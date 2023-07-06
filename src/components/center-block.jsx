@@ -1,4 +1,5 @@
 import '../css/style.css'
+import { useState } from 'react'
 import sprite from '../img/icon/sprite.svg'
 
 const centerblockSearch = (
@@ -12,17 +13,6 @@ const centerblockSearch = (
       placeholder="Поиск"
       name="search"
     />
-  </div>
-)
-
-const centerblockFilter = (
-  //  <h2 className="centerblock__h2">Треки</h2>
-
-  <div className="centerblock__filter filter">
-    <div className="filter__title">Искать по:</div>
-    <div className="filter__button button-author _btn-text">исполнителю</div>
-    <div className="filter__button button-year _btn-text">году выпуска</div>
-    <div className="filter__button button-genre _btn-text">жанру</div>
   </div>
 )
 
@@ -410,11 +400,104 @@ const globalCenterBlockContent = (
   </div>
 )
 
+const list = (
+  <div className="filterList">
+    <ul className="filterListul">
+      <li className="filterListtext">Michael Jackson</li>
+      <li className="filterListtext">Frank Sinatra</li>
+      <li className="filterListtext">Calvin Harris</li>
+      <li className="filterListtext">Zhu</li>
+      <li className="filterListtext">Arctic Monkeys</li>
+      <li className="filterListtext">Test</li>
+      <li className="filterListtext">Test</li>
+      <li className="filterListtext">Test</li>
+      <li className="filterListtext">Test</li>
+      <li className="filterListtext">Test</li>
+      <li className="filterListtext">Test</li>
+      <li className="filterListtext">Test</li>
+      <li className="filterListtext">Test</li>
+      <li className="filterListtext">Test</li>
+      <li className="filterListtext">Test</li>
+    </ul>
+  </div>
+)
+
+const yearUl = <div className="filterList filterListyear" />
+
+const genre = (
+  <div className="filterList">
+    <ul className="filterListul">
+      <li className="filterListtext">Рок</li>
+      <li className="filterListtext">Хип-хоп</li>
+      <li className="filterListtext">Поп-музыка</li>
+      <li className="filterListtext">Техно</li>
+      <li className="filterList__text">Инди</li>
+    </ul>
+  </div>
+)
+
 function RenderCenter() {
+  const [visible, changeOfState] = useState('CloseList')
+  const changeState = (OpenList) =>
+    changeOfState(visible === OpenList ? 'CloseList' : OpenList)
+  const onEnterArtist = (event) => {
+    if (event.key === 'Enter') {
+      changeState('OpenListArtist')
+    }
+  }
+
+  const onEnterYear = (event) => {
+    if (event.key === 'Enter') {
+      changeState('OpenYear')
+    }
+  }
+
+  const onEnterGenre = (event) => {
+    if (event.key === 'Enter') {
+      changeState('OpenGenre')
+    }
+  }
+
   return (
     <div className="main__centerblock centerblock">
       {centerblockSearch}
-      {centerblockFilter}
+
+      <h2 className="centerblock__h2">Треки</h2>
+      <div className="centerblock__filter filter">
+        <div className="filter__title">Искать по:</div>
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyDown={onEnterArtist}
+          onClick={() => changeState('OpenListArtist')}
+          className="filter__button button-author _btn-text"
+        >
+          исполнителю
+        </div>
+
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyDown={onEnterYear}
+          onClick={() => changeState('OpenYear')}
+          className="filter__button button-year _btn-text"
+        >
+          году выпуска
+        </div>
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyDown={onEnterGenre}
+          onClick={() => changeState('OpenGenre')}
+          className="filter__button button-genre _btn-text"
+        >
+          жанру
+        </div>
+      </div>
+      {visible === 'OpenListArtist' ? list : null}
+      {visible === 'OpenYear' ? yearUl : null}
+      {visible === 'OpenGenre' ? genre : null}
+
       {globalCenterBlockContent}
     </div>
   )
