@@ -458,6 +458,10 @@ function RenderCenter() {
     }
   }
 
+  // const [openFilter, setOpenFilter] = useState(null)
+
+  // const setStatusFilter = (event) => setOpenFilter()
+
   return (
     <div className="main__centerblock centerblock">
       {centerblockSearch}
@@ -470,7 +474,9 @@ function RenderCenter() {
           tabIndex={0}
           onKeyDown={onEnterArtist}
           onClick={() => changeState('OpenListArtist')}
-          className="filter__button button-author _btn-text"
+          className={`filter__button button-author _btn-text ${
+            visible === 'OpenListArtist' ? 'active' : null
+          }`}
         >
           исполнителю
         </div>
@@ -480,7 +486,9 @@ function RenderCenter() {
           tabIndex={0}
           onKeyDown={onEnterYear}
           onClick={() => changeState('OpenYear')}
-          className="filter__button button-year _btn-text"
+          className={`filter__button button-year _btn-text ${
+            visible === 'OpenYear' ? 'active' : null
+          }`}
         >
           году выпуска
         </div>
@@ -489,7 +497,9 @@ function RenderCenter() {
           tabIndex={0}
           onKeyDown={onEnterGenre}
           onClick={() => changeState('OpenGenre')}
-          className="filter__button button-genre _btn-text"
+          className={`filter__button button-genre _btn-text ${
+            visible === 'OpenGenre' ? 'active' : null
+          }`}
         >
           жанру
         </div>
