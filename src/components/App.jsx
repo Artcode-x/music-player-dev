@@ -1,9 +1,9 @@
 import '../css/style.css'
 import { useState, useEffect } from 'react'
-import Ma1nNav from './left-nav'
+import Ma1nNav from './Left-Nav/left-nav'
 import RenderCenter from './center-block'
-import RenderRbar from './right-bar'
-import RenderBar from './BarBelow'
+import RenderRbar from './Right-Bar/right-bar'
+import RenderBar from './Bar-Below/BarBelow'
 
 function App() {
   const [loading, setTimeLoading] = useState(true)

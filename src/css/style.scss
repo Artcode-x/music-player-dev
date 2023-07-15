@@ -112,11 +112,7 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
 
-    &__nav {
-        width: 244px;
-        background-color: #181818;
-        padding: 20px 0 20px 36px;
-    }
+    // &__nav {}
 
     &__centerblock {
         width: auto;
@@ -124,76 +120,37 @@ body {
         padding: 20px 40px 20px 111px;
     }
 
-    &__sidebar {
-        max-width: 418px;
-        padding: 20px 90px 20px 78px;
-    }
+    // &__sidebar {}
 }
 
-.nav {
+//.nav {
 
-    &__logo {
-        width: 113.33px;
-        height: 43px;
-        padding: 13px 0 13px 0;
-        background-color: transparent;
-        margin-bottom: 20px;
-    }
+//  &__logo {}
 
-    &__burger {
-        width: 20px;
-        height: 36px;
-        padding: 13px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+//  &__burger {}
 
-    &__menu {
-        display: block;
-        visibility: visible;
-    }
-}
+//     &__menu {}
+// }
 
-.logo {
+//.logo {
 
-    &__image {
-        width: 113.33px;
-        height: 17px;
-        color: #181818;
-    }
+//   &__image {}
 
-}
+//
 
-.burger {
+// .burger {
 
-    &__line {
-        display: inline-block;
-        width: 100%;
-        height: 1px;
-        background-color: #D3D3D3;
+//     &__line {}
+// }
 
-    }
-}
+//.menu {
 
-.menu {
+// &__list {}
 
-    &__list {
-        padding: 18px 0 10px 0;
-    }
+// &__item {}
 
-    &__item {
-        padding: 5px 0;
-        margin-bottom: 16px;
-    }
-
-    &__link {
-        color: #FFFFFF;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
-    }
-}
+//  &__link {}
+//}
 
 .centerblock {
 
@@ -287,22 +244,16 @@ body {
 }
 
 
-.content {
+//.content {
 
-    &__title {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 24px;
-    }
+// &__title {}
 
-    &__playlist {
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-    }
-}
+// &__playlist {
+//     display: flex;
+//     flex-direction: column;
+//     overflow-y: auto;
+// }
+//}
 
 .playlist-title {
 
@@ -455,104 +406,44 @@ body {
 
 
 
-.sidebar {
+//.sidebar {
 
-    &__personal {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-end;
-        padding: 12px 0 15px 0;
-    }
+// &__personal {}
 
-    &__personal-name {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
-        color: #FFFFFF;
-        margin-right: 16px;
-    }
+// &__personal-name {}
 
-    &__avatar {
-        width: 43px;
-        height: 43px;
-        background-color: #313131;
-        border-radius: 50%;
-    }
+// &__avatar {}
 
-    &__block {
-        height: 100%;
-        padding: 240px 0 0 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
+// &__block {}
 
-    &__list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+// &__list {}
 
-    &__item {
-        width: 250px;
-        height: 150px;
+// &__item {
 
-        &:not(:last-child) {
-            margin-bottom: 30px;
-        }
-    }
+//     &:not(:last-child) {
+//         margin-bottom: 30px;
+//     }
+// }
 
-    &__link {
-        width: 100%;
-        height: 100%;
-    }
+//  &__link {}
 
-    &__img {
-        width: 100%;
-        height: auto;
-    }
-}
+// &__img {}
+//}
 
 // =================== bar-player ====================//
 
-.bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(28, 28, 28, 0.5);
-}
+//.bar {}
 
 
 .bar {
 
-    &__content {
-        display: flex;
-        flex-direction: column;
+    //&__content {}
 
-    }
+    //&__player-progress {}
 
-    &__player-progress {
-        width: 100%;
-        height: 5px;
-        background: #2E2E2E;
-    }
+    // &__player-block {}
 
-    &__player-block {
-        height: 73px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    &__player {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-    }
+    // &__player {}
 
     &__volume-block {
         width: auto;
@@ -567,12 +458,12 @@ body {
 .player {
 
 
-    &__controls {
-        display: flex;
-        flex-direction: row;
-        padding: 0 27px 0 31px;
-    }
-
+    //&__controls {}
+    // const StyledPlayerBtnPrev = styled.div``
+    // const StyledPlayerBtnPlay = styled.div``
+    // const StyledPlayerBtnNext = styled.div``
+    // const StyledPlayerBtnRepeat = styled.div``
+    // const Styled = styled.div``
     &__btn-prev,
     &__btn-play,
     &__btn-next,

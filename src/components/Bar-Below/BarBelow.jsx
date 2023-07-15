@@ -1,15 +1,57 @@
-import '../css/style.css'
-import sprite from '../img/icon/sprite.svg'
-import RybkaForImport from './skeleton-fish-import'
+import '../../css/style.css'
+import { styled } from 'styled-components'
+import sprite from '../../img/icon/sprite.svg'
+import RybkaForImport from '../skeleton-fish-import'
+
+const StyledBar = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(28, 28, 28, 0.5);
+`
+const StyledBarContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const StyledBarPlayerProgress = styled.div`
+  width: 100%;
+  height: 5px;
+  background: #2e2e2e;
+`
+
+const StyledBarPlayerBlock = styled.div`
+  height: 73px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const StyledBarPlayer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+`
+const StyledPlayerControls = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 0 27px 0 31px;
+`
+const StyledPlayerBtnPrev = styled.div``
+// const StyledPlayerBtnPlay = styled.div``
+// const StyledPlayerBtnNext = styled.div``
+// const StyledPlayerBtnRepeat = styled.div``
 
 function RenderBar({ loading }) {
   return (
-    <div className="bar">
-      <div className="bar__content">
-        <div className="bar__player-progress" />
-        <div className="bar__player-block">
-          <div className="bar__player player">
-            <div className="player__controls">
+    <StyledBar>
+      <StyledBarContent>
+        <StyledBarPlayerProgress />
+        <StyledBarPlayerBlock>
+          <StyledBarPlayer>
+            <StyledPlayerControls>
               <div className="player__btn-prev">
                 <svg className="player__btn-prev-svg" alt="prev">
                   <use xlinkHref={`${sprite}#icon-prev`} />
@@ -35,7 +77,7 @@ function RenderBar({ loading }) {
                   <use xlinkHref={`${sprite}#icon-shuffle`} />
                 </svg>
               </div>
-            </div>
+            </StyledPlayerControls>
             <div className="player__track-play track-play">
               {loading ? (
                 <div className="track-play__contain">
@@ -101,10 +143,10 @@ function RenderBar({ loading }) {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </StyledBarPlayer>
+        </StyledBarPlayerBlock>
+      </StyledBarContent>
+    </StyledBar>
   )
 }
 

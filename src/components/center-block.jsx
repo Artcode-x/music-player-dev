@@ -1,72 +1,67 @@
 import '../css/style.css'
 import { useState } from 'react'
+import { styled } from 'styled-components'
 import sprite from '../img/icon/sprite.svg'
 import RybkaForImport from './skeleton-fish-import'
 
-const centerblockSearch = (
-  <div className="centerblock__search search">
-    <svg className="search__svg">
-      <use xlinkHref={`${sprite}#icon-search`} />
-    </svg>
-    <input
-      className="search__text"
-      type="search"
-      placeholder="Поиск"
-      name="search"
-    />
-  </div>
-)
-
-const contentTitlePlayList = (
-  <div className="content__title playlist-title">
-    <div className="playlist-title__col col01">Трек</div>
-    <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
-    <div className="playlist-title__col col03">АЛЬБОМ</div>
-    <div className="playlist-title__col col04">
-      <svg className="playlist-title__svg" alt="time">
-        <use xlinkHref={`${sprite}#icon-watch`} />
-      </svg>
-    </div>
-  </div>
-)
-
-const list = (
-  <div className="filterList">
-    <ul className="filterListul">
-      <li className="filterListtext">Michael Jackson</li>
-      <li className="filterListtext">Frank Sinatra</li>
-      <li className="filterListtext">Calvin Harris</li>
-      <li className="filterListtext">Zhu</li>
-      <li className="filterListtext">Arctic Monkeys</li>
-      <li className="filterListtext">Test</li>
-      <li className="filterListtext">Test</li>
-      <li className="filterListtext">Test</li>
-      <li className="filterListtext">Test</li>
-      <li className="filterListtext">Test</li>
-      <li className="filterListtext">Test</li>
-      <li className="filterListtext">Test</li>
-      <li className="filterListtext">Test</li>
-      <li className="filterListtext">Test</li>
-      <li className="filterListtext">Test</li>
-    </ul>
-  </div>
-)
-
-const yearUl = <div className="filterList filterListyear" />
-
-const genre = (
-  <div className="filterList">
-    <ul className="filterListul">
-      <li className="filterListtext">Рок</li>
-      <li className="filterListtext">Хип-хоп</li>
-      <li className="filterListtext">Поп-музыка</li>
-      <li className="filterListtext">Техно</li>
-      <li className="filterList__text">Инди</li>
-    </ul>
-  </div>
-)
+const StyledContentTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+`
 
 function RenderCenter({ loading1 }) {
+  const contentTitlePlayList = (
+    <div className="content__title playlist-title">
+      <div className="playlist-title__col col01">Трек</div>
+      <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
+      <div className="playlist-title__col col03">АЛЬБОМ</div>
+      <div className="playlist-title__col col04">
+        <svg className="playlist-title__svg" alt="time">
+          <use xlinkHref={`${sprite}#icon-watch`} />
+        </svg>
+      </div>
+    </div>
+  )
+
+  const list = (
+    <div className="filterList">
+      <ul className="filterListul">
+        <li className="filterListtext">Michael Jackson</li>
+        <li className="filterListtext">Frank Sinatra</li>
+        <li className="filterListtext">Calvin Harris</li>
+        <li className="filterListtext">Zhu</li>
+        <li className="filterListtext">Arctic Monkeys</li>
+        <li className="filterListtext">Test</li>
+        <li className="filterListtext">Test</li>
+        <li className="filterListtext">Test</li>
+        <li className="filterListtext">Test</li>
+        <li className="filterListtext">Test</li>
+        <li className="filterListtext">Test</li>
+        <li className="filterListtext">Test</li>
+        <li className="filterListtext">Test</li>
+        <li className="filterListtext">Test</li>
+        <li className="filterListtext">Test</li>
+      </ul>
+    </div>
+  )
+
+  const yearUl = <div className="filterList filterListyear" />
+
+  const genre = (
+    <div className="filterList">
+      <ul className="filterListul">
+        <li className="filterListtext">Рок</li>
+        <li className="filterListtext">Хип-хоп</li>
+        <li className="filterListtext">Поп-музыка</li>
+        <li className="filterListtext">Техно</li>
+        <li className="filterList__text">Инди</li>
+      </ul>
+    </div>
+  )
+
   const [visible, changeOfState] = useState('CloseList')
   const changeState = (OpenList) =>
     changeOfState(visible === OpenList ? 'CloseList' : OpenList)
@@ -90,7 +85,18 @@ function RenderCenter({ loading1 }) {
 
   return (
     <div className="main__centerblock centerblock">
-      {centerblockSearch}
+      <div className="centerblock__search search">
+        <svg className="search__svg">
+          <use xlinkHref={`${sprite}#icon-search`} />
+        </svg>
+        <input
+          className="search__text"
+          type="search"
+          placeholder="Поиск"
+          name="search"
+        />
+      </div>
+
       <h2 className="centerblock__h2">Треки</h2>
       <div className="centerblock__filter filter">
         <div className="filter__title">Искать по:</div>
