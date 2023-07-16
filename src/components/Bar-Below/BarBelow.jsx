@@ -39,7 +39,15 @@ const StyledPlayerControls = styled.div`
   flex-direction: row;
   padding: 0 27px 0 31px;
 `
-const StyledPlayerBtnPrev = styled.div``
+const StyledPlayerBtnPrev = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 27px 0 31px;
+  &__btn-prev,
+`
+
 // const StyledPlayerBtnPlay = styled.div``
 // const StyledPlayerBtnNext = styled.div``
 // const StyledPlayerBtnRepeat = styled.div``
@@ -52,11 +60,11 @@ function RenderBar({ loading }) {
         <StyledBarPlayerBlock>
           <StyledBarPlayer>
             <StyledPlayerControls>
-              <div className="player__btn-prev">
+              <StyledPlayerBtnPrev>
                 <svg className="player__btn-prev-svg" alt="prev">
                   <use xlinkHref={`${sprite}#icon-prev`} />
                 </svg>
-              </div>
+              </StyledPlayerBtnPrev>
               <div className="player__btn-play _btn">
                 <svg className="player__btn-play-svg" alt="play">
                   <use xlinkHref={`${sprite}#icon-play`} />

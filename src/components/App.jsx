@@ -1,7 +1,7 @@
 import '../css/style.css'
 import { useState, useEffect } from 'react'
 import Ma1nNav from './Left-Nav/left-nav'
-import RenderCenter from './center-block'
+import RenderCenter from './Center-Block/center-block'
 import RenderRbar from './Right-Bar/right-bar'
 import RenderBar from './Bar-Below/BarBelow'
 
