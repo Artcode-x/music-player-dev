@@ -17,10 +17,6 @@ a:visited {
 }
 
 button,
-._btn {
-  cursor: pointer;
-}
-
 ul li {
   list-style: none;
 }
@@ -47,38 +43,16 @@ body {
   background-color: #383838;
 }
 
-.container {
-  max-width: 1920px;
-  height: 100vh;
-  margin: 0 auto;
-  position: relative;
-  background-color: #181818;
-}
-
 ._btn-icon:hover svg {
   fill: transparent;
   stroke: #ACACAC;
   cursor: pointer;
 }
 
-._btn-icon:active svg {
+_btn-icon:active svg {
   fill: transparent;
   stroke: #FFFFFF;
   cursor: pointer;
-}
-
-._btn-icon:active .track-play__like-svg,
-._btn-icon:active .track-play__dislike-svg {
-  fill: #696969;
-  stroke: #FFFFFF;
-  cursor: pointer;
-}
-
-.main {
-  flex: 1 1 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .playlist-title__col {
@@ -112,161 +86,6 @@ body {
   font-size: 16px;
   line-height: 24px;
   color: #696969;
-}
-
-.bar__volume-block {
-  width: auto;
-  display: flex;
-  align-items: center;
-  padding: 0 92px 0 0;
-}
-
-.player__btn-play, .player__btn-next, .player__btn-repeat, .player__btn-shuffle {
-  padding: 5px;
-  display: flex;
-  align-items: center;
-}
-.player__btn-prev {
-  margin-right: 23px;
-}
-.player__btn-prev-svg {
-  width: 15px;
-  height: 14px;
-}
-.player__btn-play {
-  margin-right: 23px;
-}
-.player__btn-play-svg {
-  width: 22px;
-  height: 20px;
-  fill: #D9D9D9;
-}
-.player__btn-next {
-  margin-right: 28px;
-  fill: #a53939;
-}
-.player__btn-next-svg {
-  width: 15px;
-  height: 14px;
-  fill: inherit;
-  stroke: #D9D9D9;
-}
-.player__btn-repeat {
-  margin-right: 24px;
-}
-.player__btn-repeat-svg {
-  width: 18px;
-  height: 12px;
-  fill: transparent;
-  stroke: #696969;
-}
-.player__btn-shuffle {
-  display: flex;
-  align-items: center;
-}
-.player__btn-shuffle-svg {
-  width: 19px;
-  height: 12px;
-  fill: transparent;
-  stroke: #696969;
-}
-.player__track-play {
-  display: flex;
-  flex-direction: row;
-}
-
-.track-play__contain {
-  width: auto;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-areas: "image author" "image album";
-  align-items: center;
-}
-.track-play__image {
-  width: 51px;
-  height: 51px;
-  background-color: #313131;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 12px;
-  grid-area: image;
-}
-.track-play__svg {
-  width: 18px;
-  height: 17px;
-  fill: transparent;
-  stroke: #4E4E4E;
-}
-.track-play__author {
-  grid-area: author;
-  min-width: 49px;
-}
-.track-play__author-link {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #FFFFFF;
-  white-space: nowrap;
-}
-.track-play__album {
-  grid-area: album;
-  min-width: 49px;
-}
-.track-play__album-link {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 24px;
-  color: #FFFFFF;
-}
-.track-play__like-dis {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 26%;
-}
-.track-play__like, .track-play__dislike {
-  padding: 5px;
-}
-.track-play__like-svg {
-  width: 14px;
-  height: 12px;
-  fill: transparent;
-  stroke: #696969;
-}
-.track-play__dislike {
-  margin-left: 28.5px;
-}
-.track-play__dislike-svg {
-  width: 14.34px;
-  height: 13px;
-  fill: transparent;
-  stroke: #696969;
-}
-
-.volume__content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-}
-.volume__image {
-  width: 13px;
-  height: 18px;
-  margin-right: 17px;
-}
-.volume__svg {
-  width: 13px;
-  height: 18px;
-  fill: transparent;
-}
-.volume__progress {
-  width: 109px;
-}
-.volume__progress-line {
-  width: 109px;
 }
 
 .active {

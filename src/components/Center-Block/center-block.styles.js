@@ -200,81 +200,96 @@ export const FilterButton = styled.div`
   border-radius: 60px;
   padding: 6px 20px;
 
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+  &:hover {
+    border-color: #d9b6ff;
+    color: #d9b6ff;
+    cursor: pointer;
+  }
+  &:active {
+    border-color: #ad61ff;
+    color: #ad61ff;
+    cursor: pointer;
+  }
+`
+export const FilterButtonArtist = styled(FilterButton)`
   color: ${(props) =>
     props.propsKeyVisible === 'OpenListArtist' ? '#ad61ff' : null};
   border-color: ${(props) =>
     props.propsKeyVisible === 'OpenListArtist' ? '#ad61ff' : null};
-
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
-  &:hover {
-    border-color: #d9b6ff;
-    color: #d9b6ff;
-    cursor: pointer;
-  }
-  &:active {
-    border-color: #ad61ff;
-    color: #ad61ff;
-    cursor: pointer;
-  }
 `
-export const FilterButtonYear = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  border: 1px solid #ffffff;
-  border-radius: 60px;
-  padding: 6px 20px;
 
+export const FilterButtonYear = styled(FilterButton)`
   color: ${(props) =>
     props.propsKeyVisible === 'OpenYear' ? '#ad61ff' : null};
   border-color: ${(props) =>
     props.propsKeyVisible === 'OpenYear' ? '#ad61ff' : null};
-
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
-  &:hover {
-    border-color: #d9b6ff;
-    color: #d9b6ff;
-    cursor: pointer;
-  }
-  &:active {
-    border-color: #ad61ff;
-    color: #ad61ff;
-    cursor: pointer;
-  }
 `
-export const FilterButtonGenre = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  border: 1px solid #ffffff;
-  border-radius: 60px;
-  padding: 6px 20px;
 
+// export const FilterButtonYear = styled.div`
+//   font-style: normal;
+//   font-weight: 400;
+//   font-size: 16px;
+//   line-height: 24px;
+//   border: 1px solid #ffffff;
+//   border-radius: 60px;
+//   padding: 6px 20px;
+
+//   color: ${(props) =>
+//     props.propsKeyVisible === 'OpenYear' ? '#ad61ff' : null};
+//   border-color: ${(props) =>
+//     props.propsKeyVisible === 'OpenYear' ? '#ad61ff' : null};
+
+//   &:not(:last-child) {
+//     margin-right: 10px;
+//   }
+//   &:hover {
+//     border-color: #d9b6ff;
+//     color: #d9b6ff;
+//     cursor: pointer;
+//   }
+//   &:active {
+//     border-color: #ad61ff;
+//     color: #ad61ff;
+//     cursor: pointer;
+//   }
+// `
+export const FilterButtonGenre = styled(FilterButton)`
   color: ${(props) =>
     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
   border-color: ${(props) =>
     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
-
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
-  &:hover {
-    border-color: #d9b6ff;
-    color: #d9b6ff;
-    cursor: pointer;
-  }
-  &:active {
-    border-color: #ad61ff;
-    color: #ad61ff;
-    cursor: pointer;
-  }
 `
+// export const FilterButtonGenre = styled.div`
+//   font-style: normal;
+//   font-weight: 400;
+//   font-size: 16px;
+//   line-height: 24px;
+//   border: 1px solid #ffffff;
+//   border-radius: 60px;
+//   padding: 6px 20px;
+
+//   color: ${(props) =>
+//     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
+//   border-color: ${(props) =>
+//     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
+
+//   &:not(:last-child) {
+//     margin-right: 10px;
+//   }
+//   &:hover {
+//     border-color: #d9b6ff;
+//     color: #d9b6ff;
+//     cursor: pointer;
+//   }
+//   &:active {
+//     border-color: #ad61ff;
+//     color: #ad61ff;
+//     cursor: pointer;
+//   }
+// `
 export const ContentPlaylist = styled.div`
   display: flex;
   flex-direction: column;

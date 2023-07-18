@@ -87,7 +87,7 @@ function RenderCenter({ loading1 }) {
       <S.CenterblockH2>Треки</S.CenterblockH2>
       <S.CenterblockFilter>
         <S.FilterTitle>Искать по:</S.FilterTitle>
-        <S.FilterButton
+        <S.FilterButtonArtist
           propsKeyVisible={visible}
           role="button"
           tabIndex={0}
@@ -99,7 +99,7 @@ function RenderCenter({ loading1 }) {
           // }`}
         >
           исполнителю
-        </S.FilterButton>
+        </S.FilterButtonArtist>
 
         <S.FilterButtonYear
           propsKeyVisible={visible}
