@@ -5,6 +5,7 @@ import RenderCenter from './Center-Block/center-block'
 import RenderRbar from './Right-Bar/right-bar'
 import RenderBar from './Bar-Below/BarBelow'
 import * as S from './App-styles'
+import { GlobalStyle } from '../GlobalStyles'
 
 function App() {
   const [loading, setTimeLoading] = useState(true)
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <S.Container>
+      <GlobalStyle />
       <S.Main>
         <Ma1nNav />
         <RenderCenter loading1={loading} />
