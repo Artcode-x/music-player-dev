@@ -2,7 +2,7 @@ import * as S from './right-bar.styles'
 import iconRandom from '../../img/playlist01.png'
 import iconRandom1 from '../../img/playlist02.png'
 import iconRandom2 from '../../img/playlist03.png'
-import RybkaForImport from '../skeleton-fish-import'
+import RybkaForImport from '../Skeleton/skeleton-fish-import'
 
 function RenderRbar({ loading }) {
   return (

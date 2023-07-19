@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import sprite from '../../img/icon/sprite.svg'
-import RybkaForImport from '../skeleton-fish-import'
+import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
 
 function RenderCenter({ loading1 }) {
