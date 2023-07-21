@@ -1,5 +1,3 @@
-import '../../css/style.css'
-// import { styled, css } from 'styled-components'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './bar-below.styles'

@@ -1,4 +1,3 @@
-import '../css/style.css'
 import { useState, useEffect } from 'react'
 import Ma1nNav from './Left-Nav/left-nav'
 import RenderCenter from './Center-Block/center-block'
