@@ -1,30 +1,22 @@
-import { useState, useEffect } from 'react'
-import Ma1nNav from './Left-Nav/left-nav'
-import RenderCenter from './Center-Block/center-block'
-import RenderRbar from './Right-Bar/right-bar'
-import RenderBar from './Bar-Below/BarBelow'
-import * as S from './App-styles'
+import { useState } from 'react'
 import { GlobalStyle } from '../GlobalStyles'
+import AppRoutes from '../routes'
+// import NavBar from './Nav-Bar/navbar'
 
 function App() {
-  const [loading, setTimeLoading] = useState(true)
+  const [login, setLogin] = useState(false)
 
-  useEffect(() => {
-    setTimeout(() => setTimeLoading(false), 2000)
-  }, [loading])
-
+  const [input, setInput] = useState(null)
   return (
-    <S.Container>
+    <>
+      <AppRoutes
+        input={input}
+        setInput={setInput}
+        login={login}
+        setLogin={setLogin}
+      />
       <GlobalStyle />
-      <S.Main>
-        <Ma1nNav />
-        <RenderCenter loading1={loading} />
-        <RenderRbar loading={loading} />
-      </S.Main>
-      <S.Bar>
-        <RenderBar loading={loading} />
-      </S.Bar>
-    </S.Container>
+    </>
   )
 }
 export default App

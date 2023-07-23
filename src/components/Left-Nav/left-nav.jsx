@@ -4,7 +4,6 @@ import logo from '../../img/logo.png'
 import * as S from './left-nav.styles'
 
 // const S. = styled.div``
-
 function Ma1nNav() {
   const [visible, close] = useState(true)
   const changeState = () => close(!visible)
@@ -35,13 +34,13 @@ function Ma1nNav() {
         <S.NavMenu>
           <S.MenuList>
             <S.MenuItem>
-              <S.MenuLink href="index.html">Главное</S.MenuLink>
+              <S.MenuLink to="/main">Главное</S.MenuLink>
             </S.MenuItem>
             <S.MenuItem>
-              <S.MenuLink href="http://">Мой плейлист</S.MenuLink>
+              <S.MenuLink to="/MyPlaylist">Мой плейлист</S.MenuLink>
             </S.MenuItem>
             <S.MenuItem>
-              <S.MenuLink href="http://">Войти</S.MenuLink>
+              <S.MenuLink to="/">Выйти</S.MenuLink>
             </S.MenuItem>
           </S.MenuList>
         </S.NavMenu>
