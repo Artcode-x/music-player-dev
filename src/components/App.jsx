@@ -6,15 +6,9 @@ import AppRoutes from '../routes'
 function App() {
   const [login, setLogin] = useState(false)
 
-  const [input, setInput] = useState(null)
   return (
     <>
-      <AppRoutes
-        input={input}
-        setInput={setInput}
-        login={login}
-        setLogin={setLogin}
-      />
+      <AppRoutes login={login} setLogin={setLogin} />
       <GlobalStyle />
     </>
   )

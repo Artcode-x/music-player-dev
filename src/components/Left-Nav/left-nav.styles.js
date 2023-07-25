@@ -49,6 +49,9 @@ export const MenuList = styled.ul`
 export const MenuItem = styled.li`
   padding: 5px 0;
   margin-bottom: 16px;
+  &:hover {
+    text-decoration: ${(props) => (props.fishechka ? 'underline' : null)};
+  }
 `
 
 export const MenuLink = styled(NavLink)`
@@ -57,4 +60,8 @@ export const MenuLink = styled(NavLink)`
   font-size: 16px;
   line-height: 24px;
 `
+// export const activeClassName = 'underline'
+// export const MenuLink2 = styled(MenuLink)`
+// className={{ isActive }} => cn(MenuLink,{[activeClassName]:isActive})
+// `
 // export const  = styled.div``

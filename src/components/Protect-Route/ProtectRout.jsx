@@ -1,13 +1,11 @@
 import { Navigate } from 'react-router-dom'
 
 export default function ProtectedRoute({
-  input,
   children,
   redirectPath = '/',
-  // login,
+  login,
 }) {
-  //   if (!login) {
-  if (input !== 'Alex') {
+  if (!login) {
     return <Navigate to={redirectPath} replace />
   }
 
