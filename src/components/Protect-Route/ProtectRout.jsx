@@ -1,13 +1,9 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 
-export default function ProtectedRoute({
-  children,
-  redirectPath = '/',
-  login,
-}) {
+export default function ProtectedRoute({ redirectPath = '/', login }) {
   if (!login) {
     return <Navigate to={redirectPath} replace />
   }
 
-  return children
+  return <Outlet />
 }

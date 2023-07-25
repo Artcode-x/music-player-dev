@@ -12,16 +12,12 @@ export default function AppRoutes({ setLogin, login }) {
     <Routes>
       <Route path="/registration" element={<Registration />} />
       <Route path="/" element={<Login setLogin={setLogin} />} />
-      <Route
-        path="/main"
-        element={
-          <ProtectedRoute login={login}>
-            <Main />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/MyPlaylist" element={<MyPlaylist />} />
-      <Route path="/Category/:id" element={<Category />} />
+
+      <Route element={<ProtectedRoute login={login} />}>
+        <Route path="/main" element={<Main />} />
+        <Route path="/MyPlaylist" element={<MyPlaylist />} />
+        <Route path="/Category/:id" element={<Category />} />
+      </Route>
 
       <Route path="*" element={<Page404 />} />
     </Routes>
