@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
+import getAllTracksFromApi from '../Api/api'
 
 function RenderCenter({ loading1 }) {
   const contentTitlePlayList = (
@@ -55,6 +56,19 @@ function RenderCenter({ loading1 }) {
   )
 
   const [visible, changeOfState] = useState('CloseList')
+  const [allTracks, setAllTracks] = useState(null)
+
+  useEffect(() => {
+    getAllTracksFromApi()
+      .then((spisokTrackov) => {
+        setAllTracks(spisokTrackov)
+        console.log(spisokTrackov)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
   const changeState = (OpenList) =>
     changeOfState(visible === OpenList ? 'CloseList' : OpenList)
   const onEnterArtist = (event) => {
@@ -165,35 +179,42 @@ function RenderCenter({ loading1 }) {
           {contentTitlePlayList}
           <S.ContentPlaylist>
             <S.PlaylistItem>
-              <S.PlaylistTrack>
-                <S.TrackTitle>
-                  <S.TrackTitleImage>
-                    <RybkaForImport IamWidth="51" IamHeight="51" />
-                    <S.TrackTitleSvg alt="music">
-                      <use xlinkHref={`${sprite}#icon-note`} />
-                    </S.TrackTitleSvg>
-                  </S.TrackTitleImage>
-                  <S.TrackTitleText>
+              {allTracks.map((track) => (
+                <S.PlaylistTrack key={track.id}>
+                  <S.TrackTitle>
+                    <S.TrackTitleImage>
+                      <RybkaForImport IamWidth="51" IamHeight="51" />
+                      <S.TrackTitleSvg alt="music">
+                        <use xlinkHref={`${sprite}#icon-note`} />
+                      </S.TrackTitleSvg>
+                    </S.TrackTitleImage>
+                    <S.TrackTitleText>
+                      <S.TrackTitleLink href="http://">
+                        {track.name}
+                        <span className="track__title-span" />
+                      </S.TrackTitleLink>
+                    </S.TrackTitleText>
+                  </S.TrackTitle>
+                  <S.TrackAuthor>
                     <S.TrackTitleLink href="http://">
-                      Guilt <span className="track__title-span" />
+                      {track.author}
                     </S.TrackTitleLink>
-                  </S.TrackTitleText>
-                </S.TrackTitle>
-                <S.TrackAuthor>
-                  <S.TrackTitleLink href="http://">Nero</S.TrackTitleLink>
-                </S.TrackAuthor>
-                <S.TrackAlbum>
-                  <S.TrackTitleLink href="http://">
-                    Welcome Reality
-                  </S.TrackTitleLink>
-                </S.TrackAlbum>
-                <S.TrackTime>
-                  <S.TrackTimeSvg alt="time">
-                    <use xlinkHref={`${sprite}#icon-like`} />
-                  </S.TrackTimeSvg>
-                  <S.TrackTimeText>4:44</S.TrackTimeText>
-                </S.TrackTime>
-              </S.PlaylistTrack>
+                  </S.TrackAuthor>
+                  <S.TrackAlbum>
+                    <S.TrackTitleLink href="http://">
+                      {track.album}
+                    </S.TrackTitleLink>
+                  </S.TrackAlbum>
+                  <S.TrackTime>
+                    <S.TrackTimeSvg alt="time">
+                      <use xlinkHref={`${sprite}#icon-like`} />
+                    </S.TrackTimeSvg>
+                    <S.TrackTimeText>
+                      {track.duration_in_seconds}
+                    </S.TrackTimeText>
+                  </S.TrackTime>
+                </S.PlaylistTrack>
+              ))}
             </S.PlaylistItem>
           </S.ContentPlaylist>
         </S.centerblockContent>
