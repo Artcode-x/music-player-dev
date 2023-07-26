@@ -5,10 +5,11 @@ export default function Login({ token }) {
   const navigate = useNavigate()
 
   const onClick = () => {
+    document.cookie = 'user=token'
     const user = token
     console.log(user)
     if (user === token) {
-      navigate('/main', { replace: true })
+      navigate('/', { replace: true })
     }
   }
   return (
