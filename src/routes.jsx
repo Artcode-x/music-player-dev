@@ -7,13 +7,13 @@ import MyPlaylist from './Pages/My-playlist/My-playlist'
 import Category from './Pages/Categoty/Category'
 import ProtectedRoute from './components/Protect-Route/ProtectRout'
 
-export default function AppRoutes({ setLogin, login }) {
+export default function AppRoutes({ token, setLogin, login }) {
   return (
     <Routes>
       <Route path="/registration" element={<Registration />} />
-      <Route path="/" element={<Login setLogin={setLogin} />} />
+      <Route path="/" element={<Login token={token} setLogin={setLogin} />} />
 
-      <Route element={<ProtectedRoute login={login} />}>
+      <Route element={<ProtectedRoute token={token} login={login} />}>
         <Route path="/main" element={<Main />} />
         <Route path="/MyPlaylist" element={<MyPlaylist />} />
         <Route path="/Category/:id" element={<Category />} />
