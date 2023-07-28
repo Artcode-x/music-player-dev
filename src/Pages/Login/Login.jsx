@@ -1,17 +1,19 @@
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
+
 import * as S from './Login.style'
 
-export default function Login({ token }) {
+export default function Login({ setToken }) {
   const navigate = useNavigate()
 
   const onClick = () => {
-    document.cookie = 'user=token'
-    const user = token
-    console.log(user)
-    if (user === token) {
-      navigate('/', { replace: true })
-    }
+    Cookies.set('userName', 'token')
+
+    setToken(Cookies.get())
+
+    navigate('/', { replace: true })
   }
+
   return (
     <S.Title>
       <h1>Login Page</h1>

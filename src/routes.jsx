@@ -7,13 +7,13 @@ import Favorites from './Pages/My-playlist/My-playlist'
 import Category from './Pages/Categoty/Category'
 import ProtectedRoute from './components/Protect-Route/ProtectRout'
 
-export default function AppRoutes({ token, setLogin, login }) {
+export default function AppRoutes({ token, setToken, setLogin, login }) {
   return (
     <Routes>
       <Route path="/Register" element={<Register />} />
       <Route
         path="/Login"
-        element={<Login token={token} setLogin={setLogin} />}
+        element={<Login setToken={setToken} setLogin={setLogin} />}
       />
 
       <Route element={<ProtectedRoute token={token} login={login} />}>

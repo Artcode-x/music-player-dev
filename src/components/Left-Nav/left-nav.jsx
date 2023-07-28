@@ -33,13 +33,13 @@ function Ma1nNav() {
       {visible && (
         <S.NavMenu>
           <S.MenuList>
-            <S.MenuItem fishechka>
+            <S.MenuItem fishechka="stroka">
               <S.MenuLink to="/">Главное</S.MenuLink>
             </S.MenuItem>
-            <S.MenuItem fishechka>
+            <S.MenuItem fishechka="stroka">
               <S.MenuLink to="/Favorites">Мой плейлист</S.MenuLink>
             </S.MenuItem>
-            <S.MenuItem fishechka>
+            <S.MenuItem fishechka="stroka">
               <S.MenuLink to="/Login">Выйти</S.MenuLink>
             </S.MenuItem>
           </S.MenuList>

@@ -50,7 +50,8 @@ export const MenuItem = styled.li`
   padding: 5px 0;
   margin-bottom: 16px;
   &:hover {
-    text-decoration: ${(props) => (props.fishechka ? 'underline' : null)};
+    text-decoration: ${(props) =>
+      props.fishechka === 'stroka' ? 'underline' : null};
   }
 `
 
