@@ -1,9 +1,15 @@
+import { useEffect } from 'react'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './bar-below.styles'
 
-function RenderBar({ loading }) {
-  return (
+function RenderBar({ loading, keyItem }) {
+  const closeOrOpenBar = () => {}
+  useEffect(() => {
+    closeOrOpenBar(keyItem)
+  }, [])
+
+  return keyItem !== '' ? (
     <S.Bar>
       <S.BarContent>
         <S.BarPlayerProgress />
@@ -61,12 +67,12 @@ function RenderBar({ loading }) {
                   </S.TrackPlayImage>
                   <S.TrackPlayAuthor>
                     <S.TrackPlayAuthorLink href="http://">
-                      Ты та...
+                      {keyItem.name}
                     </S.TrackPlayAuthorLink>
                   </S.TrackPlayAuthor>
                   <S.TrackPlayAlbum>
                     <S.TrackPlayAlbumLink href="http://">
-                      Баста
+                      {keyItem.author}
                     </S.TrackPlayAlbumLink>
                   </S.TrackPlayAlbum>
                 </S.TrackPlayContain>
@@ -101,7 +107,7 @@ function RenderBar({ loading }) {
         </S.BarPlayerBlock>
       </S.BarContent>
     </S.Bar>
-  )
+  ) : null
 }
 
 export default RenderBar

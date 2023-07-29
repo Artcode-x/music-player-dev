@@ -1,0 +1,53 @@
+import { useState, useEffect } from 'react'
+import Ma1nNav from '../../components/Left-Nav/left-nav'
+import RenderCenter from '../../components/Center-Block/center-block'
+import RenderRbar from '../../components/Right-Bar/right-bar'
+import RenderBar from '../../components/Bar-Below/BarBelow'
+import * as S from './fromApp-ToMain.styles'
+import GetAllTracksFromApi from '../../components/Api/api'
+
+function Main() {
+  const [loading, setTimeLoading] = useState(true)
+  const [allTracks, setAllTracks] = useState(null)
+
+  // стейт для выбранного трека
+  const [keyItem, setKeyItem] = useState('')
+
+  useEffect(() => {
+    setTimeout(() => setTimeLoading(false), 2000)
+  }, [loading])
+
+  useEffect(() => {
+    GetAllTracksFromApi()
+      .then((spisokTrackov) => {
+        setAllTracks(spisokTrackov)
+        console.log(spisokTrackov)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
+  return (
+    <S.Container>
+      <S.Main>
+        <Ma1nNav />
+        <RenderCenter
+          keyItem={keyItem}
+          setKeyItem={setKeyItem}
+          allTracks={allTracks}
+          loading1={loading}
+        />
+        <RenderRbar loading={loading} />
+      </S.Main>
+      <S.Bar>
+        <RenderBar
+          keyItem={keyItem}
+          setKeyItem={setKeyItem}
+          loading={loading}
+        />
+      </S.Bar>
+    </S.Container>
+  )
+}
+export default Main

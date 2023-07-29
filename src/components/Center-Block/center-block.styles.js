@@ -301,8 +301,10 @@ export const centerblockContent = styled.div`
 `
 export const PlaylistItem = styled.div`
   width: 100%;
-  display: block;
+  display: flex;
   margin-bottom: 12px;
+  flex-direction: column;
+  gap: 12px;
 `
 
 export const PlaylistTrack = styled.div`
@@ -310,6 +312,11 @@ export const PlaylistTrack = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  &:hover {
+    text-decoration: underline;
+    color: coral;
+    cursor: pointer;
+  }
 `
 
 export const TrackTitle = styled.div`
