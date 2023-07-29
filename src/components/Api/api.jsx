@@ -5,8 +5,8 @@ export default async function GetAllTracksFromApi() {
       method: 'GET',
     }
   )
-  if (response.status !== 200) {
-    throw new Error('Ты не пройдешь!')
+  if (!response.ok) {
+    throw new Error('Ошибка Сервера! Проверка в api.jsx')
   }
   const data = await response.json()
   return data
@@ -19,3 +19,7 @@ export default async function GetAllTracksFromApi() {
 // }).then((vsetracki) => {
 //   return vsetracki.json()
 // })
+
+// if (response.status !== 200) {
+//   throw new Error('Ты не пройдешь!')
+// }

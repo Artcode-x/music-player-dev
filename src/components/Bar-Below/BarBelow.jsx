@@ -1,13 +1,13 @@
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './bar-below.styles'
 
 function RenderBar({ loading, keyItem }) {
-  const closeOrOpenBar = () => {}
-  useEffect(() => {
-    closeOrOpenBar(keyItem)
-  }, [])
+  // const closeOrOpenBar = () => {}
+  // useEffect(() => {
+  //   closeOrOpenBar(keyItem)
+  // }, [])
 
   return keyItem !== '' ? (
     <S.Bar>

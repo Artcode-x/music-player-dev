@@ -306,6 +306,11 @@ export const PlaylistItem = styled.div`
   flex-direction: column;
   gap: 12px;
 `
+export const ErrorItem = styled.div`
+  color: coral;
+  text-align: center;
+  font-size: xx-large;
+`
 
 export const PlaylistTrack = styled.div`
   display: flex;

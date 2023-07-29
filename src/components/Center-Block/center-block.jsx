@@ -4,10 +4,9 @@ import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
 
-function RenderCenter({ loading1, allTracks, keyItem, setKeyItem }) {
+function RenderCenter({ loading1, allTracks, setKeyItem, addError }) {
   const todoClick = (track) => {
     setKeyItem(track)
-    console.log({ keyItem })
   }
 
   const contentTitlePlayList = (
@@ -81,8 +80,7 @@ function RenderCenter({ loading1, allTracks, keyItem, setKeyItem }) {
       changeState('OpenGenre')
     }
   }
-
-  return (
+  return !addError ? (
     <S.MainCenterblock>
       <S.CenterblockSearch>
         <S.SearchSvg>
@@ -171,6 +169,7 @@ function RenderCenter({ loading1, allTracks, keyItem, setKeyItem }) {
         <S.centerblockContent>
           {contentTitlePlayList}
           <S.ContentPlaylist>
+            {/* <p>{addError}</p> */}
             <S.PlaylistItem>
               {allTracks.map((track) => (
                 <S.PlaylistTrack
@@ -207,6 +206,51 @@ function RenderCenter({ loading1, allTracks, keyItem, setKeyItem }) {
                   </S.TrackTime>
                 </S.PlaylistTrack>
               ))}
+            </S.PlaylistItem>
+          </S.ContentPlaylist>
+        </S.centerblockContent>
+      )}
+    </S.MainCenterblock>
+  ) : (
+    <S.MainCenterblock>
+      {loading1 ? (
+        <S.centerblockContent>
+          {contentTitlePlayList}
+          <S.ContentPlaylist>
+            <S.PlaylistItem>
+              <S.PlaylistTrack>
+                <S.TrackTitle>
+                  <S.TrackTitleImage>
+                    <RybkaForImport IamWidth="51px" IamHeight="51px" />
+                  </S.TrackTitleImage>
+                  <S.TrackTitleText>
+                    <RybkaForImport IamWidth="356px" IamHeight="19px" />
+                  </S.TrackTitleText>
+                </S.TrackTitle>
+                <S.TrackAuthor>
+                  <RybkaForImport IamWidth="271px" IamHeight="19px" />
+                </S.TrackAuthor>
+                <S.TrackAlbum>
+                  <RybkaForImport IamWidth="305px" IamHeight="19px" />
+                </S.TrackAlbum>
+                <S.TrackTime>
+                  <S.TrackTimeSvg alt="time">
+                    <use xlinkHref={`${sprite}#icon-like`} />
+                  </S.TrackTimeSvg>
+                </S.TrackTime>
+              </S.PlaylistTrack>
+            </S.PlaylistItem>
+          </S.ContentPlaylist>
+        </S.centerblockContent>
+      ) : (
+        <S.centerblockContent>
+          {contentTitlePlayList}
+          <S.ContentPlaylist>
+            {/* <p>{addError}</p> */}
+            <S.PlaylistItem>
+              <S.ErrorItem>
+                <p>{addError}</p>
+              </S.ErrorItem>
             </S.PlaylistItem>
           </S.ContentPlaylist>
         </S.centerblockContent>

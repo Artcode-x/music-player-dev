@@ -9,23 +9,26 @@ import GetAllTracksFromApi from '../../components/Api/api'
 function Main() {
   const [loading, setTimeLoading] = useState(true)
   const [allTracks, setAllTracks] = useState(null)
-
+  const [addError, setAddError] = useState(null)
   // стейт для выбранного трека
   const [keyItem, setKeyItem] = useState('')
+
+  const fromApi = async () => {
+    try {
+      const spisokTrackov = await GetAllTracksFromApi()
+      setAllTracks(spisokTrackov)
+    } catch (error) {
+      console.log(error.message)
+      setAddError(error.message)
+    }
+  }
 
   useEffect(() => {
     setTimeout(() => setTimeLoading(false), 2000)
   }, [loading])
 
   useEffect(() => {
-    GetAllTracksFromApi()
-      .then((spisokTrackov) => {
-        setAllTracks(spisokTrackov)
-        console.log(spisokTrackov)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    fromApi()
   }, [])
 
   return (
@@ -33,7 +36,7 @@ function Main() {
       <S.Main>
         <Ma1nNav />
         <RenderCenter
-          keyItem={keyItem}
+          addError={addError}
           setKeyItem={setKeyItem}
           allTracks={allTracks}
           loading1={loading}
