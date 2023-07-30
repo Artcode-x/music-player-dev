@@ -1,17 +1,25 @@
 // import '../css/style.css'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import logo from '../../img/logo.png'
 import * as S from './left-nav.styles'
-
 // const S. = styled.div``
 function Ma1nNav() {
   const [visible, close] = useState(true)
   const changeState = () => close(!visible)
 
+  const navigate = useNavigate()
+
   const onEnter = (event) => {
     if (event.key === 'Enter') {
       changeState()
     }
+  }
+
+  const handleExit = () => {
+    Cookies.set('token', '') // очищаем токен из куки
+    navigate('/Login') // делаем редирект на страницу логина
   }
 
   return (
@@ -40,7 +48,7 @@ function Ma1nNav() {
               <S.MenuLink to="/Favorites">Мой плейлист</S.MenuLink>
             </S.MenuItem>
             <S.MenuItem fishechka="stroka">
-              <S.MenuLink to="/Login">Выйти</S.MenuLink>
+              <S.MenuExit onClick={handleExit}>Выйти</S.MenuExit>
             </S.MenuItem>
           </S.MenuList>
         </S.NavMenu>
