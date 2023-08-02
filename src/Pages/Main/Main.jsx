@@ -4,7 +4,7 @@ import RenderCenter from '../../components/Center-Block/center-block'
 import RenderRbar from '../../components/Right-Bar/right-bar'
 import RenderBar from '../../components/Bar-Below/BarBelow'
 import * as S from './fromApp-ToMain.styles'
-import GetAllTracksFromApi from '../../components/Api/api'
+import getAllTracksFromApi from '../../components/Api/api'
 
 function Main() {
   const [loading, setTimeLoading] = useState(true)
@@ -15,7 +15,7 @@ function Main() {
 
   const fromApi = async () => {
     try {
-      const spisokTrackov = await GetAllTracksFromApi()
+      const spisokTrackov = await getAllTracksFromApi()
       setAllTracks(spisokTrackov)
     } catch (error) {
       console.log(error.message)

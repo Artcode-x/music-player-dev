@@ -321,6 +321,9 @@ export const PlaylistTrack = styled.div`
     text-decoration: underline;
     color: coral;
     cursor: pointer;
+
+    background: coral;
+    opacity: 0.6;
   }
 `
 

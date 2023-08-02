@@ -1,4 +1,4 @@
-export default async function GetAllTracksFromApi() {
+export default async function getAllTracksFromApi() {
   const response = await fetch(
     'https://painassasin.online/catalog/track/all/',
     {
