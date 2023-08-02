@@ -13,22 +13,21 @@ function Main() {
   // стейт для выбранного трека
   const [keyItem, setKeyItem] = useState('')
 
-  const fromApi = async () => {
-    try {
-      const spisokTrackov = await getAllTracksFromApi()
-      setAllTracks(spisokTrackov)
-    } catch (error) {
-      console.log(error.message)
-      setAddError(error.message)
+  useEffect(() => {
+    const fromApi = async () => {
+      try {
+        const spisokTrackov = await getAllTracksFromApi()
+        setAllTracks(spisokTrackov)
+      } catch (error) {
+        console.log(error.message)
+        setAddError(error.message)
+      }
     }
-  }
+    fromApi()
+  }, [])
 
   useEffect(() => {
     setTimeout(() => setTimeLoading(false), 2000)
-  }, [loading])
-
-  useEffect(() => {
-    fromApi()
   }, [])
 
   return (

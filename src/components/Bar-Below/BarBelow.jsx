@@ -50,7 +50,7 @@ function RenderBar({ loading, keyItem }) {
                     <use xlinkHref={`${sprite}#icon-prev`} />
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
-                <S.PlayerBtnPlay onClick={() => todoClick(letsPlayMusic)}>
+                <S.PlayerBtnPlay onClick={() => todoClick()}>
                   <S.PlayerBtnPlaySvg alt="play">
                     <use xlinkHref={`${sprite}#icon-play`} />
                   </S.PlayerBtnPlaySvg>
