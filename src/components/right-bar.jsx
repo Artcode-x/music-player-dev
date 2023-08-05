@@ -2,6 +2,7 @@ import '../css/style.css'
 import iconRandom from '../img/playlist01.png'
 import iconRandom1 from '../img/playlist02.png'
 import iconRandom2 from '../img/playlist03.png'
+import RybkaForImport from './skeleton-fish-import'
 
 const sidebarPersonal = (
   <div className="sidebar__personal">
@@ -10,45 +11,57 @@ const sidebarPersonal = (
   </div>
 )
 
-const sidebarItem1 = (
-  <div className="sidebar__item">
-    <a className="sidebar__link" href="index.html">
-      <img className="sidebar__img" src={iconRandom} alt="day's playlist" />
-    </a>
-  </div>
-)
-
-const sidebarItem2 = (
-  <div className="sidebar__item">
-    <a className="sidebar__link" href="index.html">
-      <img className="sidebar__img" src={iconRandom1} alt="day's playlist" />
-    </a>
-  </div>
-)
-
-const sidebarItem3 = (
-  <div className="sidebar__item">
-    <a className="sidebar__link" href="index.html">
-      <img className="sidebar__img" src={iconRandom2} alt="day's playlist" />
-    </a>
-  </div>
-)
-
-const sidebarList = (
-  <div className="sidebar__list">
-    {sidebarItem1}
-    {sidebarItem2}
-    {sidebarItem3}
-  </div>
-)
-
-const sidebarBlock = <div className="sidebar__block">{sidebarList}</div>
-
-function RenderRbar() {
+function RenderRbar({ loading }) {
   return (
     <div className="main__sidebar sidebar">
       {sidebarPersonal}
-      {sidebarBlock}
+      {loading ? (
+        <div className="sidebar__block">
+          <div className="sidebar__list">
+            <div className="sidebar__item">
+              <RybkaForImport IamWidth="250px" IamHeight="150px" />
+            </div>
+            <div className="sidebar__item">
+              <RybkaForImport IamWidth="250px" IamHeight="150px" />
+            </div>
+            <div className="sidebar__item">
+              <RybkaForImport IamWidth="250px" IamHeight="150px" />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="sidebar__block">
+          <div className="sidebar__list">
+            <div className="sidebar__item">
+              <a className="sidebar__link" href="index.html">
+                <img
+                  className="sidebar__img"
+                  src={iconRandom}
+                  alt="day's playlist"
+                />
+              </a>
+            </div>
+            <div className="sidebar__item">
+              <a className="sidebar__link" href="index.html">
+                <img
+                  className="sidebar__img"
+                  src={iconRandom1}
+                  alt="day's playlist"
+                />
+              </a>
+            </div>
+            <div className="sidebar__item">
+              <a className="sidebar__link" href="index.html">
+                <img
+                  className="sidebar__img"
+                  src={iconRandom2}
+                  alt="day's playlist"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

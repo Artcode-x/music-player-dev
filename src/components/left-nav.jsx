@@ -1,17 +1,10 @@
 import '../css/style.css'
+import { useState } from 'react'
 import logo from '../img/logo.png'
 
 const navLogo = (
   <div className="nav__logo logo">
     <img className="logo__image" src={logo} alt="logo" />
-  </div>
-)
-
-const navBurger = (
-  <div className="nav__burger burger">
-    <span className="burger__line" />
-    <span className="burger__line" />
-    <span className="burger__line" />
   </div>
 )
 
@@ -38,11 +31,31 @@ const navMenu = (
 )
 
 function Ma1nNav() {
+  const [visible, close] = useState(true)
+  const changeState = () => close(!visible)
+
+  const onEnter = (event) => {
+    if (event.key === 'Enter') {
+      changeState()
+    }
+  }
+
   return (
     <nav className="main__nav nav">
       {navLogo}
-      {navBurger}
-      {navMenu}
+      <div
+        role="button"
+        tabIndex={0}
+        onKeyDown={onEnter}
+        onClick={changeState}
+        className="nav__burger burger"
+      >
+        <span className="burger__line" />
+        <span className="burger__line" />
+        <span className="burger__line" />
+      </div>
+
+      {visible && navMenu}
     </nav>
   )
 }
