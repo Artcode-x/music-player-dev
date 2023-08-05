@@ -29,17 +29,17 @@ function RenderRbar({ loading }) {
         <S.SidebarBlock>
           <S.SidebarList>
             <S.SidebarItem>
-              <S.SidebarLink href="index.html">
+              <S.SidebarLink to="/Category/1">
                 <S.SidebarImg src={iconRandom} alt="day's playlist" />
               </S.SidebarLink>
             </S.SidebarItem>
             <S.SidebarItem>
-              <S.SidebarLink href="index.html">
+              <S.SidebarLink to="/Category/2">
                 <S.SidebarImg src={iconRandom1} alt="day's playlist" />
               </S.SidebarLink>
             </S.SidebarItem>
             <S.SidebarItem>
-              <S.SidebarLink href="index.html">
+              <S.SidebarLink to="/Category/3">
                 <S.SidebarImg src={iconRandom2} alt="day's playlist" />
               </S.SidebarLink>
             </S.SidebarItem>

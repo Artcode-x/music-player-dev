@@ -1,6 +1,7 @@
 // import '../css/style.css'
 
 import { styled } from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 export const MainNav = styled.nav`
   width: 244px;
@@ -48,12 +49,20 @@ export const MenuList = styled.ul`
 export const MenuItem = styled.li`
   padding: 5px 0;
   margin-bottom: 16px;
+  &:hover {
+    text-decoration: ${(props) =>
+      props.fishechka === 'stroka' ? 'underline' : null};
+  }
 `
 
-export const MenuLink = styled.a`
+export const MenuLink = styled(NavLink)`
   color: #ffffff;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
 `
+// export const activeClassName = 'underline'
+// export const MenuLink2 = styled(MenuLink)`
+// className={{ isActive }} => cn(MenuLink,{[activeClassName]:isActive})
+// `
 // export const  = styled.div``
