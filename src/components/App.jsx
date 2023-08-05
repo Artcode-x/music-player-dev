@@ -1,9 +1,10 @@
-import '../css/style.css'
 import { useState, useEffect } from 'react'
-import Ma1nNav from './left-nav'
-import RenderCenter from './center-block'
-import RenderRbar from './right-bar'
-import RenderBar from './BarBelow'
+import Ma1nNav from './Left-Nav/left-nav'
+import RenderCenter from './Center-Block/center-block'
+import RenderRbar from './Right-Bar/right-bar'
+import RenderBar from './Bar-Below/BarBelow'
+import * as S from './App-styles'
+import { GlobalStyle } from '../GlobalStyles'
 
 function App() {
   const [loading, setTimeLoading] = useState(true)
@@ -13,16 +14,17 @@ function App() {
   }, [loading])
 
   return (
-    <div className="container">
-      <main className="main">
+    <S.Container>
+      <GlobalStyle />
+      <S.Main>
         <Ma1nNav />
         <RenderCenter loading1={loading} />
         <RenderRbar loading={loading} />
-      </main>
-      <div className="bar">
+      </S.Main>
+      <S.Bar>
         <RenderBar loading={loading} />
-      </div>
-    </div>
+      </S.Bar>
+    </S.Container>
   )
 }
 export default App
