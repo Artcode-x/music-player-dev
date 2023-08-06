@@ -1,41 +1,42 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 // import { useEffect } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './bar-below.styles'
+import PlayersControls from '../PlayerControls/PlayerControls'
 
-function RenderBar({ loading, keyItem }) {
+function RenderBar({ loading, keyItem, repeat, setRepeat }) {
   // const closeOrOpenBar = () => {}
   // useEffect(() => {
   //   closeOrOpenBar(keyItem)
   // }, [])
-  const [isPlaying, setIsPlaying] = useState(true)
+  // const [isPlaying, setIsPlaying] = useState(true)
   const audioRef = useRef(null)
 
-  const handleStart = () => {
-    audioRef.current.play()
-    setIsPlaying(true)
-  }
+  // const handleStart = () => {
+  //   audioRef.current.play()
+  //   setIsPlaying(true)
+  // }
 
-  const handleStop = () => {
-    audioRef.current.pause()
-    setIsPlaying(false)
-  }
+  // const handleStop = () => {
+  //   audioRef.current.pause()
+  //   setIsPlaying(false)
+  // }
 
-  let letsPlayMusic = isPlaying ? handleStop : handleStart
-  useEffect(() => {
-    letsPlayMusic = isPlaying ? handleStop : handleStart
-    console.log(letsPlayMusic)
-  }, [isPlaying])
+  // let letsPlayMusic = isPlaying ? handleStop : handleStart
+  // useEffect(() => {
+  //   letsPlayMusic = isPlaying ? handleStop : handleStart
+  //   console.log(letsPlayMusic)
+  // }, [isPlaying])
 
-  function todoClick() {
-    letsPlayMusic()
-  }
+  // function todoClick() {
+  //   letsPlayMusic()
+  // }
 
   return keyItem !== '' ? (
     <>
-      <audio key={keyItem.id} controls autoPlay ref={audioRef}>
+      <audio key={keyItem.id} autoPlay ref={audioRef} loop={repeat}>
         <source src={keyItem.track_file} type="audio/mpeg" />
       </audio>
 
@@ -44,33 +45,11 @@ function RenderBar({ loading, keyItem }) {
           <S.BarPlayerProgress />
           <S.BarPlayerBlock>
             <S.BarPlayer>
-              <S.PlayerControls>
-                <S.PlayerBtnPrev>
-                  <S.PlayerBtnPrevSvg alt="prev">
-                    <use xlinkHref={`${sprite}#icon-prev`} />
-                  </S.PlayerBtnPrevSvg>
-                </S.PlayerBtnPrev>
-                <S.PlayerBtnPlay onClick={() => todoClick()}>
-                  <S.PlayerBtnPlaySvg alt="play">
-                    <use xlinkHref={`${sprite}#icon-play`} />
-                  </S.PlayerBtnPlaySvg>
-                </S.PlayerBtnPlay>
-                <S.PlayerBtnNext>
-                  <S.PlayerBtnNextSvg alt="next">
-                    <use xlinkHref={`${sprite}#icon-next`} />
-                  </S.PlayerBtnNextSvg>
-                </S.PlayerBtnNext>
-                <S.PlayerBtnRepeat>
-                  <S.PlayerBtnRepeatSvg alt="repeat">
-                    <use xlinkHref={`${sprite}#icon-repeat`} />
-                  </S.PlayerBtnRepeatSvg>
-                </S.PlayerBtnRepeat>
-                <S.PlayerBtnShuffle>
-                  <S.PlayerBtnShuffleSvg alt="shuffle">
-                    <use xlinkHref={`${sprite}#icon-shuffle`} />
-                  </S.PlayerBtnShuffleSvg>
-                </S.PlayerBtnShuffle>
-              </S.PlayerControls>
+              <PlayersControls
+                repeat={repeat}
+                setRepeat={setRepeat}
+                audioRef={audioRef}
+              />
               <S.PlayerTrackPlay>
                 {loading ? (
                   <S.TrackPlayContain>

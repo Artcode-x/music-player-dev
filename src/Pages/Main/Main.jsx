@@ -13,6 +13,8 @@ function Main() {
   // стейт для выбранного трека
   const [keyItem, setKeyItem] = useState('')
 
+  const [repeat, setRepeat] = useState(false)
+
   useEffect(() => {
     const fromApi = async () => {
       try {
@@ -44,6 +46,8 @@ function Main() {
       </S.Main>
       <S.Bar>
         <RenderBar
+          repeat={repeat}
+          setRepeat={setRepeat}
           keyItem={keyItem}
           setKeyItem={setKeyItem}
           loading={loading}
