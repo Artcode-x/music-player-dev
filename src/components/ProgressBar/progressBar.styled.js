@@ -11,6 +11,13 @@ export const BarPlayerProgress = styled.input`
     height: 19px;
   }
 `
+
+export const BarTime = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 25px;
+`
+
 export const StyledProgressInput = styled.input`
   --progress-height: 8px;
   --progress-color: #b672ff;
