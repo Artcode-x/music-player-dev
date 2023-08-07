@@ -1,38 +1,27 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-// import { useEffect } from 'react'
+
 import { useRef } from 'react'
+
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './bar-below.styles'
 import PlayersControls from '../PlayerControls/PlayerControls'
+import VolumeBar from '../VolumeBar/VolumeBar'
+import ProgressBar from '../ProgressBar/progressBar'
 
 function RenderBar({ loading, keyItem, repeat, setRepeat }) {
-  // const closeOrOpenBar = () => {}
-  // useEffect(() => {
-  //   closeOrOpenBar(keyItem)
-  // }, [])
-  // const [isPlaying, setIsPlaying] = useState(true)
   const audioRef = useRef(null)
 
-  // const handleStart = () => {
-  //   audioRef.current.play()
-  //   setIsPlaying(true)
-  // }
+  // const [currentTime, setCurrentTime] = useState(0) // храним состояние воспроизводимого трека/времени
 
-  // const handleStop = () => {
-  //   audioRef.current.pause()
-  //   setIsPlaying(false)
-  // }
-
-  // let letsPlayMusic = isPlaying ? handleStop : handleStart
   // useEffect(() => {
-  //   letsPlayMusic = isPlaying ? handleStop : handleStart
-  //   console.log(letsPlayMusic)
-  // }, [isPlaying])
-
-  // function todoClick() {
-  //   letsPlayMusic()
-  // }
+  //   console.log(currentTime)
+  //   if (audioRef !== null) {
+  //     audioRef.current?.addEventListener('timeupdate', () => {
+  //       setCurrentTime(audioRef.current?.currentTime)
+  //     })
+  //   }
+  // }, [audioRef.current?.currentTime, audioRef])
 
   return keyItem !== '' ? (
     <>
@@ -42,7 +31,7 @@ function RenderBar({ loading, keyItem, repeat, setRepeat }) {
 
       <S.Bar>
         <S.BarContent>
-          <S.BarPlayerProgress />
+          <ProgressBar audioRef={audioRef} />
           <S.BarPlayerBlock>
             <S.BarPlayer>
               <PlayersControls
@@ -100,18 +89,7 @@ function RenderBar({ loading, keyItem, repeat, setRepeat }) {
                 </S.TrackPlayLikeDis>
               </S.PlayerTrackPlay>
             </S.BarPlayer>
-            <S.BarVolumeBlock>
-              <S.VolumeContent>
-                <S.VolumeImage>
-                  <S.VolumeSvg alt="volume">
-                    <use xlinkHref={`${sprite}#icon-volume`} />
-                  </S.VolumeSvg>
-                </S.VolumeImage>
-                <S.VolumeProgress>
-                  <S.VolumeProgressLineBtn type="range" name="range" />
-                </S.VolumeProgress>
-              </S.VolumeContent>
-            </S.BarVolumeBlock>
+            <VolumeBar audioRef={audioRef} />
           </S.BarPlayerBlock>
         </S.BarContent>
       </S.Bar>
