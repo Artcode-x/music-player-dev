@@ -1,39 +1,59 @@
-import { useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie'
-
+import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import * as S from './Login.style'
 
-export default function Login({ setToken }) {
-  const navigate = useNavigate()
+export default function AuthPage() {
+  const [error, setError] = useState(null)
 
-  const onClick = () => {
-    Cookies.set('token', 'test')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-    setToken(Cookies.get())
-
-    navigate('/', { replace: true })
+  const handleLogin = async () => {
+    alert(`Выполняется вход: ${email} ${password}`)
+    setError('Неизвестная ошибка входа')
   }
 
+  // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
+  useEffect(() => {
+    setError(null)
+  }, [email, password])
+
   return (
-    <S.Title>
-      <h1>Login Page</h1>
-      <S.LoginButton type="button" onClick={onClick}>
-        Login
-      </S.LoginButton>
-    </S.Title>
+    <S.PageContainer>
+      <S.ModalForm>
+        <Link to="/login">
+          <S.ModalLogo>
+            <S.ModalLogoImage src="/img/logo_modal.png" alt="logo" />
+          </S.ModalLogo>
+        </Link>
+        <S.Inputs>
+          <S.ModalInput
+            type="text"
+            name="login"
+            placeholder="Почта"
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value)
+            }}
+          />
+          <S.ModalInput
+            type="password"
+            name="password"
+            placeholder="Пароль"
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value)
+            }}
+          />
+        </S.Inputs>
+        {error && <S.Error>{error}</S.Error>}
+        <S.Buttons>
+          <S.PrimaryButton onClick={handleLogin}>Войти</S.PrimaryButton>
+          <Link to="/register">
+            <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
+          </Link>
+        </S.Buttons>
+      </S.ModalForm>
+    </S.PageContainer>
   )
 }
-// const onButtonClick = () => {
-//   setLogin(true)
-//   navigate('/main', { replace: true })
-// }
-//   return (
-//     <S.Title>
-//       <h1>Login Page</h1>
-
-//       <S.LoginButton type="button" onClick={onButtonClick}>
-//         Login
-//       </S.LoginButton>
-//     </S.Title>
-//   )
-// }

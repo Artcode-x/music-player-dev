@@ -23,3 +23,5 @@ export default async function getAllTracksFromApi() {
 // if (response.status !== 200) {
 //   throw new Error('Ты не пройдешь!')
 // }
+
+export async function name(params) {}

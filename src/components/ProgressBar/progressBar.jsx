@@ -59,8 +59,7 @@ export default function ProgressBar({ audioRef }) {
         onInput={(event) => changeProgress(event)}
       />
       <S.BarTime>
-        {formatTime(Math.floor(сurrentTime))}/
-        {formatTime(Math.floor(audioRef.current?.duration))}
+        {formatTime(Math.floor(сurrentTime))}/{formatTime(Math.floor(time))}
       </S.BarTime>
     </>
   )

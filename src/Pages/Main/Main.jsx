@@ -15,16 +15,18 @@ function Main() {
 
   const [repeat, setRepeat] = useState(false)
 
-  useEffect(() => {
-    const fromApi = async () => {
-      try {
-        const spisokTrackov = await getAllTracksFromApi()
-        setAllTracks(spisokTrackov)
-      } catch (error) {
-        console.log(error.message)
-        setAddError(error.message)
-      }
+  const fromApi = async () => {
+    try {
+      const spisokTrackov = await getAllTracksFromApi()
+      setAllTracks(spisokTrackov)
+    } catch (error) {
+      // console.log(error.message)
+      setAddError(error.message)
     }
+  }
+
+  useEffect(() => {
+   
     fromApi()
   }, [])
 
