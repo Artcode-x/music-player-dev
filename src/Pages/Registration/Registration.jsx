@@ -1,17 +1,63 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import * as S from './Registration.styled'
+import { handleReg } from '../../components/Api/api'
 
-export default function AuthPage() {
+export default function Register({ setToken, setUserReg }) {
   const [error, setError] = useState(null)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
 
+  const [username, setUsername] = useState('')
+
+  // const [userReg, setUserReg] = useState('')
+
+  const navigate = useNavigate()
+
+  function checkInputs() {
+    if (!email) {
+      throw new Error('Поле емейл не заполнено')
+    }
+    if (!password) {
+      throw new Error('Поле password не заполнено')
+    }
+    if (!username) {
+      throw new Error('Поле имени не заполнено')
+    }
+    if (password !== repeatPassword) {
+      throw new Error('Пароли не совпадают')
+    }
+  }
+
   const handleRegister = async () => {
-    alert(`Выполняется регистрация: ${email} ${password}`)
-    setError('Неизвестная ошибка регистрации')
+    try {
+      checkInputs()
+      const newUserReg = await handleReg({ email, password, username })
+      setUserReg(newUserReg)
+      //    console.log(newUserReg)
+
+      if (newUserReg.id) {
+        setToken(true)
+        navigate('/')
+      }
+      if (!newUserReg.id) {
+        if (newUserReg.username) {
+          setError(newUserReg.username[0])
+          return
+        }
+        if (newUserReg.email) {
+          setError(newUserReg.email[0])
+          return
+        }
+        if (newUserReg.password) {
+          setError(newUserReg.password[0])
+        }
+      }
+    } catch (someerror) {
+      setError(someerror.message)
+    }
   }
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
@@ -44,6 +90,15 @@ export default function AuthPage() {
             value={password}
             onChange={(event) => {
               setPassword(event.target.value)
+            }}
+          />
+          <S.ModalInput
+            type="username"
+            name="username"
+            placeholder="Имя юзера"
+            value={username}
+            onChange={(event) => {
+              setUsername(event.target.value)
             }}
           />
           <S.ModalInput

@@ -24,4 +24,51 @@ export default async function getAllTracksFromApi() {
 //   throw new Error('Ты не пройдешь!')
 // }
 
-export async function name(params) {}
+fetch('https://painassasin.online/user/login/', {
+  method: 'POST',
+  body: JSON.stringify({
+    email: 'gleb@fokin.ru',
+    password: 'gleb@fokin.ru',
+  }),
+  headers: {
+    // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+    'content-type': 'application/json',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json))
+
+export async function handleReg({ email, password, username }) {
+  const response = await fetch('https://painassasin.online/user/signup/', {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+      password,
+      username,
+    }),
+    headers: {
+      'content-type': 'application/json',
+    },
+  })
+  if (response === 500) {
+    throw new Error('Сервер сломался')
+  }
+  const data = await response.json()
+  return data
+}
+
+//   fetch('https://painassasin.online/user/signup/', {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       email: 'gleb@fokin.ru',
+//       password: 'Aa12345!!',
+//       username: 'gleb@fokin.ru',
+//     }),
+//     headers: {
+//       // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+//       'content-type': 'application/json',
+//     },
+//   })
+//     .then((response) => response.json())
+//     .then((json) => console.log(json))
+// }

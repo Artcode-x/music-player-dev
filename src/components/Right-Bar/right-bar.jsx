@@ -4,11 +4,11 @@ import iconRandom1 from '../../img/playlist02.png'
 import iconRandom2 from '../../img/playlist03.png'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 
-function RenderRbar({ loading }) {
+function RenderRbar({ userReg, loading }) {
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
+        <S.SidebarPersonalName>{userReg.email}</S.SidebarPersonalName>
         <S.SidebarAvatar />
       </S.SidebarPersonal>
       {loading ? (

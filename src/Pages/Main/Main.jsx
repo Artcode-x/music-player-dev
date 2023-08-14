@@ -6,7 +6,7 @@ import RenderBar from '../../components/Bar-Below/BarBelow'
 import * as S from './fromApp-ToMain.styles'
 import getAllTracksFromApi from '../../components/Api/api'
 
-function Main() {
+function Main({ userReg }) {
   const [loading, setTimeLoading] = useState(true)
   const [allTracks, setAllTracks] = useState(null)
   const [addError, setAddError] = useState(null)
@@ -26,7 +26,6 @@ function Main() {
   }
 
   useEffect(() => {
-   
     fromApi()
   }, [])
 
@@ -44,7 +43,7 @@ function Main() {
           allTracks={allTracks}
           loading1={loading}
         />
-        <RenderRbar loading={loading} />
+        <RenderRbar loading={loading} userReg={userReg} />
       </S.Main>
       <S.Bar>
         <RenderBar
