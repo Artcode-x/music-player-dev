@@ -9,11 +9,14 @@ function App() {
 
   const [login, setLogin] = useState(false)
 
-  const [userReg, setUserReg] = useState('')
+  const [userReg, setUserReg] = useState('') // для страницы рег-ии
+  const [newLogin, setNewLogin] = useState('') // для стран-цы логина
 
   return (
     <>
       <AppRoutes
+        newLogin={newLogin}
+        setNewLogin={setNewLogin}
         userReg={userReg}
         setUserReg={setUserReg}
         token={token}

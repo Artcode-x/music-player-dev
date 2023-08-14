@@ -14,6 +14,8 @@ export default function AppRoutes({
   login,
   userReg,
   setUserReg,
+  newLogin,
+  setNewLogin,
 }) {
   return (
     <Routes>
@@ -23,11 +25,21 @@ export default function AppRoutes({
       />
       <Route
         path="/Login"
-        element={<Login setToken={setToken} setLogin={setLogin} />}
+        element={
+          <Login
+            newLogin={newLogin}
+            setNewLogin={setNewLogin}
+            setToken={setToken}
+            setLogin={setLogin}
+          />
+        }
       />
 
       <Route element={<ProtectedRoute token={token} login={login} />}>
-        <Route path="/" element={<Main userReg={userReg} />} />
+        <Route
+          path="/"
+          element={<Main userReg={userReg} newLogin={newLogin} />}
+        />
         <Route path="/Favorites" element={<Favorites />} />
         <Route path="/Category/:id" element={<Category />} />
       </Route>

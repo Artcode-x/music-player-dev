@@ -1,16 +1,49 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import * as S from './Login.style'
+import { Login } from '../../components/Api/api'
 
-export default function AuthPage() {
+export default function AuthPage({ setNewLogin, setToken }) {
   const [error, setError] = useState(null)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const navigate = useNavigate()
+
+  function checkInputs() {
+    if (!email || !password) {
+      if (!email) throw new Error('Email поле пусто')
+      if (!password) throw new Error('password поле пусто')
+    }
+  }
+
   const handleLogin = async () => {
-    alert(`Выполняется вход: ${email} ${password}`)
-    setError('Неизвестная ошибка входа')
+    try {
+      checkInputs()
+      const todoNewLogin = await Login({ email, password }) // передаем в ф-ию логин в api наши емейл и пароль с инпутов(которые записаны в состояния)
+      setNewLogin(todoNewLogin)
+
+      if (todoNewLogin.id) {
+        setToken(true)
+        navigate('/')
+      }
+
+      if (!todoNewLogin.id) {
+        // обработка 400 ошибки и 401
+        if (todoNewLogin.email) {
+          setError(todoNewLogin.email[0])
+          return
+        }
+        if (todoNewLogin.password) {
+          setError(todoNewLogin.password[0])
+          return
+        }
+        if (todoNewLogin.detail) setError(todoNewLogin.detail[0])
+      }
+    } catch (serror) {
+      setError(serror.message)
+    }
   }
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
