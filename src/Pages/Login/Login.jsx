@@ -2,14 +2,26 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import * as S from './Login.style'
 import { Login } from '../../components/Api/api'
+import { useUserContext } from '../../components/Context/Context'
 
 export default function AuthPage({ setNewLogin, setToken }) {
+  const { toggleUser } = useUserContext()
+  const navigate = useNavigate()
   const [error, setError] = useState(null)
+
+  const getLoginCheck = (newUser) => {
+    if (newUser.detail) {
+      setError(newUser.detail)
+      return
+    }
+    toggleUser(newUser) // в ф-ию toggleUser передаем ответ с апи
+    navigate('/')
+  }
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const navigate = useNavigate()
+  const [isLoading, setisLoading] = useState(false) // Создаем состояние для активности/неактивности кнопки логина
 
   function checkInputs() {
     if (!email || !password) {
@@ -21,7 +33,9 @@ export default function AuthPage({ setNewLogin, setToken }) {
   const handleLogin = async () => {
     try {
       checkInputs()
+      setisLoading(true) // делаем кнопку неактивной до получения ответа с апи, затем в блоке finally меняем снова ее состояние на активное, переключая на false
       const todoNewLogin = await Login({ email, password }) // передаем в ф-ию логин в api наши емейл и пароль с инпутов(которые записаны в состояния)
+      getLoginCheck(todoNewLogin)
       setNewLogin(todoNewLogin)
 
       if (todoNewLogin.id) {
@@ -43,6 +57,8 @@ export default function AuthPage({ setNewLogin, setToken }) {
       }
     } catch (serror) {
       setError(serror.message)
+    } finally {
+      setisLoading(false)
     }
   }
 
@@ -81,7 +97,9 @@ export default function AuthPage({ setNewLogin, setToken }) {
         </S.Inputs>
         {error && <S.Error>{error}</S.Error>}
         <S.Buttons>
-          <S.PrimaryButton onClick={handleLogin}>Войти</S.PrimaryButton>
+          <S.PrimaryButton disabled={isLoading} onClick={handleLogin}>
+            Войти
+          </S.PrimaryButton>
           <Link to="/register">
             <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
           </Link>

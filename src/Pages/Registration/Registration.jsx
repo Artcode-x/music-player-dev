@@ -2,8 +2,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import * as S from './Registration.styled'
 import { handleReg } from '../../components/Api/api'
+import { useUserContext } from '../../components/Context/Context'
 
-export default function Register({ setToken, setUserReg }) {
+export default function Register({ setToken }) {
   const [error, setError] = useState(null)
 
   const [email, setEmail] = useState('')
@@ -12,9 +13,16 @@ export default function Register({ setToken, setUserReg }) {
 
   const [username, setUsername] = useState('')
 
-  // const [userReg, setUserReg] = useState('')
-
+  const [buttonDisable, setButtonDisable] = useState(false) // на время запроса кнопка зарег блокируется, для этого создаем это сост-ие
   const navigate = useNavigate()
+
+  const { toggleUser } = useUserContext()
+
+  const getRegisterCheck = (newUser) => {
+    toggleUser(newUser) // в ф-ию toggleUser передаем ответ с апи
+    navigate('/')
+    console.log(newUser)
+  }
 
   function checkInputs() {
     if (!email) {
@@ -34,8 +42,11 @@ export default function Register({ setToken, setUserReg }) {
   const handleRegister = async () => {
     try {
       checkInputs()
+      setButtonDisable(true) // делаем кнопку неактивной до ответа с апи
       const newUserReg = await handleReg({ email, password, username })
-      setUserReg(newUserReg)
+      getRegisterCheck(newUserReg)
+      console.log(newUserReg)
+      //  setUserReg(newUserReg)
       //    console.log(newUserReg)
 
       if (newUserReg.id) {
@@ -57,6 +68,8 @@ export default function Register({ setToken, setUserReg }) {
       }
     } catch (someerror) {
       setError(someerror.message)
+    } finally {
+      setButtonDisable(true) // делаем кнопку активной
     }
   }
 
@@ -113,7 +126,7 @@ export default function Register({ setToken, setUserReg }) {
         </S.Inputs>
         {error && <S.Error>{error}</S.Error>}
         <S.Buttons>
-          <S.PrimaryButton onClick={handleRegister}>
+          <S.PrimaryButton disabled={buttonDisable} onClick={handleRegister}>
             Зарегистрироваться
           </S.PrimaryButton>
         </S.Buttons>
