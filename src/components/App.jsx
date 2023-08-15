@@ -10,9 +10,6 @@ function App() {
 
   const [login, setLogin] = useState(false)
 
-  const [userReg, setUserReg] = useState('') // для страницы рег-ии
-  const [newLogin, setNewLogin] = useState('') // для стран-цы логина
-
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
 
   const toggleLogout = () => {
@@ -40,10 +37,6 @@ function App() {
   return (
     <UserContext.Provider value={valueTest}>
       <AppRoutes
-        newLogin={newLogin}
-        setNewLogin={setNewLogin}
-        userReg={userReg}
-        setUserReg={setUserReg}
         token={token}
         setToken={setToken}
         login={login}

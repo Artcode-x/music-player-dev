@@ -6,16 +6,13 @@ import { useUserContext } from '../../components/Context/Context'
 
 export default function Register({ setToken }) {
   const [error, setError] = useState(null)
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
-
   const [username, setUsername] = useState('')
-
   const [buttonDisable, setButtonDisable] = useState(false) // на время запроса кнопка зарег блокируется, для этого создаем это сост-ие
-  const navigate = useNavigate()
 
+  const navigate = useNavigate()
   const { toggleUser } = useUserContext()
 
   const getRegisterCheck = (newUser) => {
@@ -46,8 +43,6 @@ export default function Register({ setToken }) {
       const newUserReg = await handleReg({ email, password, username })
       getRegisterCheck(newUserReg)
       console.log(newUserReg)
-      //  setUserReg(newUserReg)
-      //    console.log(newUserReg)
 
       if (newUserReg.id) {
         setToken(true)
