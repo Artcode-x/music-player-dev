@@ -4,7 +4,7 @@ import * as S from './Registration.styled'
 import { handleReg } from '../../components/Api/api'
 import { useUserContext } from '../../components/Context/Context'
 
-export default function Register({ setToken }) {
+export default function Register() {
   const [error, setError] = useState(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -18,22 +18,13 @@ export default function Register({ setToken }) {
   const getRegisterCheck = (newUser) => {
     toggleUser(newUser) // в ф-ию toggleUser передаем ответ с апи
     navigate('/')
-    console.log(newUser)
   }
 
   function checkInputs() {
-    if (!email) {
-      throw new Error('Поле емейл не заполнено')
-    }
-    if (!password) {
-      throw new Error('Поле password не заполнено')
-    }
-    if (!username) {
-      throw new Error('Поле имени не заполнено')
-    }
-    if (password !== repeatPassword) {
-      throw new Error('Пароли не совпадают')
-    }
+    if (!email) throw new Error('Поле емейл не заполнено')
+    if (!password) throw new Error('Поле password не заполнено')
+    if (!username) throw new Error('Поле имени не заполнено')
+    if (password !== repeatPassword) throw new Error('Пароли не совпадают')
   }
 
   const handleRegister = async () => {
@@ -41,13 +32,7 @@ export default function Register({ setToken }) {
       checkInputs()
       setButtonDisable(true) // делаем кнопку неактивной до ответа с апи
       const newUserReg = await handleReg({ email, password, username })
-      getRegisterCheck(newUserReg)
-      console.log(newUserReg)
 
-      if (newUserReg.id) {
-        setToken(true)
-        navigate('/')
-      }
       if (!newUserReg.id) {
         if (newUserReg.username) {
           setError(newUserReg.username[0])
@@ -61,10 +46,11 @@ export default function Register({ setToken }) {
           setError(newUserReg.password[0])
         }
       }
+      getRegisterCheck(newUserReg)
     } catch (someerror) {
       setError(someerror.message)
     } finally {
-      setButtonDisable(true) // делаем кнопку активной
+      setButtonDisable(false) // делаем кнопку активной
     }
   }
 

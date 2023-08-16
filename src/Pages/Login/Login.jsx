@@ -4,16 +4,12 @@ import * as S from './Login.style'
 import { Login } from '../../components/Api/api'
 import { useUserContext } from '../../components/Context/Context'
 
-export default function AuthPage({ setToken }) {
+export default function AuthPage() {
   const { toggleUser } = useUserContext()
   const navigate = useNavigate()
   const [error, setError] = useState(null)
 
   const getLoginCheck = (newUser) => {
-    if (newUser.detail) {
-      setError(newUser.detail)
-      return
-    }
     toggleUser(newUser) // в ф-ию toggleUser передаем ответ с апи
     navigate('/')
   }
@@ -35,12 +31,6 @@ export default function AuthPage({ setToken }) {
       checkInputs()
       setisLoading(true) // делаем кнопку неактивной до получения ответа с апи, затем в блоке finally меняем снова ее состояние на активное, переключая на false
       const todoNewLogin = await Login({ email, password }) // передаем в ф-ию логин в api наши емейл и пароль с инпутов(которые записаны в состояния)
-      getLoginCheck(todoNewLogin)
-
-      if (todoNewLogin.id) {
-        setToken(true)
-        navigate('/')
-      }
 
       if (!todoNewLogin.id) {
         // обработка 400 ошибки и 401
@@ -54,6 +44,7 @@ export default function AuthPage({ setToken }) {
         }
         if (todoNewLogin.detail) setError(todoNewLogin.detail[0])
       }
+      getLoginCheck(todoNewLogin)
     } catch (serror) {
       setError(serror.message)
     } finally {
