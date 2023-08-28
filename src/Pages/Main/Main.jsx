@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Ma1nNav from '../../components/Left-Nav/left-nav'
 import RenderCenter from '../../components/Center-Block/center-block'
 import RenderRbar from '../../components/Right-Bar/right-bar'
 import RenderBar from '../../components/Bar-Below/BarBelow'
 import * as S from './fromApp-ToMain.styles'
 import getAllTracksFromApi from '../../components/Api/api'
+import addTracks from '../../store/actions/creators/creators'
 
 function Main() {
   const [loading, setTimeLoading] = useState(true)
@@ -15,9 +17,12 @@ function Main() {
 
   const [repeat, setRepeat] = useState(false)
 
+  const dispatch = useDispatch()
+
   const fromApi = async () => {
     try {
       const spisokTrackov = await getAllTracksFromApi()
+      dispatch(addTracks(spisokTrackov)) // передаю в action, то что нужно сохранить
       setAllTracks(spisokTrackov)
     } catch (error) {
       // console.log(error.message)

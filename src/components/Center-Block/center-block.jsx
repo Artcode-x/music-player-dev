@@ -1,10 +1,13 @@
 import { useState } from 'react'
 
+import { useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
 
-function RenderCenter({ loading1, allTracks, setKeyItem, addError }) {
+function RenderCenter({ loading1, setKeyItem, addError }) {
+  const allTracks = useSelector((store) => store.tracks.allTracks)
+
   const todoClick = (track) => {
     setKeyItem(track)
   }

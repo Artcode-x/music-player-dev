@@ -298,6 +298,32 @@ export const ContentPlaylist = styled.div`
 export const centerblockContent = styled.div`
   display: flex;
   flex-direction: column;
+
+  gap: 8px;
+  box-sizing: border-box;
+  height: 80%;
+  list-style: none;
+  width: 100%;
+  scrollbar-color: white, gray;
+
+  &::-webkit-scrollbar {
+    background-color: #313131;
+    width: 10px;
+    border-radius: 4px;
+    overflow-y: auto;
+  }
+
+  /* &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #ffffff;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #4b4949;
+  } */
 `
 export const PlaylistItem = styled.div`
   width: 100%;
@@ -367,6 +393,7 @@ export const TrackTitleSvg = styled.svg`
   fill: transparent;
   stroke: #4e4e4e;
 `
+
 export const TrackTitleText = styled.div``
 export const TrackTime = styled.div``
 
