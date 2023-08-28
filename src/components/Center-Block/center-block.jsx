@@ -1,14 +1,18 @@
 import { useState } from 'react'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
+import { addActiveTrack } from '../../store/actions/creators/creators'
 
 function RenderCenter({ loading1, setKeyItem, addError }) {
   const allTracks = useSelector((store) => store.tracks.allTracks)
 
+  const dispatch = useDispatch()
+
   const todoClick = (track) => {
+    dispatch(addActiveTrack(true))
     setKeyItem(track)
   }
 
