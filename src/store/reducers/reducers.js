@@ -10,6 +10,7 @@ const initialTracks = {
   allTracks: [],
   PLAY_TRACK: [],
   ACTIVE_TRACK: [],
+  activeTrack: {},
 }
 
 function tracksReducer(state = initialTracks, action) {

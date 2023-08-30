@@ -10,20 +10,22 @@ import {
 } from '../../store/actions/creators/creators'
 
 function RenderCenter({ loading1, setKeyItem, addError }) {
-  const [isPlaying, setIsPlaying] = useState(null)
+  //  const [isPlaying, setIsPlaying] = useState(null)
 
   const allTracks = useSelector((store) => store.tracks.allTracks)
 
   const playPause = useSelector((store) => store.tracks.playPause)
 
+  const activeTrack = useSelector((store) => store.tracks.activeTrack) // исп-ем знания из state/store
+
   const dispatch = useDispatch()
 
   const todoClick = (track) => {
-    setIsPlaying(track.id)
+    //  setIsPlaying(track.id)
 
     dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true
 
-    dispatch(addActiveTrack(true))
+    dispatch(addActiveTrack(track)) // хранится тек-ий играющий трек
     setKeyItem(track)
   }
 
@@ -198,7 +200,7 @@ function RenderCenter({ loading1, setKeyItem, addError }) {
                     <S.TrackTitleImage>
                       <RybkaForImport IamWidth="51" IamHeight="51" />
 
-                      {isPlaying === track.id ? (
+                      {track.id === activeTrack.id ? (
                         <S.PlayingDot playPause={playPause} />
                       ) : (
                         <S.TrackTitleSvg alt="music">
