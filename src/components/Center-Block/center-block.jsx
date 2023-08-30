@@ -4,17 +4,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
-import { addActiveTrack } from '../../store/actions/creators/creators'
+import {
+  addActiveTrack,
+  addSetPause,
+} from '../../store/actions/creators/creators'
 
 function RenderCenter({ loading1, setKeyItem, addError }) {
   const [isPlaying, setIsPlaying] = useState(null)
 
   const allTracks = useSelector((store) => store.tracks.allTracks)
 
+  const playPause = useSelector((store) => store.tracks.playPause)
+
   const dispatch = useDispatch()
 
   const todoClick = (track) => {
     setIsPlaying(track.id)
+
+    dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true
+
     dispatch(addActiveTrack(true))
     setKeyItem(track)
   }
@@ -191,7 +199,7 @@ function RenderCenter({ loading1, setKeyItem, addError }) {
                       <RybkaForImport IamWidth="51" IamHeight="51" />
 
                       {isPlaying === track.id ? (
-                        <S.PlayingDot />
+                        <S.PlayingDot playPause={playPause} />
                       ) : (
                         <S.TrackTitleSvg alt="music">
                           <use xlinkHref={`${sprite}#icon-note`} />

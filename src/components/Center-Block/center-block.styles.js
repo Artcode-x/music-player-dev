@@ -354,7 +354,7 @@ export const PlayingDot = styled.div`
   display: block;
   animation: ${bubbleOut} 0.6s ease-in-out infinite both;
   ${(props) =>
-    !props.playing &&
+    !props.playPause &&
     css`
       animation: none;
     `}

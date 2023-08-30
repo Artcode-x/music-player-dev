@@ -1,9 +1,13 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import * as S from './PlayerControls.style'
 import sprite from '../../img/icon/sprite.svg'
+import { addSetPause } from '../../store/actions/creators/creators'
 
 export default function PlayersControls({ audioRef, repeat, setRepeat }) {
   const [isPlaying, setIsPlaying] = useState(false)
+
+  const dispatch = useDispatch()
 
   const toPrevTrack = () => {
     alert('предыдущий')
@@ -20,10 +24,12 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
         break
       case 'play':
         audioRef.current.play()
+        dispatch(addSetPause(true))
         setIsPlaying(false)
         break
       case 'stop':
         audioRef.current.pause()
+        dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимация
         setIsPlaying(true)
         break
       case 'next':
