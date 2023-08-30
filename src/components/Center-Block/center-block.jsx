@@ -7,11 +7,14 @@ import * as S from './center-block.styles'
 import { addActiveTrack } from '../../store/actions/creators/creators'
 
 function RenderCenter({ loading1, setKeyItem, addError }) {
+  const [isPlaying, setIsPlaying] = useState(null)
+
   const allTracks = useSelector((store) => store.tracks.allTracks)
 
   const dispatch = useDispatch()
 
   const todoClick = (track) => {
+    setIsPlaying(track.id)
     dispatch(addActiveTrack(true))
     setKeyItem(track)
   }
@@ -186,9 +189,14 @@ function RenderCenter({ loading1, setKeyItem, addError }) {
                   <S.TrackTitle>
                     <S.TrackTitleImage>
                       <RybkaForImport IamWidth="51" IamHeight="51" />
-                      <S.TrackTitleSvg alt="music">
-                        <use xlinkHref={`${sprite}#icon-note`} />
-                      </S.TrackTitleSvg>
+
+                      {isPlaying === track.id ? (
+                        <S.PlayingDot />
+                      ) : (
+                        <S.TrackTitleSvg alt="music">
+                          <use xlinkHref={`${sprite}#icon-note`} />
+                        </S.TrackTitleSvg>
+                      )}
                     </S.TrackTitleImage>
                     <S.TrackTitleText>
                       <S.TrackTitleLink>

@@ -13,46 +13,6 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
     alert('следующий')
   }
 
-  //   const [currTime, setCurrTime] = useState({ min: '', sec: '' }) // текущее состояние звука в секундах
-  //   const [seconds, setSeconds] = useState() // текущая позиция звука в секундах
-
-  //   useEffect(() => {
-  //     const sec = duration / 1000
-  //     const min = Math.floor(sec % 60)
-  //     const secRemain = Math.floor(sec % 60)
-  //     const time = {
-  //       min: min,
-  //       sec: secRemain,
-  //     }
-  //   })
-
-  //   const [trackIndex, setTrackIndex] = useState(0)
-  //   const tracks = [
-  //     {
-  //       title: '',
-  //       artist: '',
-  //       audioSrc: '',
-  //     },
-  //   ]
-  //   const { title, artist, audioSrc } = tracks[trackIndex]
-
-  //   const isReady = useRef(false)
-
-  //   const [trackProgress, setTrackProgress] = useState(0)
-  //   useEffect(() => {
-  //     audioRef.current.pause()
-  //     audioRef.current = new Audio(audioSrc)
-  //     setTrackProgress(audioRef.current.currentTime)
-  //     console.log(trackProgress)
-  //     if (isReady.current) {
-  //       audioRef.current.play()
-  //       setIsPlaying(true)
-  //       // startTimer()
-  //     } else {
-  //       isReady.current = true
-  //     }
-  //   }, [trackIndex])
-
   const audiocontrol = (text) => {
     switch (text) {
       case 'prev':
