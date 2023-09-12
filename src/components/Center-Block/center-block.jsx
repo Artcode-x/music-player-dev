@@ -25,9 +25,9 @@ function RenderCenter({ loading1, setKeyItem, addError }) {
 
   const dispatch = useDispatch()
 
-  const todoClick = (track, index) => {
+  const todoClick = (track, i) => {
     //  setIsPlaying(track.id)
-    dispatch(addIdTrack({ ...idTrack, id: index }))
+    dispatch(addIdTrack({ ...idTrack, index: i }))
     // Чтобы изменить состояние, нам потребуется dispatch. dispatch - Это ф-ия, и при вызове ее, параметром она принимает ACTION. Action - это объект, у которого обязательно должен быть тип. (тип мы указывали в редюсере)
     // Второе св-во объекта - это какие то данные, в данном случае это зн-ие true/false
     dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true

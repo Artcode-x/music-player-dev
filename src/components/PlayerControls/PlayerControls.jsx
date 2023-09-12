@@ -24,17 +24,17 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
 
   const toPrevTrack = () => {
     dispatch(addSetPause(true))
-    dispatch(addIdTrack({ id: idTrack.id - 1 }))
-    dispatch(addActiveTrack(allTracks[idTrack.id - 1]))
+    dispatch(addIdTrack({ index: idTrack.index - 1 }))
+    dispatch(addActiveTrack(allTracks[idTrack.index - 1]))
   }
 
   const toNextTrack = () => {
     // обозначаем что трек играет
     dispatch(addSetPause(true))
     // увеличим число на +1 где idTrack
-    dispatch(addIdTrack({ id: idTrack.id + 1 }))
+    dispatch(addIdTrack({ index: idTrack.index + 1 }))
     // включаем след трек
-    dispatch(addActiveTrack(allTracks[idTrack.id + 1]))
+    dispatch(addActiveTrack(allTracks[idTrack.index + 1]))
   }
 
   const audiocontrol = (text) => {
