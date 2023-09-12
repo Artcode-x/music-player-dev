@@ -3,6 +3,7 @@ import {
   PLAY_TRACK,
   ACTIVE_TRACK,
   PLAY_PAUSE,
+  ID_TRACK,
   //   SHUFFLE_TRACKS,
   //   ADD_USER,
   //   FAVORITES_TRACKS,
@@ -11,6 +12,11 @@ import {
   //   SET_CURRENT_TRACK,
   //   PREV_TRACK,
 } from '../types/types'
+
+// Actions - получают какие то данные, затем куда то сохраняют их
+// dispatch берет/перенаправляет этот Action и отправляет его в reducer
+// reducer - Меняет данные на основе того что находится в Action-е. Сохраняет изменения в store и отдает в State .
+// затем реакт делает перерендер компонент в которых изменились данные
 
 // первый Action
 const addTracks = (tracks) => ({
@@ -32,6 +38,11 @@ export const addActiveTrack = (activeTrack) => ({
 export const addSetPause = (playPause) => ({
   type: PLAY_PAUSE,
   payload: { playPause },
+})
+
+export const addIdTrack = (idTrack) => ({
+  type: ID_TRACK,
+  payload: { idTrack },
 })
 
 export default addTracks

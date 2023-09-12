@@ -6,23 +6,30 @@ import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
 import {
   addActiveTrack,
+  addIdTrack,
   addSetPause,
 } from '../../store/actions/creators/creators'
 
 function RenderCenter({ loading1, setKeyItem, addError }) {
   //  const [isPlaying, setIsPlaying] = useState(null)
 
+  // чтобы получить состояние, исп-ем хук useSelector
+  // Параметром он принимает ф-ию, а эта ф-ия в свою очередь параметром принимает состояние, и из этого состояния мы уже получаем нужную переменную (в данном примере allTracks)
   const allTracks = useSelector((store) => store.tracks.allTracks)
 
   const playPause = useSelector((store) => store.tracks.playPause)
 
   const activeTrack = useSelector((store) => store.tracks.activeTrack) // исп-ем знания из state/store
 
+  const idTrack = useSelector((store) => store.tracks.idTrack)
+
   const dispatch = useDispatch()
 
-  const todoClick = (track) => {
+  const todoClick = (track, index) => {
     //  setIsPlaying(track.id)
-
+    dispatch(addIdTrack({ ...idTrack, id: index }))
+    // Чтобы изменить состояние, нам потребуется dispatch. dispatch - Это ф-ия, и при вызове ее, параметром она принимает ACTION. Action - это объект, у которого обязательно должен быть тип. (тип мы указывали в редюсере)
+    // Второе св-во объекта - это какие то данные, в данном случае это зн-ие true/false
     dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true
 
     dispatch(addActiveTrack(track)) // хранится тек-ий играющий трек
@@ -191,9 +198,9 @@ function RenderCenter({ loading1, setKeyItem, addError }) {
           <S.ContentPlaylist>
             {/* <p>{addError}</p> */}
             <S.PlaylistItem>
-              {allTracks.map((track) => (
+              {allTracks.map((track, index) => (
                 <S.PlaylistTrack
-                  onClick={() => todoClick(track)}
+                  onClick={() => todoClick(track, index)}
                   key={track.id}
                 >
                   <S.TrackTitle>

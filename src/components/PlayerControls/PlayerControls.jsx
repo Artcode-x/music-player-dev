@@ -1,20 +1,40 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as S from './PlayerControls.style'
 import sprite from '../../img/icon/sprite.svg'
-import { addSetPause } from '../../store/actions/creators/creators'
+import {
+  addSetPause,
+  addActiveTrack,
+  addIdTrack,
+} from '../../store/actions/creators/creators'
+import allTracksSelector from '../../store/selectors/selectors'
 
 export default function PlayersControls({ audioRef, repeat, setRepeat }) {
+  //  let index
   const [isPlaying, setIsPlaying] = useState(false)
+
+  // состояние текущего трека - играет или нет
+  // const activeTrack = useSelector(activeTrackSelector)
+
+  const allTracks = useSelector(allTracksSelector)
+
+  const idTrack = useSelector((store) => store.tracks.idTrack)
 
   const dispatch = useDispatch()
 
   const toPrevTrack = () => {
-    alert('предыдущий')
+    dispatch(addSetPause(true))
+    dispatch(addIdTrack({ id: idTrack.id - 1 }))
+    dispatch(addActiveTrack(allTracks[idTrack.id - 1]))
   }
 
   const toNextTrack = () => {
-    alert('следующий')
+    // обозначаем что трек играет
+    dispatch(addSetPause(true))
+    // увеличим число на +1 где idTrack
+    dispatch(addIdTrack({ id: idTrack.id + 1 }))
+    // включаем след трек
+    dispatch(addActiveTrack(allTracks[idTrack.id + 1]))
   }
 
   const audiocontrol = (text) => {

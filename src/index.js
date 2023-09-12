@@ -9,6 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      {/* После установки модуля react-redux, используем компонент provider, в который оборачиваем наше приложение. И параметром этот компонент принимает store, т.е. он будет в компоненты прокидывать состояние */}
       <Provider store={store}>
         <App />
       </Provider>
