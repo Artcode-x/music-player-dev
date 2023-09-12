@@ -4,6 +4,7 @@ import {
   ACTIVE_TRACK,
   PLAY_PAUSE,
   ID_TRACK,
+  SHUFFLE_TRACKS,
   //   SHUFFLE_TRACKS,
   //   ADD_USER,
   //   FAVORITES_TRACKS,
@@ -43,6 +44,11 @@ export const addSetPause = (playPause) => ({
 export const addIdTrack = (idTrack) => ({
   type: ID_TRACK,
   payload: { idTrack },
+})
+
+export const addShuffleTrack = (shuffleTracks) => ({
+  type: SHUFFLE_TRACKS,
+  payload: { shuffleTracks },
 })
 
 export default addTracks

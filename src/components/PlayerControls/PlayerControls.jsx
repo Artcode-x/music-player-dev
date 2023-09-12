@@ -6,6 +6,7 @@ import {
   addSetPause,
   addActiveTrack,
   addIdTrack,
+  addShuffleTrack,
 } from '../../store/actions/creators/creators'
 import allTracksSelector from '../../store/selectors/selectors'
 
@@ -19,6 +20,8 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
   const allTracks = useSelector(allTracksSelector)
 
   const idTrack = useSelector((store) => store.tracks.idTrack)
+
+  // const shuffleMusic = useSelector((store) => store.tracks.shuffleTracks)
 
   const dispatch = useDispatch()
 
@@ -35,6 +38,12 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
     dispatch(addIdTrack({ index: idTrack.index + 1 }))
     // включаем след трек
     dispatch(addActiveTrack(allTracks[idTrack.index + 1]))
+  }
+
+  const shuffle = () => {
+    const shuffleTracks = allTracks.map((track) => track)
+    shuffleTracks.sort(() => Math.random() - 0.5)
+    dispatch(addShuffleTrack(shuffleTracks))
   }
 
   const audiocontrol = (text) => {
@@ -60,6 +69,8 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
         console.log(repeat)
         break
       case 'shuffle':
+        shuffle()
+
         alert('пока не реализовано')
         break
       default:
