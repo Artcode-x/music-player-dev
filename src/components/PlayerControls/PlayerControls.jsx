@@ -7,6 +7,7 @@ import {
   addActiveTrack,
   addIdTrack,
   addShuffleTrack,
+  addSHufflePlayStop,
 } from '../../store/actions/creators/creators'
 import allTracksSelector from '../../store/selectors/selectors'
 
@@ -21,7 +22,9 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
 
   const idTrack = useSelector((store) => store.tracks.idTrack)
 
-  // const shuffleMusic = useSelector((store) => store.tracks.shuffleTracks)
+  const shufflePlayStop = useSelector((store) => store.tracks.shufflePlayStop)
+
+  const shuffleTracks = useSelector((store) => store.tracks.shuffleTracks)
 
   const dispatch = useDispatch()
 
@@ -32,18 +35,48 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
   }
 
   const toNextTrack = () => {
-    // обозначаем что трек играет
-    dispatch(addSetPause(true))
-    // увеличим число на +1 где idTrack
-    dispatch(addIdTrack({ index: idTrack.index + 1 }))
-    // включаем след трек
-    dispatch(addActiveTrack(allTracks[idTrack.index + 1]))
+    // если нажали первый раз кнопку зашафл треки
+    // нужно зап-ть нулевой трек из зашафленного массива
+    if (shufflePlayStop === 'buttonClickFirst') {
+      //  записываем трек который играет нулевым эл-ом уже перемешанного массива
+      dispatch(addActiveTrack(shuffleTracks[0]))
+
+      // первый раз была нажата кнопка шафл
+      dispatch(addIdTrack({ index: 0 }))
+      dispatch(addSHufflePlayStop(true))
+      return
+    }
+    if (shufflePlayStop === false) {
+      // обозначаем что трек играет
+      dispatch(addSetPause(true))
+      // увеличим число на +1 где idTrack
+      dispatch(addIdTrack({ index: idTrack.index + 1 }))
+      // включаем след трек
+      dispatch(addActiveTrack(allTracks[idTrack.index + 1]))
+    } else {
+      dispatch(addSetPause(true))
+
+      dispatch(addIdTrack({ index: idTrack.index + 1 }))
+
+      dispatch(addActiveTrack(shuffleTracks[idTrack.index + 1]))
+    }
   }
 
   const shuffle = () => {
-    const shuffleTracks = allTracks.map((track) => track)
-    shuffleTracks.sort(() => Math.random() - 0.5)
-    dispatch(addShuffleTrack(shuffleTracks))
+    // если тру - нажали 2 раз
+    if (shufflePlayStop === true || shufflePlayStop === 'buttonClickFirst') {
+      // выключаем кнопку
+      dispatch(addShuffleTrack(false))
+    } else {
+      // для понимания того что кнопка шафл нажата первый раз
+      dispatch(addShuffleTrack('buttonClickFirst'))
+
+      const newShuffleTracks = allTracks.map((track) => track)
+      newShuffleTracks.sort(() => Math.random() - 0.5)
+      // console.log(allTracks)
+      // console.log(shuffleTracks)
+      dispatch(addShuffleTrack(newShuffleTracks))
+    }
   }
 
   const audiocontrol = (text) => {

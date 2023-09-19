@@ -6,6 +6,7 @@ import {
   PLAY_PAUSE,
   ID_TRACK,
   SHUFFLE_TRACKS,
+  SHUFFLE_PLAY_STOP,
 } from '../actions/types/types'
 
 // state - состояние, может быть объектом или массивом либо приметивное зн-ие, которое хранит какие то данные. Чаще всего это объект, у которого уже есть конкретные поля, которые могут быть как объектами, так и массивами/примитивами.
@@ -18,6 +19,7 @@ const initialTracks = {
   activeTrack: {},
   idTrack: {},
   shuffleTracks: {},
+  shufflePlayStop: {},
 }
 
 // reducer - ф-ия может быть обьявл-на через func-on, либо через стрел ф-ию. Первым параметром принимает состояние, а вторым - action.
@@ -70,6 +72,14 @@ function tracksReducer(state = initialTracks, action) {
       return {
         ...state,
         shuffleTracks, // добавляем в стейт ключ
+      }
+    }
+
+    case SHUFFLE_PLAY_STOP: {
+      const { shufflePlayStop } = action.payload
+      return {
+        ...state,
+        shufflePlayStop, // добавляем в стейт ключ
       }
     }
 

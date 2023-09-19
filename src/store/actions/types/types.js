@@ -2,6 +2,7 @@ export const ADD_TRACK = 'ADD_TRACK' // добавление всех треко
 export const PLAY_TRACK = 'PLAY_TRACK'
 export const ACTIVE_TRACK = 'ACTIVE_TRACK'
 export const SHUFFLE_TRACKS = 'SHUFFLE_TRACK'
+export const SHUFFLE_PLAY_STOP = 'SHUFFLE_PLAY_STOP'
 export const ADD_USER = 'ADD_USER'
 export const FAVORITES_TRACKS = 'FAVORITES_TRACKS'
 export const ADD_TOKEN = 'ADD_TOKEN'
