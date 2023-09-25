@@ -10,7 +10,7 @@ import {
   addSetPause,
 } from '../../store/actions/creators/creators'
 
-function RenderCenter({ loading1, setKeyItem, addError }) {
+function RenderCenter({ loading1, addError }) {
   //  const [isPlaying, setIsPlaying] = useState(null)
 
   // чтобы получить состояние, исп-ем хук useSelector
@@ -33,7 +33,7 @@ function RenderCenter({ loading1, setKeyItem, addError }) {
     dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true
 
     dispatch(addActiveTrack(track)) // хранится тек-ий играющий трек
-    setKeyItem(track)
+    // setKeyItem(track)
   }
 
   const contentTitlePlayList = (

@@ -15,7 +15,7 @@ export default function PlayersControls({
   audioRef,
   repeat,
   setRepeat,
-  setKeyItem,
+  // setKeyItem,
 }) {
   //  let index
   const [isPlaying, setIsPlaying] = useState(false)
@@ -38,7 +38,7 @@ export default function PlayersControls({
     dispatch(addIdTrack({ index: idTrack.index - 1 }))
     dispatch(addActiveTrack(allTracks[idTrack.index - 1]))
 
-    setKeyItem(allTracks[idTrack.index - 1])
+    //  setKeyItem(allTracks[idTrack.index - 1])
   }
 
   const toNextTrack = () => {
@@ -66,7 +66,8 @@ export default function PlayersControls({
       dispatch(addIdTrack({ index: idTrack.index + 1 }))
       // включаем след трек
       dispatch(addActiveTrack(allTracks[idTrack.index + 1]))
-      setKeyItem(allTracks[idTrack.index + 1])
+
+      //     setKeyItem(allTracks[idTrack.index + 1])
     } else {
       console.log('3333')
       dispatch(addSetPause(true))

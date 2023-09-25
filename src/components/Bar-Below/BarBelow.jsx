@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 
 import { useRef } from 'react'
-
+import { useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './bar-below.styles'
@@ -9,8 +9,10 @@ import PlayersControls from '../PlayerControls/PlayerControls'
 import VolumeBar from '../VolumeBar/VolumeBar'
 import ProgressBar from '../ProgressBar/progressBar'
 
-function RenderBar({ loading, keyItem, repeat, setRepeat, setKeyItem }) {
+function RenderBar({ loading, repeat, setRepeat }) {
   const audioRef = useRef(null)
+
+  const activeTrack = useSelector((store) => store.tracks.activeTrack)
 
   // const [currentTime, setCurrentTime] = useState(0) // храним состояние воспроизводимого трека/времени
 
@@ -23,10 +25,10 @@ function RenderBar({ loading, keyItem, repeat, setRepeat, setKeyItem }) {
   //   }
   // }, [audioRef.current?.currentTime, audioRef])
 
-  return keyItem !== '' ? (
+  return activeTrack !== '' ? (
     <>
-      <audio key={keyItem.id} autoPlay ref={audioRef} loop={repeat}>
-        <source src={keyItem.track_file} type="audio/mpeg" />
+      <audio key={activeTrack.id} autoPlay ref={audioRef} loop={repeat}>
+        <source src={activeTrack.track_file} type="audio/mpeg" />
       </audio>
 
       <S.Bar>
@@ -38,7 +40,7 @@ function RenderBar({ loading, keyItem, repeat, setRepeat, setKeyItem }) {
                 repeat={repeat}
                 setRepeat={setRepeat}
                 audioRef={audioRef}
-                setKeyItem={setKeyItem}
+                //  setKeyItem={setKeyItem}
               />
               <S.PlayerTrackPlay>
                 {loading ? (
@@ -65,12 +67,12 @@ function RenderBar({ loading, keyItem, repeat, setRepeat, setKeyItem }) {
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
                       <S.TrackPlayAuthorLink href="http://">
-                        {keyItem.name}
+                        {activeTrack.name}
                       </S.TrackPlayAuthorLink>
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
                       <S.TrackPlayAlbumLink href="http://">
-                        {keyItem.author}
+                        {activeTrack.author}
                       </S.TrackPlayAlbumLink>
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>

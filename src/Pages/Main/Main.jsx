@@ -13,7 +13,7 @@ function Main() {
   const [allTracks, setAllTracks] = useState(null)
   const [addError, setAddError] = useState(null)
   // стейт для выбранного трека
-  const [keyItem, setKeyItem] = useState('')
+  // const [keyItem, setKeyItem] = useState('')
 
   const [repeat, setRepeat] = useState(false)
 
@@ -44,7 +44,7 @@ function Main() {
         <Ma1nNav />
         <RenderCenter
           addError={addError}
-          setKeyItem={setKeyItem}
+          // setKeyItem={setKeyItem}
           allTracks={allTracks}
           loading1={loading}
         />
@@ -54,8 +54,8 @@ function Main() {
         <RenderBar
           repeat={repeat}
           setRepeat={setRepeat}
-          keyItem={keyItem}
-          setKeyItem={setKeyItem}
+          // keyItem={keyItem}
+          // setKeyItem={setKeyItem}
           loading={loading}
         />
       </S.Bar>
