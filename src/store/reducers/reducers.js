@@ -19,7 +19,7 @@ const initialTracks = {
   activeTrack: {},
   idTrack: {},
   shuffleTracks: {},
-  shufflePlayStop: {},
+  shufflePlayStop: false,
 }
 
 // reducer - ф-ия может быть обьявл-на через func-on, либо через стрел ф-ию. Первым параметром принимает состояние, а вторым - action.

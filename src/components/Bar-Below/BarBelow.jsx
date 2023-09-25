@@ -9,7 +9,7 @@ import PlayersControls from '../PlayerControls/PlayerControls'
 import VolumeBar from '../VolumeBar/VolumeBar'
 import ProgressBar from '../ProgressBar/progressBar'
 
-function RenderBar({ loading, keyItem, repeat, setRepeat }) {
+function RenderBar({ loading, keyItem, repeat, setRepeat, setKeyItem }) {
   const audioRef = useRef(null)
 
   // const [currentTime, setCurrentTime] = useState(0) // храним состояние воспроизводимого трека/времени
@@ -38,6 +38,7 @@ function RenderBar({ loading, keyItem, repeat, setRepeat }) {
                 repeat={repeat}
                 setRepeat={setRepeat}
                 audioRef={audioRef}
+                setKeyItem={setKeyItem}
               />
               <S.PlayerTrackPlay>
                 {loading ? (

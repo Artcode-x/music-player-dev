@@ -107,6 +107,7 @@ function RenderCenter({ loading1, setKeyItem, addError }) {
       changeState('OpenGenre')
     }
   }
+
   return !addError ? (
     <S.MainCenterblock>
       <S.CenterblockSearch>

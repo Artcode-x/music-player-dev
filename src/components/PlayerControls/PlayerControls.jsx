@@ -11,7 +11,12 @@ import {
 } from '../../store/actions/creators/creators'
 import allTracksSelector from '../../store/selectors/selectors'
 
-export default function PlayersControls({ audioRef, repeat, setRepeat }) {
+export default function PlayersControls({
+  audioRef,
+  repeat,
+  setRepeat,
+  setKeyItem,
+}) {
   //  let index
   const [isPlaying, setIsPlaying] = useState(false)
 
@@ -32,28 +37,38 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
     dispatch(addSetPause(true))
     dispatch(addIdTrack({ index: idTrack.index - 1 }))
     dispatch(addActiveTrack(allTracks[idTrack.index - 1]))
+
+    setKeyItem(allTracks[idTrack.index - 1])
   }
 
   const toNextTrack = () => {
     // если нажали первый раз кнопку зашафл треки
     // нужно зап-ть нулевой трек из зашафленного массива
+
     if (shufflePlayStop === 'buttonClickFirst') {
+      console.log('1111')
+      if (shuffleTracks) {
+        dispatch(addActiveTrack(shuffleTracks[0]))
+      }
       //  записываем трек который играет нулевым эл-ом уже перемешанного массива
-      dispatch(addActiveTrack(shuffleTracks[0]))
 
       // первый раз была нажата кнопка шафл
       dispatch(addIdTrack({ index: 0 }))
       dispatch(addSHufflePlayStop(true))
+
       return
     }
     if (shufflePlayStop === false) {
+      console.log('2222')
       // обозначаем что трек играет
       dispatch(addSetPause(true))
       // увеличим число на +1 где idTrack
       dispatch(addIdTrack({ index: idTrack.index + 1 }))
       // включаем след трек
       dispatch(addActiveTrack(allTracks[idTrack.index + 1]))
+      setKeyItem(allTracks[idTrack.index + 1])
     } else {
+      console.log('3333')
       dispatch(addSetPause(true))
 
       dispatch(addIdTrack({ index: idTrack.index + 1 }))
