@@ -133,7 +133,13 @@ export default function PlayersControls({
       </S.PlayerBtnRepeat>
       <S.PlayerBtnShuffle onClick={() => audiocontrol('shuffle')}>
         <S.PlayerBtnShuffleSvg alt="shuffle">
-          <use xlinkHref={`${sprite}#icon-shuffle`} />
+          <use
+            xlinkHref={
+              shuffled === false
+                ? `${sprite}#icon-shuffle`
+                : `${sprite}#icon-shuffleActive`
+            }
+          />
         </S.PlayerBtnShuffleSvg>
       </S.PlayerBtnShuffle>
     </S.PlayerControls>
