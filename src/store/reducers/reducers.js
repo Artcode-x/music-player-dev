@@ -113,14 +113,16 @@ function tracksReducer(state = initialTracks, action) {
       )
 
       const newTrack = playlist[currentTrackIndex + 1]
-      // console.log(playlist)
-      // console.log(currentTrackIndex)
-      // console.log(newTrack)
+
       if (!newTrack) {
         return state
       }
 
-      return { ...state, activeTrack: newTrack }
+      return {
+        ...state,
+        activeTrack: newTrack,
+        idTrack: { index: newTrack.id },
+      }
     }
 
     // case PLAY: {

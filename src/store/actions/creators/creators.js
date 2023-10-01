@@ -17,7 +17,7 @@ import {
   //   ADD_TOKEN,
   //   NEXT_TRACK,
   //   SET_CURRENT_TRACK,
-  //   PREV_TRACK,
+  PREV_TRACK,
 } from '../types/types'
 
 // Actions - получают какие то данные, затем куда то сохраняют их
@@ -65,6 +65,11 @@ export const addSHufflePlayStop = (shufflePlayStop) => ({
 export const addNextTrack = (nextTrack) => ({
   type: NEXT_TRACK,
   payload: { nextTrack },
+})
+
+export const addPrevTrack = (prevTrack) => ({
+  type: PREV_TRACK,
+  payload: { prevTrack },
 })
 
 export const addPlay = (play) => ({

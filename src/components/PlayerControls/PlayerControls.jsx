@@ -43,63 +43,6 @@ export default function PlayersControls({
     dispatch(addSetPause(true))
     dispatch(addIdTrack({ index: idTrack.index - 1 }))
     dispatch(addActiveTrack(allTracks[idTrack.index - 1]))
-
-    //  setKeyItem(allTracks[idTrack.index - 1])
-  }
-
-  const toNextTrack = () => {
-    // если нажали первый раз кнопку зашафл треки
-    // нужно зап-ть нулевой трек из зашафленного массива
-
-    if (shuffled === 'buttonClickFirst') {
-      if (shuffleTracks) {
-        dispatch(addActiveTrack(shuffleTracks[0]))
-      }
-      //  записываем трек который играет нулевым эл-ом уже перемешанного массива
-
-      // первый раз была нажата кнопка шафл
-      dispatch(addIdTrack({ index: shuffleTracks[0].id }))
-      // dispatch(addSHufflePlayStop(true))
-      dispatch(addShuffled(true))
-      dispatch(addSetPause(true))
-      return
-    }
-    if (shuffled === false) {
-      console.log('2222')
-      // обозначаем что трек играет
-      dispatch(addSetPause(true))
-      // увеличим число на +1 где idTrack
-      //  dispatch(addIdTrack({ index: idTrack.index + 1 }))
-      // включаем след трек
-      //  dispatch(addActiveTrack(allTracks[idTrack.index + 1]))
-      dispatch(addNextTrack())
-      //     setKeyItem(allTracks[idTrack.index + 1])
-    } else {
-      console.log('3333')
-      dispatch(addSetPause(true))
-
-      dispatch(addNextTrack())
-      // dispatch(addIdTrack({ index: idTrack.index + 1 }))
-
-      // dispatch(addActiveTrack(shuffleTracks[idTrack.index + 1]))
-    }
-  }
-
-  const shuffle = () => {
-    // если тру - нажали 2 раз
-    if (shufflePlayStop === true || shufflePlayStop === 'buttonClickFirst') {
-      // выключаем кнопку
-      dispatch(addShuffleTrack(false))
-    } else {
-      // для понимания того что кнопка шафл нажата первый раз
-      dispatch(addShuffled('buttonClickFirst'))
-
-      const newShuffleTracks = allTracks.map((track) => track)
-      newShuffleTracks.sort(() => Math.random() - 0.5)
-      // console.log(allTracks)
-      // console.log(shuffleTracks)
-      dispatch(addShuffleTrack(newShuffleTracks))
-    }
   }
 
   const audiocontrol = (text) => {
@@ -110,24 +53,55 @@ export default function PlayersControls({
       case 'play':
         audioRef.current.play()
         dispatch(addSetPause(true))
-        //  dispatch(addPlay())
+
         setIsPlaying(false) // на основе стейта меняем иконку плей паузыы
         break
       case 'stop':
         audioRef.current.pause()
         dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимация
-        //    dispatch(addPause())
+
         setIsPlaying(true)
         break
       case 'next':
-        toNextTrack()
+        if (shuffled === 'buttonClickFirst') {
+          if (shuffleTracks) {
+            dispatch(addActiveTrack(shuffleTracks[0]))
+          }
+
+          dispatch(addIdTrack({ index: shuffleTracks[0].id }))
+
+          dispatch(addShuffled(true))
+          dispatch(addSetPause(true))
+          return
+        }
+        if (shuffled === false) {
+          dispatch(addSetPause(true))
+
+          dispatch(addNextTrack())
+        } else {
+          dispatch(addSetPause(true))
+
+          dispatch(addNextTrack())
+        }
         break
       case 'repeat':
         setRepeat(!repeat)
         console.log(repeat)
         break
       case 'shuffle':
-        shuffle()
+        if (
+          shufflePlayStop === true ||
+          shufflePlayStop === 'buttonClickFirst'
+        ) {
+          dispatch(addShuffleTrack(false))
+        } else {
+          dispatch(addShuffled('buttonClickFirst'))
+
+          const newShuffleTracks = allTracks.map((track) => track)
+          newShuffleTracks.sort(() => Math.random() - 0.5)
+
+          dispatch(addShuffleTrack(newShuffleTracks))
+        }
 
         break
       default:
