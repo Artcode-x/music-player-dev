@@ -12,6 +12,7 @@ import {
   // PLAY,
   // PAUSE,
   SHUFFLE,
+  PREV_TRACK,
 } from '../actions/types/types'
 
 // state - состояние, может быть объектом или массивом либо приметивное зн-ие, которое хранит какие то данные. Чаще всего это объект, у которого уже есть конкретные поля, которые могут быть как объектами, так и массивами/примитивами.
@@ -26,6 +27,7 @@ const initialTracks = {
   shuffleTracks: {},
   shufflePlayStop: false,
   nextTrack: {},
+  prevTrack: {},
   // пример структуры
   playing: false,
   playlist: [],
@@ -122,6 +124,26 @@ function tracksReducer(state = initialTracks, action) {
         ...state,
         activeTrack: newTrack,
         idTrack: { index: newTrack.id },
+      }
+    }
+
+    case PREV_TRACK: {
+      const playlist = state.shuffled ? state.shuffleTracks : state.allTracks
+
+      const currentTrackIndex = playlist.findIndex(
+        (track) => track.id === state.idTrack.index
+      )
+
+      const prevTrack = playlist[currentTrackIndex - 1]
+
+      if (!prevTrack) {
+        return state
+      }
+
+      return {
+        ...state,
+        activeTrack: prevTrack,
+        idTrack: { index: prevTrack.id },
       }
     }
 

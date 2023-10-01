@@ -10,6 +10,7 @@ import {
   // addSHufflePlayStop,
   addNextTrack,
   addShuffled,
+  addPrevTrack,
   // addPause,
   // addPlay,
 } from '../../store/actions/creators/creators'
@@ -29,7 +30,7 @@ export default function PlayersControls({
 
   const allTracks = useSelector(allTracksSelector)
 
-  const idTrack = useSelector((store) => store.tracks.idTrack)
+  // const idTrack = useSelector((store) => store.tracks.idTrack)
 
   const shufflePlayStop = useSelector((store) => store.tracks.shufflePlayStop)
 
@@ -40,9 +41,11 @@ export default function PlayersControls({
   const dispatch = useDispatch()
 
   const toPrevTrack = () => {
-    dispatch(addSetPause(true))
-    dispatch(addIdTrack({ index: idTrack.index - 1 }))
-    dispatch(addActiveTrack(allTracks[idTrack.index - 1]))
+    dispatch(addSetPause(true)) // отобр пульсации иконки паузы/плей
+    dispatch(addPrevTrack())
+
+    // dispatch(addIdTrack({ index: idTrack.index - 1 }))
+    // dispatch(addActiveTrack(allTracks[idTrack.index - 1]))
   }
 
   const audiocontrol = (text) => {
