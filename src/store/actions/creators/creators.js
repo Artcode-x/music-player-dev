@@ -9,6 +9,7 @@ import {
   NEXT_TRACK,
   PLAY,
   PAUSE,
+  SHUFFLE,
 
   //   SHUFFLE_TRACKS,
   //   ADD_USER,
@@ -74,6 +75,11 @@ export const addPlay = (play) => ({
 export const addPause = (pause) => ({
   type: PAUSE,
   payload: { pause },
+})
+
+export const addShuffled = (shuffled) => ({
+  type: SHUFFLE,
+  payload: { shuffled },
 })
 
 export default addTracks

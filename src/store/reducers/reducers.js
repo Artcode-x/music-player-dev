@@ -9,8 +9,9 @@ import {
   SHUFFLE_TRACKS,
   SHUFFLE_PLAY_STOP,
   NEXT_TRACK,
-  PLAY,
-  PAUSE,
+  // PLAY,
+  // PAUSE,
+  SHUFFLE,
 } from '../actions/types/types'
 
 // state - состояние, может быть объектом или массивом либо приметивное зн-ие, которое хранит какие то данные. Чаще всего это объект, у которого уже есть конкретные поля, которые могут быть как объектами, так и массивами/примитивами.
@@ -94,6 +95,14 @@ function tracksReducer(state = initialTracks, action) {
       }
     }
 
+    case SHUFFLE: {
+      const { shuffled } = action.payload
+      return {
+        ...state,
+        shuffled, // добавляем в стейт ключ
+      }
+    }
+
     // Пример логики смены трека
     case NEXT_TRACK: {
       const playlist = state.shuffled ? state.shuffleTracks : state.allTracks
@@ -114,19 +123,19 @@ function tracksReducer(state = initialTracks, action) {
       return { ...state, activeTrack: newTrack }
     }
 
-    case PLAY: {
-      return {
-        ...state,
-        playPause: true, // добавляем в стейт ключ
-      }
-    }
+    // case PLAY: {
+    //   return {
+    //     ...state,
+    //     playPause: true, // добавляем в стейт ключ
+    //   }
+    // }
 
-    case PAUSE: {
-      return {
-        ...state,
-        playPause: false, // добавляем в стейт ключ
-      }
-    }
+    // case PAUSE: {
+    //   return {
+    //     ...state,
+    //     playPause: false, // добавляем в стейт ключ
+    //   }
+    // }
 
     default:
       return state

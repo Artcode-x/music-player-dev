@@ -19,3 +19,5 @@ export const SET_CURRENT_TRACK = 'SET_CURRENT_TRACK'
 export const PLAY_PAUSE = 'PLAY_PAUSE'
 
 export const ID_TRACK = 'ID_TRACK'
+
+export const SHUFFLE = 'SHUFFLE'

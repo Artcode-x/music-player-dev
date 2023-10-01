@@ -7,10 +7,11 @@ import {
   addActiveTrack,
   addIdTrack,
   addShuffleTrack,
-  addSHufflePlayStop,
+  // addSHufflePlayStop,
   addNextTrack,
-  addPause,
-  addPlay,
+  addShuffled,
+  // addPause,
+  // addPlay,
 } from '../../store/actions/creators/creators'
 import allTracksSelector from '../../store/selectors/selectors'
 
@@ -32,6 +33,8 @@ export default function PlayersControls({
 
   const shufflePlayStop = useSelector((store) => store.tracks.shufflePlayStop)
 
+  const shuffled = useSelector((store) => store.tracks.shuffled)
+
   const shuffleTracks = useSelector((store) => store.tracks.shuffleTracks)
 
   const dispatch = useDispatch()
@@ -48,20 +51,20 @@ export default function PlayersControls({
     // если нажали первый раз кнопку зашафл треки
     // нужно зап-ть нулевой трек из зашафленного массива
 
-    if (shufflePlayStop === 'buttonClickFirst') {
-      console.log('1111')
+    if (shuffled === 'buttonClickFirst') {
       if (shuffleTracks) {
         dispatch(addActiveTrack(shuffleTracks[0]))
       }
       //  записываем трек который играет нулевым эл-ом уже перемешанного массива
 
       // первый раз была нажата кнопка шафл
-      dispatch(addIdTrack({ index: 0 }))
-      dispatch(addSHufflePlayStop(true))
-
+      dispatch(addIdTrack({ index: shuffleTracks[0].id }))
+      // dispatch(addSHufflePlayStop(true))
+      dispatch(addShuffled(true))
+      dispatch(addSetPause(true))
       return
     }
-    if (shufflePlayStop === false) {
+    if (shuffled === false) {
       console.log('2222')
       // обозначаем что трек играет
       dispatch(addSetPause(true))
@@ -75,9 +78,10 @@ export default function PlayersControls({
       console.log('3333')
       dispatch(addSetPause(true))
 
-      dispatch(addIdTrack({ index: idTrack.index + 1 }))
+      dispatch(addNextTrack())
+      // dispatch(addIdTrack({ index: idTrack.index + 1 }))
 
-      dispatch(addActiveTrack(shuffleTracks[idTrack.index + 1]))
+      // dispatch(addActiveTrack(shuffleTracks[idTrack.index + 1]))
     }
   }
 
@@ -88,7 +92,7 @@ export default function PlayersControls({
       dispatch(addShuffleTrack(false))
     } else {
       // для понимания того что кнопка шафл нажата первый раз
-      dispatch(addShuffleTrack('buttonClickFirst'))
+      dispatch(addShuffled('buttonClickFirst'))
 
       const newShuffleTracks = allTracks.map((track) => track)
       newShuffleTracks.sort(() => Math.random() - 0.5)
@@ -105,14 +109,14 @@ export default function PlayersControls({
         break
       case 'play':
         audioRef.current.play()
-        // dispatch(addSetPause(true))
-        dispatch(addPlay())
+        dispatch(addSetPause(true))
+        //  dispatch(addPlay())
         setIsPlaying(false) // на основе стейта меняем иконку плей паузыы
         break
       case 'stop':
         audioRef.current.pause()
-        //  dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимация
-        dispatch(addPause())
+        dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимация
+        //    dispatch(addPause())
         setIsPlaying(true)
         break
       case 'next':
@@ -125,7 +129,6 @@ export default function PlayersControls({
       case 'shuffle':
         shuffle()
 
-        alert('пока не реализовано')
         break
       default:
         break
