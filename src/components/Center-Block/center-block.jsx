@@ -21,8 +21,6 @@ function RenderCenter({ loading1, addError }) {
 
   const activeTrack = useSelector((store) => store.tracks.activeTrack) // исп-ем знания из state/store
 
-  // const idTrack = useSelector((store) => store.tracks.idTrack)
-
   const dispatch = useDispatch()
 
   const todoClick = (track) => {
@@ -197,7 +195,6 @@ function RenderCenter({ loading1, addError }) {
         <S.centerblockContent>
           {contentTitlePlayList}
           <S.ContentPlaylist>
-            {/* <p>{addError}</p> */}
             <S.PlaylistItem>
               {allTracks.map((track, index) => (
                 <S.PlaylistTrack

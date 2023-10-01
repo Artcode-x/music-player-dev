@@ -7,7 +7,6 @@ import { useUserContext } from '../Context/Context'
 
 function RenderRbar({ loading }) {
   const { user } = useUserContext()
-  console.log(user)
 
   return (
     <S.MainSidebar>

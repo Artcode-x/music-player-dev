@@ -1,23 +1,12 @@
 import {
   ADD_TRACK,
-  PLAY_TRACK,
-  ACTIVE_TRACK,
   PLAY_PAUSE,
   ID_TRACK,
   SHUFFLE_TRACKS,
-  SHUFFLE_PLAY_STOP,
   NEXT_TRACK,
-  PLAY,
-  PAUSE,
-  SHUFFLE,
-
-  //   SHUFFLE_TRACKS,
-  //   ADD_USER,
-  //   FAVORITES_TRACKS,
-  //   ADD_TOKEN,
-  //   NEXT_TRACK,
-  //   SET_CURRENT_TRACK,
   PREV_TRACK,
+  SHUFFLE,
+  ACTIVE_TRACK,
 } from '../types/types'
 
 // Actions - получают какие то данные, затем куда то сохраняют их
@@ -32,16 +21,6 @@ const addTracks = (tracks) => ({
   payload: { tracks }, // записываем то что принимает addTracks - tracks
 })
 
-export const addPlayTrack = (playTrack) => ({
-  type: PLAY_TRACK,
-  payload: { playTrack },
-})
-
-export const addActiveTrack = (activeTrack) => ({
-  type: ACTIVE_TRACK,
-  payload: { activeTrack },
-})
-
 export const addSetPause = (playPause) => ({
   type: PLAY_PAUSE,
   payload: { playPause },
@@ -52,34 +31,21 @@ export const addIdTrack = (idTrack) => ({
   payload: { idTrack },
 })
 
-export const addShuffleTrack = (shuffleTracks) => ({
+export const addActiveTrack = (activeTrack) => ({
+  type: ACTIVE_TRACK,
+  payload: activeTrack,
+})
+
+export const addShuffleTrack = () => ({
   type: SHUFFLE_TRACKS,
-  payload: { shuffleTracks },
 })
 
-export const addSHufflePlayStop = (shufflePlayStop) => ({
-  type: SHUFFLE_PLAY_STOP,
-  payload: { shufflePlayStop },
-})
-
-export const addNextTrack = (nextTrack) => ({
+export const addNextTrack = () => ({
   type: NEXT_TRACK,
-  payload: { nextTrack },
 })
 
-export const addPrevTrack = (prevTrack) => ({
+export const addPrevTrack = () => ({
   type: PREV_TRACK,
-  payload: { prevTrack },
-})
-
-export const addPlay = (play) => ({
-  type: PLAY,
-  payload: { play },
-})
-
-export const addPause = (pause) => ({
-  type: PAUSE,
-  payload: { pause },
 })
 
 export const addShuffled = (shuffled) => ({

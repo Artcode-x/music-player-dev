@@ -7,14 +7,10 @@ import {
   addActiveTrack,
   addIdTrack,
   addShuffleTrack,
-  // addSHufflePlayStop,
   addNextTrack,
   addShuffled,
   addPrevTrack,
-  // addPause,
-  // addPlay,
 } from '../../store/actions/creators/creators'
-import allTracksSelector from '../../store/selectors/selectors'
 
 export default function PlayersControls({
   audioRef,
@@ -22,17 +18,10 @@ export default function PlayersControls({
   setRepeat,
   // setKeyItem,
 }) {
-  //  let index
   const [isPlaying, setIsPlaying] = useState(false)
 
   // состояние текущего трека - играет или нет
   // const activeTrack = useSelector(activeTrackSelector)
-
-  const allTracks = useSelector(allTracksSelector)
-
-  // const idTrack = useSelector((store) => store.tracks.idTrack)
-
-  const shufflePlayStop = useSelector((store) => store.tracks.shufflePlayStop)
 
   const shuffled = useSelector((store) => store.tracks.shuffled)
 
@@ -43,9 +32,6 @@ export default function PlayersControls({
   const toPrevTrack = () => {
     dispatch(addSetPause(true)) // отобр пульсации иконки паузы/плей
     dispatch(addPrevTrack())
-
-    // dispatch(addIdTrack({ index: idTrack.index - 1 }))
-    // dispatch(addActiveTrack(allTracks[idTrack.index - 1]))
   }
 
   const audiocontrol = (text) => {
@@ -89,23 +75,23 @@ export default function PlayersControls({
         break
       case 'repeat':
         setRepeat(!repeat)
-        console.log(repeat)
+
         break
       case 'shuffle':
-        if (
-          shufflePlayStop === true ||
-          shufflePlayStop === 'buttonClickFirst'
-        ) {
-          dispatch(addShuffleTrack(false))
-        } else {
-          dispatch(addShuffled('buttonClickFirst'))
+        // if (
+        //   shufflePlayStop === true ||
+        //   shufflePlayStop === 'buttonClickFirst'
+        // ) {
+        //   dispatch(addShuffleTrack(false))
+        // } else {
+        //   dispatch(addShuffled('buttonClickFirst'))
 
-          const newShuffleTracks = allTracks.map((track) => track)
-          newShuffleTracks.sort(() => Math.random() - 0.5)
+        //   const newShuffleTracks = allTracks.map((track) => track)
+        //   newShuffleTracks.sort(() => Math.random() - 0.5)
 
-          dispatch(addShuffleTrack(newShuffleTracks))
-        }
-
+        //   dispatch(addShuffleTrack(newShuffleTracks))
+        // }
+        dispatch(addShuffleTrack())
         break
       default:
         break

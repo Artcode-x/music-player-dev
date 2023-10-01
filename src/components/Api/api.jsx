@@ -55,9 +55,7 @@ fetch('https://skypro-music-api.skyeng.tech/user/login/', {
     // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
     'content-type': 'application/json',
   },
-})
-  .then((response) => response.json())
-  .then((json) => console.log(json))
+}).then((response) => response.json())
 
 export async function handleReg({ email, password, username }) {
   const response = await fetch(

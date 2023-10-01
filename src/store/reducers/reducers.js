@@ -2,17 +2,13 @@
 
 import {
   ADD_TRACK,
-  PLAY_TRACK,
-  ACTIVE_TRACK,
   PLAY_PAUSE,
   ID_TRACK,
   SHUFFLE_TRACKS,
-  SHUFFLE_PLAY_STOP,
   NEXT_TRACK,
-  // PLAY,
-  // PAUSE,
   SHUFFLE,
   PREV_TRACK,
+  ACTIVE_TRACK,
 } from '../actions/types/types'
 
 // state - состояние, может быть объектом или массивом либо приметивное зн-ие, которое хранит какие то данные. Чаще всего это объект, у которого уже есть конкретные поля, которые могут быть как объектами, так и массивами/примитивами.
@@ -20,20 +16,10 @@ import {
 // Создаем дефолтное состояние, оно присваивается в тот момент когда пользователь открыл приложение
 const initialTracks = {
   allTracks: [],
-  PLAY_TRACK: [],
-  ACTIVE_TRACK: [],
   activeTrack: {},
   idTrack: {},
-  shuffleTracks: {},
-  shufflePlayStop: false,
-  nextTrack: {},
-  prevTrack: {},
-  // пример структуры
-  playing: false,
-  playlist: [],
-  track: null,
+  newShuffleTracksArray: {},
   shuffled: false,
-  shuffledPlaylist: [],
 }
 
 // reducer - ф-ия может быть обьявл-на через func-on, либо через стрел ф-ию. Первым параметром принимает состояние, а вторым - action.
@@ -50,27 +36,20 @@ function tracksReducer(state = initialTracks, action) {
         allTracks: tracks, // записываем в allTracks - треки (tracks)
       }
     }
-    case PLAY_TRACK: {
-      const { playTrack } = action.payload
-      return {
-        ...state,
-        playTrack,
-      }
-    }
-
-    case ACTIVE_TRACK: {
-      const { activeTrack } = action.payload
-      return {
-        ...state,
-        activeTrack, // добавляем в стейт ключ
-      }
-    }
 
     case PLAY_PAUSE: {
       const { playPause } = action.payload
       return {
         ...state,
         playPause, // добавляем в стейт ключ
+      }
+    }
+
+    case ACTIVE_TRACK: {
+      const test = action.payload
+      return {
+        ...state,
+        activeTrack: test, // добавляем в стейт ключ
       }
     }
 
@@ -82,18 +61,16 @@ function tracksReducer(state = initialTracks, action) {
       }
     }
     case SHUFFLE_TRACKS: {
-      const { shuffleTracks } = action.payload
-      return {
-        ...state,
-        shuffleTracks, // добавляем в стейт ключ
+      if (state.shuffled === true) {
+        return { ...state, shuffled: false } // откл кноппку
       }
-    }
-
-    case SHUFFLE_PLAY_STOP: {
-      const { shufflePlayStop } = action.payload
+      const newShuffleTracksArray = state.allTracks.map((track) => track)
+      newShuffleTracksArray.sort(() => Math.random() - 0.5)
       return {
         ...state,
-        shufflePlayStop, // добавляем в стейт ключ
+        newShuffleTracksArray,
+        shuffled: true, // включаем кнопку шафл
+        idTrack: { index: 'novyi id' },
       }
     }
 
@@ -101,15 +78,16 @@ function tracksReducer(state = initialTracks, action) {
       const { shuffled } = action.payload
       return {
         ...state,
-        shuffled, // добавляем в стейт ключ
+        shuffled,
       }
     }
 
     // Пример логики смены трека
     case NEXT_TRACK: {
-      const playlist = state.shuffled ? state.shuffleTracks : state.allTracks
+      const playlist = state.shuffled
+        ? state.newShuffleTracksArray
+        : state.allTracks
 
-      //
       const currentTrackIndex = playlist.findIndex(
         (track) => track.id === state.idTrack.index
       )
@@ -128,7 +106,9 @@ function tracksReducer(state = initialTracks, action) {
     }
 
     case PREV_TRACK: {
-      const playlist = state.shuffled ? state.shuffleTracks : state.allTracks
+      const playlist = state.shuffled
+        ? state.newShuffleTracksArray
+        : state.allTracks
 
       const currentTrackIndex = playlist.findIndex(
         (track) => track.id === state.idTrack.index
@@ -146,20 +126,6 @@ function tracksReducer(state = initialTracks, action) {
         idTrack: { index: prevTrack.id },
       }
     }
-
-    // case PLAY: {
-    //   return {
-    //     ...state,
-    //     playPause: true, // добавляем в стейт ключ
-    //   }
-    // }
-
-    // case PAUSE: {
-    //   return {
-    //     ...state,
-    //     playPause: false, // добавляем в стейт ключ
-    //   }
-    // }
 
     default:
       return state
