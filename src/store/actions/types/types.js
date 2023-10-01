@@ -7,8 +7,13 @@ export const ADD_USER = 'ADD_USER'
 export const FAVORITES_TRACKS = 'FAVORITES_TRACKS'
 export const ADD_TOKEN = 'ADD_TOKEN'
 
+//
 export const NEXT_TRACK = 'NEXT_TRACK'
 export const PREV_TRACK = 'PREV_TRACK'
+export const PLAY = 'PLAY'
+export const PAUSE = 'PAUSE'
+//
+
 export const SET_CURRENT_TRACK = 'SET_CURRENT_TRACK'
 
 export const PLAY_PAUSE = 'PLAY_PAUSE'

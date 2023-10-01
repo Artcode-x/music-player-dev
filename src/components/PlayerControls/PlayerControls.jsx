@@ -8,6 +8,9 @@ import {
   addIdTrack,
   addShuffleTrack,
   addSHufflePlayStop,
+  addNextTrack,
+  addPause,
+  addPlay,
 } from '../../store/actions/creators/creators'
 import allTracksSelector from '../../store/selectors/selectors'
 
@@ -63,10 +66,10 @@ export default function PlayersControls({
       // обозначаем что трек играет
       dispatch(addSetPause(true))
       // увеличим число на +1 где idTrack
-      dispatch(addIdTrack({ index: idTrack.index + 1 }))
+      //  dispatch(addIdTrack({ index: idTrack.index + 1 }))
       // включаем след трек
-      dispatch(addActiveTrack(allTracks[idTrack.index + 1]))
-
+      //  dispatch(addActiveTrack(allTracks[idTrack.index + 1]))
+      dispatch(addNextTrack())
       //     setKeyItem(allTracks[idTrack.index + 1])
     } else {
       console.log('3333')
@@ -102,12 +105,14 @@ export default function PlayersControls({
         break
       case 'play':
         audioRef.current.play()
-        dispatch(addSetPause(true))
-        setIsPlaying(false)
+        // dispatch(addSetPause(true))
+        dispatch(addPlay())
+        setIsPlaying(false) // на основе стейта меняем иконку плей паузыы
         break
       case 'stop':
         audioRef.current.pause()
-        dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимация
+        //  dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимация
+        dispatch(addPause())
         setIsPlaying(true)
         break
       case 'next':

@@ -21,13 +21,13 @@ function RenderCenter({ loading1, addError }) {
 
   const activeTrack = useSelector((store) => store.tracks.activeTrack) // исп-ем знания из state/store
 
-  const idTrack = useSelector((store) => store.tracks.idTrack)
+  // const idTrack = useSelector((store) => store.tracks.idTrack)
 
   const dispatch = useDispatch()
 
-  const todoClick = (track, i) => {
+  const todoClick = (track) => {
     //  setIsPlaying(track.id)
-    dispatch(addIdTrack({ ...idTrack, index: i }))
+    dispatch(addIdTrack({ index: track.id }))
     // Чтобы изменить состояние, нам потребуется dispatch. dispatch - Это ф-ия, и при вызове ее, параметром она принимает ACTION. Action - это объект, у которого обязательно должен быть тип. (тип мы указывали в редюсере)
     // Второе св-во объекта - это какие то данные, в данном случае это зн-ие true/false
     dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true

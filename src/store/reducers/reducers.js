@@ -1,4 +1,5 @@
 /* eslint-disable default-param-last */
+
 import {
   ADD_TRACK,
   PLAY_TRACK,
@@ -7,6 +8,9 @@ import {
   ID_TRACK,
   SHUFFLE_TRACKS,
   SHUFFLE_PLAY_STOP,
+  NEXT_TRACK,
+  PLAY,
+  PAUSE,
 } from '../actions/types/types'
 
 // state - состояние, может быть объектом или массивом либо приметивное зн-ие, которое хранит какие то данные. Чаще всего это объект, у которого уже есть конкретные поля, которые могут быть как объектами, так и массивами/примитивами.
@@ -20,6 +24,13 @@ const initialTracks = {
   idTrack: {},
   shuffleTracks: {},
   shufflePlayStop: false,
+  nextTrack: {},
+  // пример структуры
+  playing: false,
+  playlist: [],
+  track: null,
+  shuffled: false,
+  shuffledPlaylist: [],
 }
 
 // reducer - ф-ия может быть обьявл-на через func-on, либо через стрел ф-ию. Первым параметром принимает состояние, а вторым - action.
@@ -80,6 +91,40 @@ function tracksReducer(state = initialTracks, action) {
       return {
         ...state,
         shufflePlayStop, // добавляем в стейт ключ
+      }
+    }
+
+    // Пример логики смены трека
+    case NEXT_TRACK: {
+      const playlist = state.shuffled ? state.shuffleTracks : state.allTracks
+
+      //
+      const currentTrackIndex = playlist.findIndex(
+        (track) => track.id === state.idTrack.index
+      )
+
+      const newTrack = playlist[currentTrackIndex + 1]
+      // console.log(playlist)
+      // console.log(currentTrackIndex)
+      // console.log(newTrack)
+      if (!newTrack) {
+        return state
+      }
+
+      return { ...state, activeTrack: newTrack }
+    }
+
+    case PLAY: {
+      return {
+        ...state,
+        playPause: true, // добавляем в стейт ключ
+      }
+    }
+
+    case PAUSE: {
+      return {
+        ...state,
+        playPause: false, // добавляем в стейт ключ
       }
     }
 
