@@ -25,7 +25,7 @@ function RenderBar({ loading, repeat, setRepeat }) {
   //   }
   // }, [audioRef.current?.currentTime, audioRef])
 
-  return activeTrack !== '' ? (
+  return (
     <>
       <audio key={activeTrack.id} autoPlay ref={audioRef} loop={repeat}>
         <source src={activeTrack.track_file} type="audio/mpeg" />
@@ -97,7 +97,7 @@ function RenderBar({ loading, repeat, setRepeat }) {
         </S.BarContent>
       </S.Bar>
     </>
-  ) : null
+  )
 }
 
 export default RenderBar

@@ -16,7 +16,7 @@ import {
 // Создаем дефолтное состояние, оно присваивается в тот момент когда пользователь открыл приложение
 const initialTracks = {
   allTracks: [],
-  activeTrack: {},
+  activeTrack: null,
   idTrack: {},
   newShuffleTracksArray: {},
   shuffled: false,

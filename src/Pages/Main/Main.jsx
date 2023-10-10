@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Ma1nNav from '../../components/Left-Nav/left-nav'
 import RenderCenter from '../../components/Center-Block/center-block'
 import RenderRbar from '../../components/Right-Bar/right-bar'
@@ -9,6 +9,8 @@ import getAllTracksFromApi from '../../components/Api/api'
 import addTracks from '../../store/actions/creators/creators'
 
 function Main() {
+  const activeTrack = useSelector((store) => store.tracks.activeTrack)
+
   const [loading, setTimeLoading] = useState(true)
   const [allTracks, setAllTracks] = useState(null)
   const [addError, setAddError] = useState(null)
@@ -50,15 +52,18 @@ function Main() {
         />
         <RenderRbar loading={loading} />
       </S.Main>
-      <S.Bar>
-        <RenderBar
-          repeat={repeat}
-          setRepeat={setRepeat}
-          // keyItem={keyItem}
-          // setKeyItem={setKeyItem}
-          loading={loading}
-        />
-      </S.Bar>
+      {activeTrack && (
+        <S.Bar>
+          <RenderBar
+            active={activeTrack}
+            repeat={repeat}
+            setRepeat={setRepeat}
+            // keyItem={keyItem}
+            // setKeyItem={setKeyItem}
+            loading={loading}
+          />
+        </S.Bar>
+      )}
     </S.Container>
   )
 }
