@@ -38,6 +38,7 @@ export default function PlayersControls({
     switch (text) {
       case 'prev':
         toPrevTrack()
+        setIsPlaying(false)
         break
       case 'play':
         audioRef.current.play()
@@ -61,6 +62,7 @@ export default function PlayersControls({
 
           dispatch(addShuffled(true))
           dispatch(addSetPause(true))
+          setIsPlaying(false)
           return
         }
         if (shuffled === false) {
@@ -72,6 +74,7 @@ export default function PlayersControls({
 
           dispatch(addNextTrack())
         }
+        setIsPlaying(false)
         break
       case 'repeat':
         setRepeat(!repeat)
