@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/media-has-caption */
+// /* eslint-disable jsx-a11y/media-has-caption */
 
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
@@ -13,17 +13,6 @@ function RenderBar({ loading, repeat, setRepeat }) {
   const audioRef = useRef(null)
 
   const activeTrack = useSelector((store) => store.tracks.activeTrack)
-
-  // const [currentTime, setCurrentTime] = useState(0) // храним состояние воспроизводимого трека/времени
-
-  // useEffect(() => {
-  //   console.log(currentTime)
-  //   if (audioRef !== null) {
-  //     audioRef.current?.addEventListener('timeupdate', () => {
-  //       setCurrentTime(audioRef.current?.currentTime)
-  //     })
-  //   }
-  // }, [audioRef.current?.currentTime, audioRef])
 
   return (
     <>

@@ -9,6 +9,11 @@ import {
   addIdTrack,
   addSetPause,
 } from '../../store/actions/creators/creators'
+import Error from './Error'
+import Skeletons from './Skeletons'
+import Search from './Search'
+import Zagolovok from './Zagolovok'
+import contentTitlePlayList from './Title-playlist'
 
 function RenderCenter({ loading1, addError }) {
   //  const [isPlaying, setIsPlaying] = useState(null)
@@ -33,19 +38,6 @@ function RenderCenter({ loading1, addError }) {
     dispatch(addActiveTrack(track)) // хранится тек-ий играющий трек
     // setKeyItem(track)
   }
-
-  const contentTitlePlayList = (
-    <S.ContentTitle>
-      <S.PlaylistTitleCol01>Трек</S.PlaylistTitleCol01>
-      <S.PlaylistTitleCol02>ИСПОЛНИТЕЛЬ</S.PlaylistTitleCol02>
-      <S.PlaylistTitleCol03>АЛЬБОМ</S.PlaylistTitleCol03>
-      <S.PlaylistTitleCol04>
-        <S.PlaylistTitleSvg alt="time">
-          <use xlinkHref={`${sprite}#icon-watch`} />
-        </S.PlaylistTitleSvg>
-      </S.PlaylistTitleCol04>
-    </S.ContentTitle>
-  )
 
   const list = (
     <S.Filterlist>
@@ -106,16 +98,15 @@ function RenderCenter({ loading1, addError }) {
     }
   }
 
-  return !addError ? (
-    <S.MainCenterblock>
-      <S.CenterblockSearch>
-        <S.SearchSvg>
-          <use xlinkHref={`${sprite}#icon-search`} />
-        </S.SearchSvg>
-        <S.SearchText type="search" placeholder="Поиск" name="search" />
-      </S.CenterblockSearch>
+  if (loading1) return <Skeletons />
 
-      <S.CenterblockH2>Треки</S.CenterblockH2>
+  if (addError) return <Error />
+
+  return (
+    <S.MainCenterblock>
+      {/* <Search /> */}
+      {/* <Zagolovok /> */}
+      {/* Outlet  */}
       <S.CenterblockFilter>
         <S.FilterTitle>Искать по:</S.FilterTitle>
         <S.FilterButtonArtist
@@ -162,137 +153,52 @@ function RenderCenter({ loading1, addError }) {
       {visible === 'OpenListArtist' ? list : null}
       {visible === 'OpenYear' ? yearUl : null}
       {visible === 'OpenGenre' ? genre : null}
-      {loading1 ? (
-        <S.centerblockContent>
-          {contentTitlePlayList}
-          <S.ContentPlaylist>
-            <S.PlaylistItem>
-              <S.PlaylistTrack>
+
+      <S.centerblockContent>
+        {contentTitlePlayList}
+        <S.ContentPlaylist>
+          <S.PlaylistItem>
+            {allTracks.map((track, index) => (
+              <S.PlaylistTrack
+                onClick={() => todoClick(track, index)}
+                key={track.id}
+              >
                 <S.TrackTitle>
                   <S.TrackTitleImage>
-                    <RybkaForImport IamWidth="51px" IamHeight="51px" />
-                  </S.TrackTitleImage>
-                  <S.TrackTitleText>
-                    <RybkaForImport IamWidth="356px" IamHeight="19px" />
-                  </S.TrackTitleText>
-                </S.TrackTitle>
-                <S.TrackAuthor>
-                  <RybkaForImport IamWidth="271px" IamHeight="19px" />
-                </S.TrackAuthor>
-                <S.TrackAlbum>
-                  <RybkaForImport IamWidth="305px" IamHeight="19px" />
-                </S.TrackAlbum>
-                <S.TrackTime>
-                  <S.TrackTimeSvg alt="time">
-                    <use xlinkHref={`${sprite}#icon-like`} />
-                  </S.TrackTimeSvg>
-                </S.TrackTime>
-              </S.PlaylistTrack>
-            </S.PlaylistItem>
-          </S.ContentPlaylist>
-        </S.centerblockContent>
-      ) : (
-        <S.centerblockContent>
-          {contentTitlePlayList}
-          <S.ContentPlaylist>
-            <S.PlaylistItem>
-              {allTracks.map((track, index) => (
-                <S.PlaylistTrack
-                  onClick={() => todoClick(track, index)}
-                  key={track.id}
-                >
-                  <S.TrackTitle>
-                    <S.TrackTitleImage>
-                      <RybkaForImport IamWidth="51" IamHeight="51" />
-                      {activeTrack &&
-                        (track.id === activeTrack.id ? (
-                          <S.PlayingDot playPause={playPause} />
-                        ) : (
-                          <S.TrackTitleSvg alt="music">
-                            <use xlinkHref={`${sprite}#icon-note`} />
-                          </S.TrackTitleSvg>
-                        ))}
-
-                      {/* {track.id === activeTrack.id ? (
+                    <RybkaForImport IamWidth="51" IamHeight="51" />
+                    {activeTrack &&
+                      (track.id === activeTrack.id ? (
                         <S.PlayingDot playPause={playPause} />
                       ) : (
                         <S.TrackTitleSvg alt="music">
                           <use xlinkHref={`${sprite}#icon-note`} />
                         </S.TrackTitleSvg>
-                      )} */}
-                    </S.TrackTitleImage>
-                    <S.TrackTitleText>
-                      <S.TrackTitleLink>
-                        {track.name}
-                        <span className="track__title-span" />
-                      </S.TrackTitleLink>
-                    </S.TrackTitleText>
-                  </S.TrackTitle>
-                  <S.TrackAuthor>
-                    <S.TrackTitleLink>{track.author}</S.TrackTitleLink>
-                  </S.TrackAuthor>
-                  <S.TrackAlbum>
-                    <S.TrackTitleLink>{track.album}</S.TrackTitleLink>
-                  </S.TrackAlbum>
-                  <S.TrackTime>
-                    <S.TrackTimeSvg alt="time">
-                      <use xlinkHref={`${sprite}#icon-like`} />
-                    </S.TrackTimeSvg>
-                    <S.TrackTimeText>
-                      {track.duration_in_seconds}
-                    </S.TrackTimeText>
-                  </S.TrackTime>
-                </S.PlaylistTrack>
-              ))}
-            </S.PlaylistItem>
-          </S.ContentPlaylist>
-        </S.centerblockContent>
-      )}
-    </S.MainCenterblock>
-  ) : (
-    <S.MainCenterblock>
-      {loading1 ? (
-        <S.centerblockContent>
-          {contentTitlePlayList}
-          <S.ContentPlaylist>
-            <S.PlaylistItem>
-              <S.PlaylistTrack>
-                <S.TrackTitle>
-                  <S.TrackTitleImage>
-                    <RybkaForImport IamWidth="51px" IamHeight="51px" />
+                      ))}
                   </S.TrackTitleImage>
                   <S.TrackTitleText>
-                    <RybkaForImport IamWidth="356px" IamHeight="19px" />
+                    <S.TrackTitleLink>
+                      {track.name}
+                      <span className="track__title-span" />
+                    </S.TrackTitleLink>
                   </S.TrackTitleText>
                 </S.TrackTitle>
                 <S.TrackAuthor>
-                  <RybkaForImport IamWidth="271px" IamHeight="19px" />
+                  <S.TrackTitleLink>{track.author}</S.TrackTitleLink>
                 </S.TrackAuthor>
                 <S.TrackAlbum>
-                  <RybkaForImport IamWidth="305px" IamHeight="19px" />
+                  <S.TrackTitleLink>{track.album}</S.TrackTitleLink>
                 </S.TrackAlbum>
                 <S.TrackTime>
                   <S.TrackTimeSvg alt="time">
                     <use xlinkHref={`${sprite}#icon-like`} />
                   </S.TrackTimeSvg>
+                  <S.TrackTimeText>{track.duration_in_seconds}</S.TrackTimeText>
                 </S.TrackTime>
               </S.PlaylistTrack>
-            </S.PlaylistItem>
-          </S.ContentPlaylist>
-        </S.centerblockContent>
-      ) : (
-        <S.centerblockContent>
-          {contentTitlePlayList}
-          <S.ContentPlaylist>
-            {/* <p>{addError}</p> */}
-            <S.PlaylistItem>
-              <S.ErrorItem>
-                <p>{addError}</p>
-              </S.ErrorItem>
-            </S.PlaylistItem>
-          </S.ContentPlaylist>
-        </S.centerblockContent>
-      )}
+            ))}
+          </S.PlaylistItem>
+        </S.ContentPlaylist>
+      </S.centerblockContent>
     </S.MainCenterblock>
   )
 }

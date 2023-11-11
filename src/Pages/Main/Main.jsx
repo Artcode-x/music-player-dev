@@ -43,7 +43,7 @@ function Main() {
   return (
     <S.Container>
       <S.Main>
-        <Ma1nNav />
+        {/* <Ma1nNav /> */}
         <RenderCenter
           addError={addError}
           // setKeyItem={setKeyItem}
