@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import { styled, keyframes, css } from 'styled-components'
 
 export const ContentTitle = styled.div`
   display: flex;
@@ -298,11 +298,66 @@ export const ContentPlaylist = styled.div`
 export const centerblockContent = styled.div`
   display: flex;
   flex-direction: column;
+
+  gap: 8px;
+  box-sizing: border-box;
+  height: 80%;
+  list-style: none;
+  width: 100%;
+  scrollbar-color: white, gray;
+
+  &::-webkit-scrollbar {
+    background-color: #313131;
+    width: 10px;
+    border-radius: 4px;
+    overflow-y: auto;
+  }
+
+  /* &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #ffffff;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #4b4949;
+  } */
 `
 export const PlaylistItem = styled.div`
   width: 100%;
-  display: block;
+  display: flex;
   margin-bottom: 12px;
+  flex-direction: column;
+  gap: 12px;
+`
+export const ErrorItem = styled.div`
+  color: coral;
+  text-align: center;
+  font-size: xx-large;
+`
+export const bubbleOut = keyframes`
+  0%, to {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1);
+  }
+`
+export const PlayingDot = styled.div`
+  // Тут стили, если трек проигрывается
+  width: 16px;
+  height: 16px;
+  background-color: #b672ff;
+  border-radius: 8px;
+  display: block;
+  animation: ${bubbleOut} 0.6s ease-in-out infinite both;
+  ${(props) =>
+    !props.playPause &&
+    css`
+      animation: none;
+    `}
 `
 
 export const PlaylistTrack = styled.div`
@@ -310,6 +365,14 @@ export const PlaylistTrack = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  &:hover {
+    text-decoration: underline;
+    color: coral;
+    cursor: pointer;
+
+    background: coral;
+    opacity: 0.6;
+  }
 `
 
 export const TrackTitle = styled.div`
@@ -352,6 +415,7 @@ export const TrackTitleSvg = styled.svg`
   fill: transparent;
   stroke: #4e4e4e;
 `
+
 export const TrackTitleText = styled.div``
 export const TrackTime = styled.div``
 

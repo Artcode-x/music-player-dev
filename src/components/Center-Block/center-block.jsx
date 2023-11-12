@@ -1,23 +1,43 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
+import { useDispatch, useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
-import getAllTracksFromApi from '../Api/api'
+import {
+  addActiveTrack,
+  addIdTrack,
+  addSetPause,
+} from '../../store/actions/creators/creators'
+import Error from './Error'
+import Skeletons from './Skeletons'
+import Search from './Search'
+import Zagolovok from './Zagolovok'
+import ContentTitlePlayList from './Title-playlist'
 
-function RenderCenter({ loading1 }) {
-  const contentTitlePlayList = (
-    <S.ContentTitle>
-      <S.PlaylistTitleCol01>Трек</S.PlaylistTitleCol01>
-      <S.PlaylistTitleCol02>ИСПОЛНИТЕЛЬ</S.PlaylistTitleCol02>
-      <S.PlaylistTitleCol03>АЛЬБОМ</S.PlaylistTitleCol03>
-      <S.PlaylistTitleCol04>
-        <S.PlaylistTitleSvg alt="time">
-          <use xlinkHref={`${sprite}#icon-watch`} />
-        </S.PlaylistTitleSvg>
-      </S.PlaylistTitleCol04>
-    </S.ContentTitle>
-  )
+function RenderCenter({ loading1, addError }) {
+  //  const [isPlaying, setIsPlaying] = useState(null)
+
+  // чтобы получить состояние, исп-ем хук useSelector
+  // Параметром он принимает ф-ию, а эта ф-ия в свою очередь параметром принимает состояние, и из этого состояния мы уже получаем нужную переменную (в данном примере allTracks)
+  const allTracks = useSelector((store) => store.tracks.allTracks)
+
+  const playPause = useSelector((store) => store.tracks.playPause)
+
+  const activeTrack = useSelector((store) => store.tracks.activeTrack) // исп-ем знания из state/store
+
+  const dispatch = useDispatch()
+
+  const todoClick = (track) => {
+    //  setIsPlaying(track.id)
+    dispatch(addIdTrack({ index: track.id }))
+    // Чтобы изменить состояние, нам потребуется dispatch. dispatch - Это ф-ия, и при вызове ее, параметром она принимает ACTION. Action - это объект, у которого обязательно должен быть тип. (тип мы указывали в редюсере)
+    // Второе св-во объекта - это какие то данные, в данном случае это зн-ие true/false
+    dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true
+
+    dispatch(addActiveTrack(track)) // хранится тек-ий играющий трек
+    // setKeyItem(track)
+  }
 
   const list = (
     <S.Filterlist>
@@ -56,18 +76,7 @@ function RenderCenter({ loading1 }) {
   )
 
   const [visible, changeOfState] = useState('CloseList')
-  const [allTracks, setAllTracks] = useState(null)
-
-  useEffect(() => {
-    getAllTracksFromApi()
-      .then((spisokTrackov) => {
-        setAllTracks(spisokTrackov)
-        console.log(spisokTrackov)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
+  // const [allTracks, setAllTracks] = useState(null)
 
   const changeState = (OpenList) =>
     changeOfState(visible === OpenList ? 'CloseList' : OpenList)
@@ -89,16 +98,16 @@ function RenderCenter({ loading1 }) {
     }
   }
 
+  // if (loading1) return <Skeletons />
+
+  if (addError) return <Error />
+
   return (
     <S.MainCenterblock>
-      <S.CenterblockSearch>
-        <S.SearchSvg>
-          <use xlinkHref={`${sprite}#icon-search`} />
-        </S.SearchSvg>
-        <S.SearchText type="search" placeholder="Поиск" name="search" />
-      </S.CenterblockSearch>
-
-      <S.CenterblockH2>Треки</S.CenterblockH2>
+      {loading1 && <Skeletons />}
+      {/* <Search /> */}
+      {/* <Zagolovok /> */}
+      {/* Outlet  */}
       <S.CenterblockFilter>
         <S.FilterTitle>Искать по:</S.FilterTitle>
         <S.FilterButtonArtist
@@ -145,80 +154,52 @@ function RenderCenter({ loading1 }) {
       {visible === 'OpenListArtist' ? list : null}
       {visible === 'OpenYear' ? yearUl : null}
       {visible === 'OpenGenre' ? genre : null}
-      {loading1 ? (
-        <S.centerblockContent>
-          {contentTitlePlayList}
-          <S.ContentPlaylist>
-            <S.PlaylistItem>
-              <S.PlaylistTrack>
+
+      <S.centerblockContent>
+        <ContentTitlePlayList />
+        <S.ContentPlaylist>
+          <S.PlaylistItem>
+            {allTracks.map((track, index) => (
+              <S.PlaylistTrack
+                onClick={() => todoClick(track, index)}
+                key={track.id}
+              >
                 <S.TrackTitle>
                   <S.TrackTitleImage>
-                    <RybkaForImport IamWidth="51px" IamHeight="51px" />
+                    <RybkaForImport IamWidth="51" IamHeight="51" />
+                    {activeTrack &&
+                      (track.id === activeTrack.id ? (
+                        <S.PlayingDot playPause={playPause} />
+                      ) : (
+                        <S.TrackTitleSvg alt="music">
+                          <use xlinkHref={`${sprite}#icon-note`} />
+                        </S.TrackTitleSvg>
+                      ))}
                   </S.TrackTitleImage>
                   <S.TrackTitleText>
-                    <RybkaForImport IamWidth="356px" IamHeight="19px" />
+                    <S.TrackTitleLink>
+                      {track.name}
+                      <span className="track__title-span" />
+                    </S.TrackTitleLink>
                   </S.TrackTitleText>
                 </S.TrackTitle>
                 <S.TrackAuthor>
-                  <RybkaForImport IamWidth="271px" IamHeight="19px" />
+                  <S.TrackTitleLink>{track.author}</S.TrackTitleLink>
                 </S.TrackAuthor>
                 <S.TrackAlbum>
-                  <RybkaForImport IamWidth="305px" IamHeight="19px" />
+                  <S.TrackTitleLink>{track.album}</S.TrackTitleLink>
                 </S.TrackAlbum>
                 <S.TrackTime>
                   <S.TrackTimeSvg alt="time">
                     <use xlinkHref={`${sprite}#icon-like`} />
                   </S.TrackTimeSvg>
+                  <S.TrackTimeText>{track.duration_in_seconds}</S.TrackTimeText>
                 </S.TrackTime>
               </S.PlaylistTrack>
-            </S.PlaylistItem>
-          </S.ContentPlaylist>
-        </S.centerblockContent>
-      ) : (
-        <S.centerblockContent>
-          {contentTitlePlayList}
-          <S.ContentPlaylist>
-            <S.PlaylistItem>
-              {allTracks.map((track) => (
-                <S.PlaylistTrack key={track.id}>
-                  <S.TrackTitle>
-                    <S.TrackTitleImage>
-                      <RybkaForImport IamWidth="51" IamHeight="51" />
-                      <S.TrackTitleSvg alt="music">
-                        <use xlinkHref={`${sprite}#icon-note`} />
-                      </S.TrackTitleSvg>
-                    </S.TrackTitleImage>
-                    <S.TrackTitleText>
-                      <S.TrackTitleLink href="http://">
-                        {track.name}
-                        <span className="track__title-span" />
-                      </S.TrackTitleLink>
-                    </S.TrackTitleText>
-                  </S.TrackTitle>
-                  <S.TrackAuthor>
-                    <S.TrackTitleLink href="http://">
-                      {track.author}
-                    </S.TrackTitleLink>
-                  </S.TrackAuthor>
-                  <S.TrackAlbum>
-                    <S.TrackTitleLink href="http://">
-                      {track.album}
-                    </S.TrackTitleLink>
-                  </S.TrackAlbum>
-                  <S.TrackTime>
-                    <S.TrackTimeSvg alt="time">
-                      <use xlinkHref={`${sprite}#icon-like`} />
-                    </S.TrackTimeSvg>
-                    <S.TrackTimeText>
-                      {track.duration_in_seconds}
-                    </S.TrackTimeText>
-                  </S.TrackTime>
-                </S.PlaylistTrack>
-              ))}
-            </S.PlaylistItem>
-          </S.ContentPlaylist>
-        </S.centerblockContent>
-      )}
+            ))}
+          </S.PlaylistItem>
+        </S.ContentPlaylist>
+      </S.centerblockContent>
     </S.MainCenterblock>
   )
 }
