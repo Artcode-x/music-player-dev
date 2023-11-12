@@ -98,12 +98,13 @@ function RenderCenter({ loading1, addError }) {
     }
   }
 
-  if (loading1) return <Skeletons />
+  // if (loading1) return <Skeletons />
 
   if (addError) return <Error />
 
   return (
     <S.MainCenterblock>
+      {loading1 && <Skeletons />}
       {/* <Search /> */}
       {/* <Zagolovok /> */}
       {/* Outlet  */}
