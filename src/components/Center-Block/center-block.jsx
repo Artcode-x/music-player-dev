@@ -13,7 +13,7 @@ import Error from './Error'
 import Skeletons from './Skeletons'
 import Search from './Search'
 import Zagolovok from './Zagolovok'
-import contentTitlePlayList from './Title-playlist'
+import ContentTitlePlayList from './Title-playlist'
 
 function RenderCenter({ loading1, addError }) {
   //  const [isPlaying, setIsPlaying] = useState(null)
@@ -155,7 +155,7 @@ function RenderCenter({ loading1, addError }) {
       {visible === 'OpenGenre' ? genre : null}
 
       <S.centerblockContent>
-        {contentTitlePlayList}
+        <ContentTitlePlayList />
         <S.ContentPlaylist>
           <S.PlaylistItem>
             {allTracks.map((track, index) => (

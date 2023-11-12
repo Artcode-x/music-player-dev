@@ -8,7 +8,7 @@ import RenderRbar from '../../components/Right-Bar/right-bar'
 import Zagolovok from '../../components/Center-Block/Zagolovok'
 import Category from '../Categoty/Category'
 
-export const LayoutPage = () => {
+export const LayoutPage = ({ loading }) => {
   return (
     <S.wrapper>
       {/* left part, menu */}
@@ -21,7 +21,7 @@ export const LayoutPage = () => {
       <Outlet />
 
       {/* right part - 3 window playlists */}
-      <RenderRbar />
+      <RenderRbar loading={loading} />
 
       {/* bar below */}
       {/* <RenderBar /> */}

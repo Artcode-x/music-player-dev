@@ -1,12 +1,13 @@
 import * as S from './center-block.styles'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
-import contentTitlePlayList from './Title-playlist'
+
 import sprite from '../../img/icon/sprite.svg'
+import ContentTitlePlayList from './Title-playlist'
 // export default const Skeletons = () => {
 export default function Skeletons() {
   return (
     <S.centerblockContent>
-      {contentTitlePlayList}
+      <ContentTitlePlayList />
       <S.ContentPlaylist>
         <S.PlaylistItem>
           <S.PlaylistTrack>

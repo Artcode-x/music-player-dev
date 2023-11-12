@@ -8,15 +8,23 @@ import Category from './Pages/Categoty/Category'
 import ProtectedRoute from './components/Protect-Route/ProtectRout'
 import { LayoutPage } from './Pages/Layout-page/Layout-page'
 
-export default function AppRoutes({ setLogin, login }) {
+export default function AppRoutes({
+  setLogin,
+  login,
+  loading,
+  setTimeLoading,
+}) {
   return (
     <Routes>
       <Route path="/Register" element={<Register />} />
       <Route path="/Login" element={<Login setLogin={setLogin} />} />
 
       <Route element={<ProtectedRoute login={login} />}>
-        <Route path="/" element={<LayoutPage />}>
-          <Route index element={<Main />} />
+        <Route path="/" element={<LayoutPage loading={loading} />}>
+          <Route
+            index
+            element={<Main loading={loading} setTimeLoading={setTimeLoading} />}
+          />
           <Route path="/Favorites" element={<Favorites />} />
           <Route path="/Category/:id" element={<Category />} />
         </Route>

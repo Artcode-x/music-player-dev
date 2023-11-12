@@ -8,10 +8,9 @@ import * as S from './fromApp-ToMain.styles'
 import getAllTracksFromApi from '../../components/Api/api'
 import addTracks from '../../store/actions/creators/creators'
 
-function Main() {
+function Main({ loading, setTimeLoading }) {
   const activeTrack = useSelector((store) => store.tracks.activeTrack)
 
-  const [loading, setTimeLoading] = useState(true)
   const [allTracks, setAllTracks] = useState(null)
   const [addError, setAddError] = useState(null)
   // стейт для выбранного трека
@@ -50,7 +49,7 @@ function Main() {
           allTracks={allTracks}
           loading1={loading}
         />
-        <RenderRbar loading={loading} />
+        {/* <RenderRbar loading={loading} /> */}
       </S.Main>
       {activeTrack && (
         <S.Bar>

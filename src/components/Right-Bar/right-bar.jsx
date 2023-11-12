@@ -11,7 +11,7 @@ function RenderRbar({ loading }) {
 
   return (
     <S.MainSidebar>
-      <UserInfo />
+      {/* <UserInfo /> */}
       {loading ? (
         <S.SidebarBlock>
           <S.SidebarList>
