@@ -17,9 +17,11 @@ export const LayoutPage = ({ loading }) => {
       <Search />
       {/* email usera */}
       <UserInfo />
-      <Zagolovok />
-      <Outlet />
+      <S.container>
+        <Zagolovok />
 
+        <Outlet />
+      </S.container>
       {/* right part - 3 window playlists */}
       <RenderRbar loading={loading} />
 
