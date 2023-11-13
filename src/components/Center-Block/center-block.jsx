@@ -104,7 +104,6 @@ function RenderCenter({ loading1, addError }) {
 
   return (
     <S.MainCenterblock>
-      {loading1 && <Skeletons />}
       {/* <Search /> */}
       {/* <Zagolovok /> */}
       {/* Outlet  */}
@@ -155,51 +154,57 @@ function RenderCenter({ loading1, addError }) {
       {visible === 'OpenYear' ? yearUl : null}
       {visible === 'OpenGenre' ? genre : null}
 
-      <S.centerblockContent>
-        <ContentTitlePlayList />
-        <S.ContentPlaylist>
-          <S.PlaylistItem>
-            {allTracks.map((track, index) => (
-              <S.PlaylistTrack
-                onClick={() => todoClick(track, index)}
-                key={track.id}
-              >
-                <S.TrackTitle>
-                  <S.TrackTitleImage>
-                    <RybkaForImport IamWidth="51" IamHeight="51" />
-                    {activeTrack &&
-                      (track.id === activeTrack.id ? (
-                        <S.PlayingDot playPause={playPause} />
-                      ) : (
-                        <S.TrackTitleSvg alt="music">
-                          <use xlinkHref={`${sprite}#icon-note`} />
-                        </S.TrackTitleSvg>
-                      ))}
-                  </S.TrackTitleImage>
-                  <S.TrackTitleText>
-                    <S.TrackTitleLink>
-                      {track.name}
-                      <span className="track__title-span" />
-                    </S.TrackTitleLink>
-                  </S.TrackTitleText>
-                </S.TrackTitle>
-                <S.TrackAuthor>
-                  <S.TrackTitleLink>{track.author}</S.TrackTitleLink>
-                </S.TrackAuthor>
-                <S.TrackAlbum>
-                  <S.TrackTitleLink>{track.album}</S.TrackTitleLink>
-                </S.TrackAlbum>
-                <S.TrackTime>
-                  <S.TrackTimeSvg alt="time">
-                    <use xlinkHref={`${sprite}#icon-like`} />
-                  </S.TrackTimeSvg>
-                  <S.TrackTimeText>{track.duration_in_seconds}</S.TrackTimeText>
-                </S.TrackTime>
-              </S.PlaylistTrack>
-            ))}
-          </S.PlaylistItem>
-        </S.ContentPlaylist>
-      </S.centerblockContent>
+      {loading1 ? (
+        <Skeletons />
+      ) : (
+        <S.centerblockContent>
+          <ContentTitlePlayList />
+          <S.ContentPlaylist>
+            <S.PlaylistItem>
+              {allTracks.map((track, index) => (
+                <S.PlaylistTrack
+                  onClick={() => todoClick(track, index)}
+                  key={track.id}
+                >
+                  <S.TrackTitle>
+                    <S.TrackTitleImage>
+                      <RybkaForImport IamWidth="51" IamHeight="51" />
+                      {activeTrack &&
+                        (track.id === activeTrack.id ? (
+                          <S.PlayingDot playPause={playPause} />
+                        ) : (
+                          <S.TrackTitleSvg alt="music">
+                            <use xlinkHref={`${sprite}#icon-note`} />
+                          </S.TrackTitleSvg>
+                        ))}
+                    </S.TrackTitleImage>
+                    <S.TrackTitleText>
+                      <S.TrackTitleLink>
+                        {track.name}
+                        <span className="track__title-span" />
+                      </S.TrackTitleLink>
+                    </S.TrackTitleText>
+                  </S.TrackTitle>
+                  <S.TrackAuthor>
+                    <S.TrackTitleLink>{track.author}</S.TrackTitleLink>
+                  </S.TrackAuthor>
+                  <S.TrackAlbum>
+                    <S.TrackTitleLink>{track.album}</S.TrackTitleLink>
+                  </S.TrackAlbum>
+                  <S.TrackTime>
+                    <S.TrackTimeSvg alt="time">
+                      <use xlinkHref={`${sprite}#icon-like`} />
+                    </S.TrackTimeSvg>
+                    <S.TrackTimeText>
+                      {track.duration_in_seconds}
+                    </S.TrackTimeText>
+                  </S.TrackTime>
+                </S.PlaylistTrack>
+              ))}
+            </S.PlaylistItem>
+          </S.ContentPlaylist>
+        </S.centerblockContent>
+      )}
     </S.MainCenterblock>
   )
 }
