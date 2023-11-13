@@ -132,7 +132,8 @@ export const filterListyear = styled.div`
 export const MainCenterblock = styled.div`
   width: auto;
   flex-grow: 3;
-  padding: 20px 40px 20px 111px;
+  /* padding: 20px 40px 20px 111px; it was */
+  padding: 20px 40px 20px 1px;
 `
 export const CenterblockSearch = styled.div`
   width: 100%;

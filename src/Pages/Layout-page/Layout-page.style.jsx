@@ -6,13 +6,15 @@ export const wrapper = styled.div`
   width: 100%;
   max-width: 1920px;
   display: grid;
-  grid-template-columns: 13% 65% 22%;
+  /* grid-template-columns: 13% 65% 22%; */
+  grid-template-columns: 16% 60% 22%;
   grid-template-rows: 90px 1fr;
   margin: 0 auto;
   padding: 20px 0;
   background-color: #181818;
   color: #fff;
   padding: 0;
+  padding-right: 30px;
 `
 export const container = styled.div`
   display: grid;
