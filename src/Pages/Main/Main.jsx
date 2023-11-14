@@ -8,7 +8,7 @@ import * as S from './fromApp-ToMain.styles'
 import getAllTracksFromApi from '../../components/Api/api'
 import addTracks from '../../store/actions/creators/creators'
 
-function Main({ loading, setTimeLoading }) {
+function Main({ loading, setTimeLoading, isPlaying, setIsPlaying }) {
   const activeTrack = useSelector((store) => store.tracks.activeTrack)
 
   const [allTracks, setAllTracks] = useState(null)
@@ -48,6 +48,8 @@ function Main({ loading, setTimeLoading }) {
           // setKeyItem={setKeyItem}
           allTracks={allTracks}
           loading1={loading}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
         />
         {/* <RenderRbar loading={loading} /> */}
       </S.Main>

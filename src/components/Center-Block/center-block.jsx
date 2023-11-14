@@ -15,7 +15,7 @@ import Search from './Search'
 import Zagolovok from './Zagolovok'
 import ContentTitlePlayList from './Title-playlist'
 
-function RenderCenter({ loading1, addError }) {
+function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
   //  const [isPlaying, setIsPlaying] = useState(null)
 
   // чтобы получить состояние, исп-ем хук useSelector
@@ -29,7 +29,7 @@ function RenderCenter({ loading1, addError }) {
   const dispatch = useDispatch()
 
   const todoClick = (track) => {
-    //  setIsPlaying(track.id)
+    setIsPlaying(false)
     dispatch(addIdTrack({ index: track.id }))
     // Чтобы изменить состояние, нам потребуется dispatch. dispatch - Это ф-ия, и при вызове ее, параметром она принимает ACTION. Action - это объект, у которого обязательно должен быть тип. (тип мы указывали в редюсере)
     // Второе св-во объекта - это какие то данные, в данном случае это зн-ие true/false

@@ -9,7 +9,7 @@ import Zagolovok from '../../components/Center-Block/Zagolovok'
 import Category from '../Categoty/Category'
 import { RenderBarPlayer } from '../Main/RenderBarPlayer'
 
-export const LayoutPage = ({ loading }) => {
+export const LayoutPage = ({ loading, isPlaying, setIsPlaying }) => {
   return (
     <S.wrapper>
       {/* left part, menu */}
@@ -29,7 +29,7 @@ export const LayoutPage = ({ loading }) => {
       {/* bar below */}
       {/* <RenderBar /> */}
       <S.playContainer>
-        <RenderBarPlayer />
+        <RenderBarPlayer isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
       </S.playContainer>
     </S.wrapper>
   )

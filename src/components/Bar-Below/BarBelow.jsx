@@ -1,22 +1,29 @@
 // /* eslint-disable jsx-a11y/media-has-caption */
 
 import { useRef } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './bar-below.styles'
 import PlayersControls from '../PlayerControls/PlayerControls'
 import VolumeBar from '../VolumeBar/VolumeBar'
 import ProgressBar from '../ProgressBar/progressBar'
+import { addNextTrack } from '../../store/actions/creators/creators'
 
-function RenderBar({ loading, repeat, setRepeat }) {
+function RenderBar({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
   const audioRef = useRef(null)
 
   const activeTrack = useSelector((store) => store.tracks.activeTrack)
-
+  const dispatch = useDispatch()
   return (
     <>
-      <audio key={activeTrack.id} autoPlay ref={audioRef} loop={repeat}>
+      <audio
+        onEnded={() => dispatch(addNextTrack())}
+        key={activeTrack.id}
+        autoPlay
+        ref={audioRef}
+        loop={repeat}
+      >
         <source src={activeTrack.track_file} type="audio/mpeg" />
       </audio>
 
@@ -29,6 +36,8 @@ function RenderBar({ loading, repeat, setRepeat }) {
                 repeat={repeat}
                 setRepeat={setRepeat}
                 audioRef={audioRef}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
                 //  setKeyItem={setKeyItem}
               />
               <S.PlayerTrackPlay>

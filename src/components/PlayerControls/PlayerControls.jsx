@@ -16,9 +16,11 @@ export default function PlayersControls({
   audioRef,
   repeat,
   setRepeat,
+  isPlaying,
+  setIsPlaying,
   // setKeyItem,
 }) {
-  const [isPlaying, setIsPlaying] = useState(false)
+  // const [isPlaying, setIsPlaying] = useState(false)
 
   // состояние текущего трека - играет или нет
   // const activeTrack = useSelector(activeTrackSelector)
@@ -45,12 +47,14 @@ export default function PlayersControls({
         dispatch(addSetPause(true))
 
         setIsPlaying(false) // на основе стейта меняем иконку плей паузыы
+        console.log('f')
         break
       case 'stop':
         audioRef.current.pause()
         dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимация
 
         setIsPlaying(true)
+        console.log('t')
         break
       case 'next':
         if (shuffled === 'buttonClickFirst') {

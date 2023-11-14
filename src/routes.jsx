@@ -13,6 +13,8 @@ export default function AppRoutes({
   login,
   loading,
   setTimeLoading,
+  isPlaying,
+  setIsPlaying,
 }) {
   return (
     <Routes>
@@ -20,10 +22,26 @@ export default function AppRoutes({
       <Route path="/Login" element={<Login setLogin={setLogin} />} />
 
       <Route element={<ProtectedRoute login={login} />}>
-        <Route path="/" element={<LayoutPage loading={loading} />}>
+        <Route
+          path="/"
+          element={
+            <LayoutPage
+              loading={loading}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+            />
+          }
+        >
           <Route
             index
-            element={<Main loading={loading} setTimeLoading={setTimeLoading} />}
+            element={
+              <Main
+                loading={loading}
+                setTimeLoading={setTimeLoading}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+              />
+            }
           />
           <Route path="/Favorites" element={<Favorites />} />
           <Route path="/Category/:id" element={<Category />} />
