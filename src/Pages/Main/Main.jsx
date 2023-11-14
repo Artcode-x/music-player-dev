@@ -16,7 +16,7 @@ function Main({ loading, setTimeLoading }) {
   // стейт для выбранного трека
   // const [keyItem, setKeyItem] = useState('')
 
-  const [repeat, setRepeat] = useState(false)
+  // const [repeat, setRepeat] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -51,7 +51,7 @@ function Main({ loading, setTimeLoading }) {
         />
         {/* <RenderRbar loading={loading} /> */}
       </S.Main>
-      {activeTrack && (
+      {/* {activeTrack && (
         <S.Bar>
           <RenderBar
             active={activeTrack}
@@ -62,7 +62,7 @@ function Main({ loading, setTimeLoading }) {
             loading={loading}
           />
         </S.Bar>
-      )}
+      )} */}
     </S.Container>
   )
 }

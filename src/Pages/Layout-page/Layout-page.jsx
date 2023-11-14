@@ -7,6 +7,7 @@ import { UserInfo } from '../../components/Right-Bar/UserInfo'
 import RenderRbar from '../../components/Right-Bar/right-bar'
 import Zagolovok from '../../components/Center-Block/Zagolovok'
 import Category from '../Categoty/Category'
+import { RenderBarPlayer } from '../Main/RenderBarPlayer'
 
 export const LayoutPage = ({ loading }) => {
   return (
@@ -27,6 +28,9 @@ export const LayoutPage = ({ loading }) => {
 
       {/* bar below */}
       {/* <RenderBar /> */}
+      <S.playContainer>
+        <RenderBarPlayer />
+      </S.playContainer>
     </S.wrapper>
   )
 }

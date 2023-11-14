@@ -14,9 +14,15 @@ export const wrapper = styled.div`
   background-color: #181818;
   color: #fff;
   padding: 0;
-  padding-right: 30px;
+  padding-right: 20px;
 `
 export const container = styled.div`
   display: grid;
   grid-column: 2/3;
+`
+export const playContainer = styled.div`
+  position: fixed;
+  width: 1920px;
+  background: rgba(28, 28, 28, 0.5);
+  bottom: 0;
 `
