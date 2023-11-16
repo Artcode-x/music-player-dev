@@ -16,7 +16,7 @@ export const PlaylistTitleCol01 = styled.div`
   color: #696969;
   text-transform: uppercase;
 
-  width: 447px;
+  width: 40%;
 `
 
 export const PlaylistTitleCol02 = styled.div`
@@ -28,7 +28,7 @@ export const PlaylistTitleCol02 = styled.div`
   color: #696969;
   text-transform: uppercase;
 
-  width: 321px;
+  width: 30%;
 `
 
 export const PlaylistTitleCol03 = styled.div`
@@ -40,7 +40,7 @@ export const PlaylistTitleCol03 = styled.div`
   color: #696969;
   text-transform: uppercase;
 
-  width: 245px;
+  width: 20%;
 `
 
 export const PlaylistTitleCol04 = styled.div`
@@ -52,7 +52,7 @@ export const PlaylistTitleCol04 = styled.div`
   color: #696969;
   text-transform: uppercase;
 
-  width: 60px;
+  width: 10%;
   text-align: end;
 `
 
@@ -131,11 +131,14 @@ export const filterListyear = styled.div`
 `
 export const MainCenterblock = styled.div`
   width: auto;
+  box-sizing: border-box;
   flex-grow: 3;
   /* padding: 20px 40px 20px 111px; it was */
-  padding: 20px 40px 20px 1px;
+  padding: 20px 0;
 `
 export const CenterblockSearch = styled.div`
+  grid-template-columns: 2 / 3;
+  grid-template-rows: 1 / 2;
   width: 100%;
   border-bottom: 1px solid #4e4e4e;
   margin-bottom: 51px;
@@ -294,7 +297,6 @@ export const FilterButtonGenre = styled(FilterButton)`
 export const ContentPlaylist = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
 `
 export const centerblockContent = styled.div`
   display: flex;
@@ -364,7 +366,6 @@ export const PlayingDot = styled.div`
 export const PlaylistTrack = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   &:hover {
     text-decoration: underline;
@@ -380,7 +381,7 @@ export const TrackTitle = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 447px;
+  width: 40%;
 `
 export const TrackTitleImage = styled.div`
   width: 51px;
@@ -394,12 +395,12 @@ export const TrackTitleImage = styled.div`
 `
 
 export const TrackAuthor = styled.div`
-  width: 321px;
+  width: 30%;
   display: flex;
   justify-content: flex-start;
 `
 export const TrackAlbum = styled.div`
-  width: 245px;
+  width: 20%;
 `
 
 export const TrackTimeSvg = styled.svg`
@@ -418,7 +419,12 @@ export const TrackTitleSvg = styled.svg`
 `
 
 export const TrackTitleText = styled.div``
-export const TrackTime = styled.div``
+export const TrackTime = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 10%;
+`
 
 export const TrackTitleLink = styled.a`
   font-style: normal;

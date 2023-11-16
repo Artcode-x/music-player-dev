@@ -110,7 +110,7 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
       <S.CenterblockFilter>
         <S.FilterTitle>Искать по:</S.FilterTitle>
         <S.FilterButtonArtist
-          propsKeyVisible={visible}
+          $propsKeyVisible={visible}
           role="button"
           tabIndex={0}
           onKeyDown={onEnterArtist}
@@ -124,7 +124,7 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
         </S.FilterButtonArtist>
 
         <S.FilterButtonYear
-          propsKeyVisible={visible}
+          $propsKeyVisible={visible}
           role="button"
           tabIndex={0}
           onKeyDown={onEnterYear}
@@ -137,7 +137,7 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
           году выпуска
         </S.FilterButtonYear>
         <S.FilterButtonGenre
-          propsKeyVisible={visible}
+          $propsKeyVisible={visible}
           role="button"
           tabIndex={0}
           onKeyDown={onEnterGenre}
