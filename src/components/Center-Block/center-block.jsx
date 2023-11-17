@@ -105,7 +105,7 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
   return (
     <S.MainCenterblock>
       {/* <Search /> */}
-      {/* <Zagolovok /> */}
+      <Zagolovok />
       {/* Outlet  */}
       <S.CenterblockFilter>
         <S.FilterTitle>Искать по:</S.FilterTitle>
@@ -169,14 +169,20 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
                   <S.TrackTitle>
                     <S.TrackTitleImage>
                       <RybkaForImport IamWidth="51" IamHeight="51" />
-                      {activeTrack &&
-                        (track.id === activeTrack.id ? (
+
+                      {activeTrack ? (
+                        track.id === activeTrack.id ? (
                           <S.PlayingDot playPause={playPause} />
                         ) : (
                           <S.TrackTitleSvg alt="music">
                             <use xlinkHref={`${sprite}#icon-note`} />
                           </S.TrackTitleSvg>
-                        ))}
+                        )
+                      ) : (
+                        <S.TrackTitleSvg alt="music">
+                          <use xlinkHref={`${sprite}#icon-note`} />
+                        </S.TrackTitleSvg>
+                      )}
                     </S.TrackTitleImage>
                     <S.TrackTitleText>
                       <S.TrackTitleLink>

@@ -19,7 +19,7 @@ export const LayoutPage = ({ loading, isPlaying, setIsPlaying }) => {
       {/* email usera */}
       <UserInfo />
       <S.container>
-        <Zagolovok />
+        {/* <Zagolovok /> */}
 
         <Outlet />
       </S.container>
