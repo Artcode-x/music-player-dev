@@ -14,6 +14,7 @@ import Skeletons from './Skeletons'
 import Search from './Search'
 import Zagolovok from './Zagolovok'
 import ContentTitlePlayList from './Title-playlist'
+import { MusicList } from './MusicList'
 
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
   //  const [isPlaying, setIsPlaying] = useState(null)
@@ -27,17 +28,6 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
   const activeTrack = useSelector((store) => store.tracks.activeTrack) // исп-ем знания из state/store
 
   const dispatch = useDispatch()
-
-  const todoClick = (track) => {
-    setIsPlaying(false)
-    dispatch(addIdTrack({ index: track.id }))
-    // Чтобы изменить состояние, нам потребуется dispatch. dispatch - Это ф-ия, и при вызове ее, параметром она принимает ACTION. Action - это объект, у которого обязательно должен быть тип. (тип мы указывали в редюсере)
-    // Второе св-во объекта - это какие то данные, в данном случае это зн-ие true/false
-    dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true
-
-    dispatch(addActiveTrack(track)) // хранится тек-ий играющий трек
-    // setKeyItem(track)
-  }
 
   const list = (
     <S.Filterlist>
@@ -159,56 +149,7 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
       ) : (
         <S.centerblockContent>
           <ContentTitlePlayList />
-          <S.ContentPlaylist>
-            <S.PlaylistItem>
-              {allTracks.map((track, index) => (
-                <S.PlaylistTrack
-                  onClick={() => todoClick(track, index)}
-                  key={track.id}
-                >
-                  <S.TrackTitle>
-                    <S.TrackTitleImage>
-                      <RybkaForImport IamWidth="51" IamHeight="51" />
-
-                      {activeTrack ? (
-                        track.id === activeTrack.id ? (
-                          <S.PlayingDot playPause={playPause} />
-                        ) : (
-                          <S.TrackTitleSvg alt="music">
-                            <use xlinkHref={`${sprite}#icon-note`} />
-                          </S.TrackTitleSvg>
-                        )
-                      ) : (
-                        <S.TrackTitleSvg alt="music">
-                          <use xlinkHref={`${sprite}#icon-note`} />
-                        </S.TrackTitleSvg>
-                      )}
-                    </S.TrackTitleImage>
-                    <S.TrackTitleText>
-                      <S.TrackTitleLink>
-                        {track.name}
-                        <span className="track__title-span" />
-                      </S.TrackTitleLink>
-                    </S.TrackTitleText>
-                  </S.TrackTitle>
-                  <S.TrackAuthor>
-                    <S.TrackTitleLink>{track.author}</S.TrackTitleLink>
-                  </S.TrackAuthor>
-                  <S.TrackAlbum>
-                    <S.TrackTitleLink>{track.album}</S.TrackTitleLink>
-                  </S.TrackAlbum>
-                  <S.TrackTime>
-                    <S.TrackTimeSvg alt="time">
-                      <use xlinkHref={`${sprite}#icon-like`} />
-                    </S.TrackTimeSvg>
-                    <S.TrackTimeText>
-                      {track.duration_in_seconds}
-                    </S.TrackTimeText>
-                  </S.TrackTime>
-                </S.PlaylistTrack>
-              ))}
-            </S.PlaylistItem>
-          </S.ContentPlaylist>
+          <MusicList isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
         </S.centerblockContent>
       )}
     </S.MainCenterblock>

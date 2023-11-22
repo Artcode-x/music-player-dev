@@ -410,6 +410,10 @@ export const TrackTimeSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `
+export const TrackLike = styled.button`
+  background: transparent;
+  border: none;
+`
 
 export const TrackTitleSvg = styled.svg`
   width: 18px;
