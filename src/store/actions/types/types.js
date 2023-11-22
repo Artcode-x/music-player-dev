@@ -6,3 +6,7 @@ export const ID_TRACK = 'ID_TRACK'
 export const SHUFFLE = 'SHUFFLE'
 export const SHUFFLE_TRACKS = 'SHUFFLE_TRACKS'
 export const ACTIVE_TRACK = 'ACTIVE_TRACK'
+
+export const USER = 'USER'
+
+export const FAVORITES_TRACKS = 'FAVORITES_TRACKS'

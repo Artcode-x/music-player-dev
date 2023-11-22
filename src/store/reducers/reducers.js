@@ -9,6 +9,8 @@ import {
   SHUFFLE,
   PREV_TRACK,
   ACTIVE_TRACK,
+  USER,
+  FAVORITES_TRACKS,
 } from '../actions/types/types'
 
 // state - состояние, может быть объектом или массивом либо приметивное зн-ие, которое хранит какие то данные. Чаще всего это объект, у которого уже есть конкретные поля, которые могут быть как объектами, так и массивами/примитивами.
@@ -20,6 +22,8 @@ const initialTracks = {
   idTrack: {},
   newShuffleTracksArray: {},
   shuffled: false,
+  userID: {},
+  vseIzbranniyeTreki: [],
 }
 
 // reducer - ф-ия может быть обьявл-на через func-on, либо через стрел ф-ию. Первым параметром принимает состояние, а вторым - action.
@@ -124,6 +128,22 @@ function tracksReducer(state = initialTracks, action) {
         ...state,
         activeTrack: prevTrack,
         idTrack: { index: prevTrack.id },
+      }
+    }
+
+    case USER: {
+      const { userID } = action.payload
+      return {
+        ...state,
+        userID,
+      }
+    }
+
+    case FAVORITES_TRACKS: {
+      const { vseIzbranniyeTreki } = action.payload
+      return {
+        ...state,
+        vseIzbranniyeTreki,
       }
     }
 

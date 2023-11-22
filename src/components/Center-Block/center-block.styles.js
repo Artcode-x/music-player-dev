@@ -367,6 +367,7 @@ export const PlaylistTrack = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
   &:hover {
     text-decoration: underline;
     color: coral;
@@ -409,6 +410,10 @@ export const TrackTimeSvg = styled.svg`
   margin-right: 17px;
   fill: transparent;
   stroke: #696969;
+`
+export const TrackLike = styled.button`
+  background: transparent;
+  border: none;
 `
 
 export const TrackTitleSvg = styled.svg`

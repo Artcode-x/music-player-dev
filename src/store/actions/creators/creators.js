@@ -7,6 +7,7 @@ import {
   PREV_TRACK,
   SHUFFLE,
   ACTIVE_TRACK,
+  USER,
 } from '../types/types'
 
 // Actions - получают какие то данные, затем куда то сохраняют их
@@ -53,4 +54,13 @@ export const addShuffled = (shuffled) => ({
   payload: { shuffled },
 })
 
+export const addUser = (userID) => ({
+  type: USER,
+  payload: { userID },
+})
+
+export const addFavoriteTracks = (vseIzbranniyeTreki) => ({
+  type: FAVORITES_TRACKS,
+  payload: { vseIzbranniyeTreki },
+})
 export default addTracks
