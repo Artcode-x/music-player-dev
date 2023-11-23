@@ -223,11 +223,12 @@ export const VolumeSvg = styled.svg`
 `
 export const VolumeProgress = styled.div`
   width: 109px;
-
+  height: 20px;
   cursor: pointer;
 `
 export const VolumeProgressLineBtn = styled.input`
   width: 109px;
+  height: 20px;
   &:active {
     cursor: pointer;
   }
