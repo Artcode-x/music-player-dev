@@ -127,36 +127,48 @@ export function getToken({ email, password }) {
 
 export function refreshToken(token) {
   return fetch(`${apiAddress}/user/token/refresh/`, {
-    method: 'POST',
+
+    method: "POST",
+
     body: JSON.stringify({
       refresh: token,
     }),
     headers: {
-      'content-type': 'application/json',
+
+      "content-type": "application/json",
     },
-  }).then((response) => response.json())
+  }).then((response) => response.json());
+
 }
 
 export function addLike({ token, id }) {
   return fetch(`${apiAddress}/catalog/track/${id}/favorite/`, {
-    method: 'POST',
+
+    method: "POST",
+
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }).then((response) => {
-    if (response.status === 401) throw new Error('Токен протух')
-    return response.json()
-  })
+
+    if (response.status === 401) throw new Error("Токен протух");
+    return response.json();
+  });
+
 }
 
 export function disLike({ token, id }) {
   return fetch(`${apiAddress}/catalog/track/${id}/favorite/`, {
-    method: 'DELETE',
+
+    method: "DELETE",
+
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }).then((response) => {
-    if (response.status === 401) throw new Error('Токен протух')
-    return response.json()
-  })
+
+    if (response.status === 401) throw new Error("Токен протух");
+    return response.json();
+  });
 }
+
