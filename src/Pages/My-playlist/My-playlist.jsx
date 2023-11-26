@@ -121,8 +121,6 @@ export default function MyPlaylist({ setIsPlaying }) {
                       <use xlinkHref={`${sprite}#icon-likeActive`} />
                     )}
 
-                    {/* Проходимся по всем трекам, уже по каждому в отдельности и ищем совпадает ли id конкретного userа с id в лайкнутых треках. 
-                 Если трек лайкнут этим пользователем - загрузится icon-likeActive если не нашли в лайкнутых польз-ях, то будет обычная иконка icon-like */}
                     {/* {track.stared_user.find((el) => el.id === user.id) ? (
                       <use xlinkHref={`${sprite}#icon-likeActive`} />
                     ) : (
