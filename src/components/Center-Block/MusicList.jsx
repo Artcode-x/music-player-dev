@@ -10,7 +10,12 @@ import addTracks, {
 } from '../../store/actions/creators/creators'
 
 import { useState } from 'react'
-import getAllTracksFromApi, { addLike, disLike, refreshToken } from '../Api/api'
+import getAllTracksFromApi, {
+  addLike,
+  disLike,
+  getFavoriteTracks,
+  refreshToken,
+} from '../Api/api'
 
 export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const activeTrack = useSelector(activeTrackSelector) // исп-ем знания из state/store
@@ -18,8 +23,10 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const playPause = useSelector((store) => store.tracks.playPause)
 
   const allTracks = useSelector((store) => store.tracks.allTracks)
-
+  console.log(allTracks)
   const [disabled, setDisabled] = useState(false) // для отключения кнопки на время обращения к апи
+
+  const vseTrekiAndLikesTracks = useSelector((store) => store.tracks.AllandFav)
 
   const dispatch = useDispatch()
 
@@ -65,9 +72,16 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
 
       // После нажатия на svgLike сработает disLike либо addLike
       // После этого необходимо обновить все треки, чтобы поставленные/убранные лайки обновились
-      const response = await getAllTracksFromApi()
+
+      if (vseTrekiAndLikesTracks === 'All') {
+        const response = await getAllTracksFromApi()
+        dispatch(addTracks(response))
+      } else {
+        const response = await getFavoriteTracks()
+        dispatch(addFavoriteTracks(response))
+      }
+
       //В итоге при каждом нажатии на лайк/диз будет диспатч addTracks
-      dispatch(addTracks(response))
     } catch (error) {
       console.log(error.message)
       // если токен протух по таймауту, обновляем его

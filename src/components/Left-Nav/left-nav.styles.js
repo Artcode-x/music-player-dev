@@ -55,12 +55,27 @@ export const MenuItem = styled.li`
       props.fishechka === 'stroka' ? 'underline' : null};
   }
 `
-
-export const MenuLink = styled(NavLink)`
+export const MenuLink1 = styled(NavLink)`
   color: #ffffff;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+`
+export const MenuLink = styled.button`
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  background: none;
+  border: none;
+  outline: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `
 
 export const MenuExit = styled.div`

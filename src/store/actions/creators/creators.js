@@ -8,6 +8,8 @@ import {
   SHUFFLE,
   ACTIVE_TRACK,
   USER,
+  FAVORITES_TRACKS,
+  ALLTRACKS_FAVORITETRACKS,
 } from '../types/types'
 
 // Actions - получают какие то данные, затем куда то сохраняют их
@@ -63,4 +65,10 @@ export const addFavoriteTracks = (vseIzbranniyeTreki) => ({
   type: FAVORITES_TRACKS,
   payload: { vseIzbranniyeTreki },
 })
+
+export const addAllandFav = (AllandFav) => ({
+  type: ALLTRACKS_FAVORITETRACKS,
+  payload: { AllandFav },
+})
+
 export default addTracks

@@ -43,7 +43,10 @@ export default function AppRoutes({
               />
             }
           />
-          <Route path="/Favorites" element={<Favorites />} />
+          <Route
+            path="/Favorites"
+            element={<Favorites setIsPlaying={setIsPlaying} />}
+          />
           <Route path="/Category/:id" element={<Category />} />
         </Route>
       </Route>
