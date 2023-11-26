@@ -1,9 +1,10 @@
 // import '../css/style.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie'
+
 import logo from '../../img/logo.png'
 import * as S from './left-nav.styles'
+import { useUserContext } from '../Context/Context'
 // const S. = styled.div``
 function Ma1nNav() {
   const [visible, close] = useState(true)
@@ -17,8 +18,10 @@ function Ma1nNav() {
     }
   }
 
+  const { toggleLogout } = useUserContext()
+
   const handleExit = () => {
-    Cookies.set('token', '') // очищаем токен из куки
+    toggleLogout()
     navigate('/Login') // делаем редирект на страницу логина
   }
 

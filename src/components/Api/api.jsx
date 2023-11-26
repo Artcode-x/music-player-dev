@@ -24,6 +24,23 @@ export default async function getAllTracksFromApi() {
 //   throw new Error('Ты не пройдешь!')
 // }
 
+export async function Login({ email, password }) {
+  // получаем тут пропсы со страницы логина - то что вводят в инпуты
+  const response = await fetch('https://painassasin.online/user/login/', {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+    headers: {
+      // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+      'content-type': 'application/json',
+    },
+  })
+  const data = await response.json()
+  return data
+}
+
 fetch('https://painassasin.online/user/login/', {
   method: 'POST',
   body: JSON.stringify({
