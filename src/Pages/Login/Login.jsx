@@ -7,7 +7,7 @@ export default function Login({ setToken }) {
   const navigate = useNavigate()
 
   const onClick = () => {
-    Cookies.set('userName', 'token')
+    Cookies.set('token', 'test')
 
     setToken(Cookies.get())
 

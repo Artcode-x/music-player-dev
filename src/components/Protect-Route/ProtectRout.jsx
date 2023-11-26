@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom'
 
 export default function ProtectedRoute({ redirectPath = '/Login', token }) {
-  if (token.userName !== 'token') {
+  if (!token) {
     return <Navigate to={redirectPath} replace />
   }
 
