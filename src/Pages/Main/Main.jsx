@@ -6,23 +6,26 @@ import RenderBar from '../../components/Bar-Below/BarBelow'
 import * as S from './fromApp-ToMain.styles'
 import getAllTracksFromApi from '../../components/Api/api'
 
-function Main() {
+function Main({ userReg }) {
   const [loading, setTimeLoading] = useState(true)
   const [allTracks, setAllTracks] = useState(null)
   const [addError, setAddError] = useState(null)
   // стейт для выбранного трека
   const [keyItem, setKeyItem] = useState('')
 
-  useEffect(() => {
-    const fromApi = async () => {
-      try {
-        const spisokTrackov = await getAllTracksFromApi()
-        setAllTracks(spisokTrackov)
-      } catch (error) {
-        console.log(error.message)
-        setAddError(error.message)
-      }
+  const [repeat, setRepeat] = useState(false)
+
+  const fromApi = async () => {
+    try {
+      const spisokTrackov = await getAllTracksFromApi()
+      setAllTracks(spisokTrackov)
+    } catch (error) {
+      // console.log(error.message)
+      setAddError(error.message)
     }
+  }
+
+  useEffect(() => {
     fromApi()
   }, [])
 
@@ -40,10 +43,12 @@ function Main() {
           allTracks={allTracks}
           loading1={loading}
         />
-        <RenderRbar loading={loading} />
+        <RenderRbar loading={loading} userReg={userReg} />
       </S.Main>
       <S.Bar>
         <RenderBar
+          repeat={repeat}
+          setRepeat={setRepeat}
           keyItem={keyItem}
           setKeyItem={setKeyItem}
           loading={loading}
