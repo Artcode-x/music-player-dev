@@ -26,7 +26,9 @@ export default function MyPlaylist({ setIsPlaying }) {
   const dispatch = useDispatch()
   const favor = useSelector((store) => store.tracks.vseIzbranniyeTreki)
 
-  console.log(favor)
+  useEffect(() => {
+    console.log(favor)
+  }, [favor])
 
   //vconst allTracks = useSelector((store) => store.tracks.allTracks)
 
@@ -45,23 +47,34 @@ export default function MyPlaylist({ setIsPlaying }) {
     dispatch(addActiveTrack(track)) // хранится тек-ий играющий трек
     // setKeyItem(track)
   }
+  const tokenAccess = JSON.parse(localStorage.getItem('tokenAccess'))
+  const tokenRefresh = JSON.parse(localStorage.getItem('tokenRefresh'))
 
   const setDislike = async (track) => {
-    const tokenAccess = JSON.parse(localStorage.getItem('tokenAccess'))
-    const tokenRefresh = JSON.parse(localStorage.getItem('tokenRefresh'))
-
     try {
       setDisabled(true)
       await disLike({ token: tokenAccess, id: track.id })
+
+      const refreshApi = await getFavoriteTracks(tokenAccess)
+      // получаем список обновленных фаворитных треков без дизлайкнутого
+      dispatch(addFavoriteTracks(refreshApi))
     } catch (error) {
-      console.log(error.message)
-      // if (error.message === 'Токен протух') {
-      //   const newAccess = await refreshToken(tokenRefresh)
-      //   localStorage.setItem('tokenAccess', JSON.stringify(newAccess))
-      // }
+      // сюда заходим если токен сгорает по таймауту
+      if (error.message === 'Токен протух') {
+        // ген новый токен доступа
+        const newAccess = await refreshToken(tokenRefresh)
+        // сохр-ем в локалсторадж/ перезаписываем тот что был
+        localStorage.setItem('tokenAccess', JSON.stringify(newAccess))
+        // чтобы выполнить диз, необходимо обратиться еще раз к апи
+        await disLike({ token: newAccess.access, id: track.id })
+        // с новым токеном обр к апи
+        const response = await getFavoriteTracks(newAccess.access)
+        //чтобы лайнутый трек исчез со страницы делаем диспатч
+        dispatch(addFavoriteTracks(response))
+      }
     } finally {
       setDisabled(false)
-      dispatch(addFavoriteTracks(favor))
+
       setDis(true)
 
       // getFavoriteTracks()
@@ -113,13 +126,13 @@ export default function MyPlaylist({ setIsPlaying }) {
                   key={track.id}
                 >
                   <S.TrackTimeSvg alt="time">
-                    {/* <use xlinkHref={`${sprite}#icon-likeActive`} /> */}
+                    <use xlinkHref={`${sprite}#icon-likeActive`} />
 
-                    {!track.id ? (
+                    {/* {!track.id ? (
                       <use xlinkHref={`${sprite}#icon-like`} />
                     ) : (
                       <use xlinkHref={`${sprite}#icon-likeActive`} />
-                    )}
+                    )} */}
 
                     {/* {track.stared_user.find((el) => el.id === user.id) ? (
                       <use xlinkHref={`${sprite}#icon-likeActive`} />

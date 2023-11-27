@@ -55,13 +55,15 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
         await addLike({ token: tokenAccess, id: track.id })
       }
 
-      if (vseTrekiAndLikesTracks === 'All') {
-        const response = await getAllTracksFromApi()
-        dispatch(addTracks(response))
-      } else {
-        const response = await getFavoriteTracks()
-        dispatch(addFavoriteTracks(response))
-      }
+      const response = await getAllTracksFromApi()
+      dispatch(addTracks(response))
+      // if (vseTrekiAndLikesTracks === 'All') {
+      //   const response = await getAllTracksFromApi()
+      //   dispatch(addTracks(response))
+      // } else {
+      //   const response = await getFavoriteTracks()
+      //   dispatch(addFavoriteTracks(response))
+      // }
     } catch (error) {
       console.log(error.message)
       // если токен протух по таймауту, обновляем его

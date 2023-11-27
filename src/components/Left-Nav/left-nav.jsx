@@ -43,7 +43,7 @@ function Ma1nNav() {
       dispatch(addFavoriteTracks(likesTrack))
 
       navigate('/Favorites')
-      dispatch(addAllandFav('Favorites'))
+      // dispatch(addAllandFav('Favorites'))
     } catch (error) {
       if (error.message === 'Токен протух') {
         console.log(tokenAccess)
