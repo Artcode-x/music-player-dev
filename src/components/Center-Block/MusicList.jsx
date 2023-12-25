@@ -1,4 +1,7 @@
-import { activeTrackSelector } from '../../store/selectors/selectors'
+import {
+  activeTrackSelector,
+  searchSelector,
+} from '../../store/selectors/selectors'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
 import sprite from '../../img/icon/sprite.svg'
@@ -82,11 +85,31 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
     }
   }
 
+  // const searchInputText = useSelector((store) => store.tracks.search)
+  const searchInputText = useSelector(searchSelector)
+
+  //  принимаем track.name для дальнейшего его сравнения с вводимым юзером текстом
+  const searchItem = (name) => {
+    if (name.toLowerCase().search(searchInputText.toLowerCase()) === -1)
+      return false
+    return true
+  }
+
+  // Пришел массив с сервера - отображаем целиком. Если что то введено в поисковую строку (searhUpdate) - отображаем отфильтрованный массив
+
+  // если searchInputText = true, тогда к массиву со всеми треками allTracks применяем метод filter, который сравнивает каждый отдельный трек из массива всех треков с тем что ввел пользователь. Используем функцию searchItem, которая осуществляет сравнение
+  const filteredArray = searchInputText
+    ? allTracks.filter((ad) => searchItem(ad.name, searchInputText))
+    : allTracks
+
   return (
     <S.ContentPlaylist>
       <S.PlaylistItem>
-        {allTracks.map((track, index) => (
-          <S.PlaylistTrack key={track.id}>
+        {filteredArray.map((track, index) => (
+          <S.PlaylistTrack
+            key={track.id}
+            // search={searchItem(track.name)}
+          >
             <S.TrackTitle onClick={() => todoClick(track, index)}>
               <S.TrackTitleImage>
                 <RybkaForImport IamWidth="51" IamHeight="51" />

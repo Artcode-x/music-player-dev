@@ -367,6 +367,9 @@ export const PlaylistTrack = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  // Вместо flex - условно нужно было показать/ иначе скрыть
+  // мешает логике появлени избранных треков
+  // display: ${(props) => (props.search ? 'flex' : 'none')};
 
   &:hover {
     text-decoration: underline;

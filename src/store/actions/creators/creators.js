@@ -10,6 +10,7 @@ import {
   USER,
   FAVORITES_TRACKS,
   ALLTRACKS_FAVORITETRACKS,
+  SEARCH,
 } from '../types/types'
 
 // Actions - получают какие то данные, затем куда то сохраняют их
@@ -69,6 +70,11 @@ export const addFavoriteTracks = (vseIzbranniyeTreki) => ({
 export const addAllandFav = (AllandFav) => ({
   type: ALLTRACKS_FAVORITETRACKS,
   payload: { AllandFav },
+})
+
+export const addUpdateSearch = (search) => ({
+  type: SEARCH,
+  payload: { search },
 })
 
 export default addTracks
