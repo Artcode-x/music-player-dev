@@ -1,13 +1,17 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import * as S from './Login.style'
-import { Login } from '../../components/Api/api'
+import { Login, getToken } from '../../components/Api/api'
 import { useUserContext } from '../../components/Context/Context'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../../store/actions/creators/creators'
 
 export default function AuthPage() {
   const { toggleUser } = useUserContext()
   const navigate = useNavigate()
   const [error, setError] = useState(null)
+
+  const dispatch = useDispatch()
 
   const getLoginCheck = (newUser) => {
     toggleUser(newUser) // в ф-ию toggleUser передаем ответ с апи
@@ -44,6 +48,26 @@ export default function AuthPage() {
         }
         if (todoNewLogin.detail) setError(todoNewLogin.detail[0])
       }
+      // передаем в getToken емейл и пасс /?
+      // после того как получим ответ, записываем его в localstorage
+      const newToken = await getToken({ email, password })
+      console.log(newToken)
+      // в localStorage в переменную tokenRefresh сохраняем ответ от апи: newToken.refresh
+
+      //! tokenAccess нужен для всего взаимодействия пользователя с кнопками - добавить лайк/убрать/перейти на все мои треки(лайкнутые)
+      //! он генерится и в backend-e определяется конкр-ый user
+      //! когда tokenAccess протухает, он обновляется tokenRefresh
+      // setItem - записывает в localStorage/ далее преобразование в строку токена
+      localStorage.setItem('tokenRefresh', JSON.stringify(newToken.refresh))
+      localStorage.setItem('tokenAccess', JSON.stringify(newToken.access))
+      //! посмотреть эти токены можно после логина в консоли/application
+
+      //! Почему сохраняем в localStorage, а не в redux - Нам понадобится обновленный токен access, чтобы запустить заново api. Но если бы tokenRefresh/tokenAccess хранили в redux, мы не смогли бы обновить tokenAccess, а потом заново запустить апи.
+
+      //! Особенности redux - ему нужно сначала завершить весь код, а только потом он обновляет redux
+      //! А в данном случае, нужно не завершая весь код обновить апи.
+
+      dispatch(addUser(todoNewLogin))
       getLoginCheck(todoNewLogin)
     } catch (serror) {
       setError(serror.message)

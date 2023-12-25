@@ -54,7 +54,7 @@ export default function ProgressBar({ audioRef }) {
         name="range"
         min="0"
         max={time}
-        сurrentTime={сurrentTime}
+        value={сurrentTime}
         step="0.01"
         onInput={(event) => changeProgress(event)}
       />
