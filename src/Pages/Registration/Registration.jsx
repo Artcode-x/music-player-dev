@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import * as S from './Registration.styled'
 import { handleReg } from '../../components/Api/api'
 import { useUserContext } from '../../components/Context/Context'
+import logo from '../../img/logo-black.png'
 
 export default function Register() {
   const [error, setError] = useState(null)
@@ -72,7 +73,7 @@ export default function Register() {
       <S.ModalForm>
         <Link to="/login">
           <S.ModalLogo>
-            <S.ModalLogoImage src="/img/logo_modal.png" alt="logo" />
+            <S.ModalLogoImage src={logo} alt="logo" />
           </S.ModalLogo>
         </Link>
         <S.Inputs>
