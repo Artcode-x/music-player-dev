@@ -52,6 +52,8 @@ export default function AuthPage() {
       // после того как получим ответ, записываем его в localstorage
       const newToken = await getToken({ email, password })
       console.log(newToken)
+      console.log(newToken.detail)
+      setError(newToken.detail)
       // в localStorage в переменную tokenRefresh сохраняем ответ от апи: newToken.refresh
 
       //! tokenAccess нужен для всего взаимодействия пользователя с кнопками - добавить лайк/убрать/перейти на все мои треки(лайкнутые)

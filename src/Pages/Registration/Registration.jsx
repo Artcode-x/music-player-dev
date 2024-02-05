@@ -22,7 +22,10 @@ export default function Register() {
 
   function checkInputs() {
     if (!email) throw new Error('Поле емейл не заполнено')
+    if (email.length < 3)
+      throw new Error('email не должен быть короче 3 символов!')
     if (!password) throw new Error('Поле password не заполнено')
+    //  if (password.length < 8) throw new Error('Пароль слишком короткий')
     if (!username) throw new Error('Поле имени не заполнено')
     if (password !== repeatPassword) throw new Error('Пароли не совпадают')
   }
@@ -32,6 +35,7 @@ export default function Register() {
       checkInputs()
       setButtonDisable(true) // делаем кнопку неактивной до ответа с апи
       const newUserReg = await handleReg({ email, password, username })
+      console.log(newUserReg)
 
       if (!newUserReg.id) {
         if (newUserReg.username) {
@@ -44,11 +48,15 @@ export default function Register() {
         }
         if (newUserReg.password) {
           setError(newUserReg.password[0])
+          return
         }
       }
       getRegisterCheck(newUserReg)
     } catch (someerror) {
       setError(someerror.message)
+      //   console.log(someerror.message)
+      // if (someerror.message === 'что то введено некорректно') {
+      // }
     } finally {
       setButtonDisable(false) // делаем кнопку активной
     }

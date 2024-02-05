@@ -26,7 +26,7 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const playPause = useSelector((store) => store.tracks.playPause)
 
   const allTracks = useSelector((store) => store.tracks.allTracks)
-  console.log(allTracks)
+  // console.log(allTracks)
   const [disabled, setDisabled] = useState(false) // для отключения кнопки на время обращения к апи
 
   const vseTrekiAndLikesTracks = useSelector((store) => store.tracks.AllandFav)
@@ -92,12 +92,14 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const searchItem = (name) => {
     if (name.toLowerCase().search(searchInputText.toLowerCase()) === -1)
       return false
+
     return true
   }
 
   // Пришел массив с сервера - отображаем целиком. Если что то введено в поисковую строку (searhUpdate) - отображаем отфильтрованный массив
 
   // если searchInputText = true, тогда к массиву со всеми треками allTracks применяем метод filter, который сравнивает каждый отдельный трек из массива всех треков с тем что ввел пользователь. Используем функцию searchItem, которая осуществляет сравнение
+  // если хоть какое то значение введенно в инпут , то это true
   const filteredArray = searchInputText
     ? allTracks.filter((ad) => searchItem(ad.name, searchInputText))
     : allTracks

@@ -111,8 +111,8 @@ export const Inputs = styled.div`
 export const Error = styled.div`
   color: coral;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 25px;
   line-height: 24px;
   margin-top: 20px;
-  text-align: left;
+  text-align: center;
 `
