@@ -1,6 +1,9 @@
+const apiAddress = 'https://skypro-music-api.skyeng.tech'
+
 export default async function getAllTracksFromApi() {
   const response = await fetch(
-    'https://painassasin.online/catalog/track/all/',
+    'https://skypro-music-api.skyeng.tech/catalog/track/all/',
+    // 'https://painassasin.online/catalog/track/all/',
     {
       method: 'GET',
     }
@@ -26,22 +29,25 @@ export default async function getAllTracksFromApi() {
 
 export async function Login({ email, password }) {
   // получаем тут пропсы со страницы логина - то что вводят в инпуты
-  const response = await fetch('https://painassasin.online/user/login/', {
-    method: 'POST',
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-    headers: {
-      // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
-      'content-type': 'application/json',
-    },
-  })
+  const response = await fetch(
+    'https://skypro-music-api.skyeng.tech/user/login/',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      headers: {
+        // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+        'content-type': 'application/json',
+      },
+    }
+  )
   const data = await response.json()
   return data
 }
 
-fetch('https://painassasin.online/user/login/', {
+fetch('https://skypro-music-api.skyeng.tech/user/login/', {
   method: 'POST',
   body: JSON.stringify({
     email: 'gleb@fokin.ru',
@@ -51,22 +57,23 @@ fetch('https://painassasin.online/user/login/', {
     // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
     'content-type': 'application/json',
   },
-})
-  .then((response) => response.json())
-  .then((json) => console.log(json))
+}).then((response) => response.json())
 
 export async function handleReg({ email, password, username }) {
-  const response = await fetch('https://painassasin.online/user/signup/', {
-    method: 'POST',
-    body: JSON.stringify({
-      email,
-      password,
-      username,
-    }),
-    headers: {
-      'content-type': 'application/json',
-    },
-  })
+  const response = await fetch(
+    'https://skypro-music-api.skyeng.tech/user/signup/',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+        username,
+      }),
+      headers: {
+        'content-type': 'application/json',
+      },
+    }
+  )
   if (response === 500) {
     throw new Error('Сервер сломался')
   }
@@ -89,3 +96,79 @@ export async function handleReg({ email, password, username }) {
 //     .then((response) => response.json())
 //     .then((json) => console.log(json))
 // }
+
+export function getFavoriteTracks(token) {
+  return fetch(
+    `https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  ).then((response) => {
+    if (response.status === 401) throw new Error('Токен протух')
+    return response.json()
+  })
+}
+
+export function getToken({ email, password }) {
+  return fetch(`https://skypro-music-api.skyeng.tech/user/token/`, {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+    headers: {
+      'content-type': 'application/json',
+    },
+  }).then((response) => response.json())
+}
+
+export function refreshToken(token) {
+  return fetch(`${apiAddress}/user/token/refresh/`, {
+
+    method: "POST",
+
+    body: JSON.stringify({
+      refresh: token,
+    }),
+    headers: {
+
+      "content-type": "application/json",
+    },
+  }).then((response) => response.json());
+
+}
+
+export function addLike({ token, id }) {
+  return fetch(`${apiAddress}/catalog/track/${id}/favorite/`, {
+
+    method: "POST",
+
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((response) => {
+
+    if (response.status === 401) throw new Error("Токен протух");
+    return response.json();
+  });
+
+}
+
+export function disLike({ token, id }) {
+  return fetch(`${apiAddress}/catalog/track/${id}/favorite/`, {
+
+    method: "DELETE",
+
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((response) => {
+
+    if (response.status === 401) throw new Error("Токен протух");
+    return response.json();
+  });
+}
+

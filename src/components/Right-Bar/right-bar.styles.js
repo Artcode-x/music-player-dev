@@ -2,10 +2,16 @@ import { styled } from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const MainSidebar = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   max-width: 418px;
-  padding: 20px 90px 20px 78px;
+  padding: 20px 10px;
 `
 export const SidebarPersonal = styled.div`
+  grid-template-columns: 3 / 4;
+  grid-template-rows: 1 / 2;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -42,8 +48,10 @@ export const SidebarList = styled.div`
 `
 
 export const SidebarItem = styled.div`
-  width: 250px;
-  height: 150px;
+  /* width: 250px;
+  height: 150px; */
+  width: auto;
+  height: auto;
   &:not(:last-child) {
     margin-bottom: 30px;
   }
@@ -53,6 +61,8 @@ export const SidebarLink = styled(Link)`
   height: 100%;
 `
 export const SidebarImg = styled.img`
-  width: 100%;
+  /* width: 100%;
+  height: auto; */
+  max-width: 100%;
   height: auto;
 `

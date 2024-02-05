@@ -1,80 +1,104 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import * as S from './PlayerControls.style'
 import sprite from '../../img/icon/sprite.svg'
+import {
+  addSetPause,
+  addActiveTrack,
+  addIdTrack,
+  addShuffleTrack,
+  addNextTrack,
+  addShuffled,
+  addPrevTrack,
+} from '../../store/actions/creators/creators'
 
-export default function PlayersControls({ audioRef, repeat, setRepeat }) {
-  const [isPlaying, setIsPlaying] = useState(false)
+export default function PlayersControls({
+  audioRef,
+  repeat,
+  setRepeat,
+  isPlaying,
+  setIsPlaying,
+  // setKeyItem,
+}) {
+  // const [isPlaying, setIsPlaying] = useState(false)
+
+  // состояние текущего трека - играет или нет
+  // const activeTrack = useSelector(activeTrackSelector)
+
+  const shuffled = useSelector((store) => store.tracks.shuffled)
+
+  const shuffleTracks = useSelector((store) => store.tracks.shuffleTracks)
+
+  const dispatch = useDispatch()
 
   const toPrevTrack = () => {
-    alert('предыдущий')
+    dispatch(addSetPause(true)) // отобр пульсации иконки паузы/плей
+    dispatch(addPrevTrack())
   }
-
-  const toNextTrack = () => {
-    alert('следующий')
-  }
-
-  //   const [currTime, setCurrTime] = useState({ min: '', sec: '' }) // текущее состояние звука в секундах
-  //   const [seconds, setSeconds] = useState() // текущая позиция звука в секундах
-
-  //   useEffect(() => {
-  //     const sec = duration / 1000
-  //     const min = Math.floor(sec % 60)
-  //     const secRemain = Math.floor(sec % 60)
-  //     const time = {
-  //       min: min,
-  //       sec: secRemain,
-  //     }
-  //   })
-
-  //   const [trackIndex, setTrackIndex] = useState(0)
-  //   const tracks = [
-  //     {
-  //       title: '',
-  //       artist: '',
-  //       audioSrc: '',
-  //     },
-  //   ]
-  //   const { title, artist, audioSrc } = tracks[trackIndex]
-
-  //   const isReady = useRef(false)
-
-  //   const [trackProgress, setTrackProgress] = useState(0)
-  //   useEffect(() => {
-  //     audioRef.current.pause()
-  //     audioRef.current = new Audio(audioSrc)
-  //     setTrackProgress(audioRef.current.currentTime)
-  //     console.log(trackProgress)
-  //     if (isReady.current) {
-  //       audioRef.current.play()
-  //       setIsPlaying(true)
-  //       // startTimer()
-  //     } else {
-  //       isReady.current = true
-  //     }
-  //   }, [trackIndex])
 
   const audiocontrol = (text) => {
     switch (text) {
       case 'prev':
         toPrevTrack()
+        setIsPlaying(false)
         break
       case 'play':
         audioRef.current.play()
-        setIsPlaying(false)
+        dispatch(addSetPause(true))
+
+        setIsPlaying(false) // на основе стейта меняем иконку плей паузыы
+        console.log('f')
         break
       case 'stop':
         audioRef.current.pause()
+        dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимация
+
         setIsPlaying(true)
+        console.log('t')
         break
       case 'next':
-        toNextTrack()
+        if (shuffled === 'buttonClickFirst') {
+          if (shuffleTracks) {
+            dispatch(addActiveTrack(shuffleTracks[0]))
+          }
+
+          dispatch(addIdTrack({ index: shuffleTracks[0].id }))
+
+          dispatch(addShuffled(true))
+          dispatch(addSetPause(true))
+          setIsPlaying(false)
+          return
+        }
+        if (shuffled === false) {
+          dispatch(addSetPause(true))
+
+          dispatch(addNextTrack())
+        } else {
+          dispatch(addSetPause(true))
+
+          dispatch(addNextTrack())
+        }
+        setIsPlaying(false)
         break
       case 'repeat':
         setRepeat(!repeat)
-        console.log(repeat)
+
         break
       case 'shuffle':
-        alert('пока не реализовано')
+        // if (
+        //   shufflePlayStop === true ||
+        //   shufflePlayStop === 'buttonClickFirst'
+        // ) {
+        //   dispatch(addShuffleTrack(false))
+        // } else {
+        //   dispatch(addShuffled('buttonClickFirst'))
+
+        //   const newShuffleTracks = allTracks.map((track) => track)
+        //   newShuffleTracks.sort(() => Math.random() - 0.5)
+
+        //   dispatch(addShuffleTrack(newShuffleTracks))
+        // }
+        dispatch(addShuffleTrack())
         break
       default:
         break
@@ -116,7 +140,13 @@ export default function PlayersControls({ audioRef, repeat, setRepeat }) {
       </S.PlayerBtnRepeat>
       <S.PlayerBtnShuffle onClick={() => audiocontrol('shuffle')}>
         <S.PlayerBtnShuffleSvg alt="shuffle">
-          <use xlinkHref={`${sprite}#icon-shuffle`} />
+          <use
+            xlinkHref={
+              shuffled === false
+                ? `${sprite}#icon-shuffle`
+                : `${sprite}#icon-shuffleActive`
+            }
+          />
         </S.PlayerBtnShuffleSvg>
       </S.PlayerBtnShuffle>
     </S.PlayerControls>

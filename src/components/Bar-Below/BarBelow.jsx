@@ -1,32 +1,30 @@
-/* eslint-disable jsx-a11y/media-has-caption */
+// /* eslint-disable jsx-a11y/media-has-caption */
 
 import { useRef } from 'react'
-
+import { useDispatch, useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './bar-below.styles'
 import PlayersControls from '../PlayerControls/PlayerControls'
 import VolumeBar from '../VolumeBar/VolumeBar'
 import ProgressBar from '../ProgressBar/progressBar'
+import { addNextTrack } from '../../store/actions/creators/creators'
 
-function RenderBar({ loading, keyItem, repeat, setRepeat }) {
+function RenderBar({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
   const audioRef = useRef(null)
 
-  // const [currentTime, setCurrentTime] = useState(0) // храним состояние воспроизводимого трека/времени
-
-  // useEffect(() => {
-  //   console.log(currentTime)
-  //   if (audioRef !== null) {
-  //     audioRef.current?.addEventListener('timeupdate', () => {
-  //       setCurrentTime(audioRef.current?.currentTime)
-  //     })
-  //   }
-  // }, [audioRef.current?.currentTime, audioRef])
-
-  return keyItem !== '' ? (
+  const activeTrack = useSelector((store) => store.tracks.activeTrack)
+  const dispatch = useDispatch()
+  return (
     <>
-      <audio key={keyItem.id} autoPlay ref={audioRef} loop={repeat}>
-        <source src={keyItem.track_file} type="audio/mpeg" />
+      <audio
+        onEnded={() => dispatch(addNextTrack())}
+        key={activeTrack.id}
+        autoPlay
+        ref={audioRef}
+        loop={repeat}
+      >
+        <source src={activeTrack.track_file} type="audio/mpeg" />
       </audio>
 
       <S.Bar>
@@ -38,6 +36,9 @@ function RenderBar({ loading, keyItem, repeat, setRepeat }) {
                 repeat={repeat}
                 setRepeat={setRepeat}
                 audioRef={audioRef}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+                //  setKeyItem={setKeyItem}
               />
               <S.PlayerTrackPlay>
                 {loading ? (
@@ -64,12 +65,12 @@ function RenderBar({ loading, keyItem, repeat, setRepeat }) {
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
                       <S.TrackPlayAuthorLink href="http://">
-                        {keyItem.name}
+                        {activeTrack.name}
                       </S.TrackPlayAuthorLink>
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
                       <S.TrackPlayAlbumLink href="http://">
-                        {keyItem.author}
+                        {activeTrack.author}
                       </S.TrackPlayAlbumLink>
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>
@@ -94,7 +95,7 @@ function RenderBar({ loading, keyItem, repeat, setRepeat }) {
         </S.BarContent>
       </S.Bar>
     </>
-  ) : null
+  )
 }
 
 export default RenderBar

@@ -6,9 +6,12 @@ import { UserContext } from './Context/Context'
 // import NavBar from './Nav-Bar/navbar'
 
 function App() {
+  const [loading, setTimeLoading] = useState(true)
   const [login, setLogin] = useState(false)
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))) // в фор-те json записать в нач сост-ие user, то что хран-ся в localstorage под ключом 'user' /
+
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const toggleLogout = () => {
     // ф-ия для выхода из системы, также помещаем ее в valueTest/useMemo чтобы могли получить ее в left-bar через контекст
@@ -34,7 +37,14 @@ function App() {
 
   return (
     <UserContext.Provider value={valueTest}>
-      <AppRoutes login={login} setLogin={setLogin} />
+      <AppRoutes
+        login={login}
+        setLogin={setLogin}
+        loading={loading}
+        setTimeLoading={setTimeLoading}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+      />
       <GlobalStyle />
     </UserContext.Provider>
   )
