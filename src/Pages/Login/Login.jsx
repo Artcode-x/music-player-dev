@@ -5,6 +5,7 @@ import { Login, getToken } from '../../components/Api/api'
 import { useUserContext } from '../../components/Context/Context'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../../store/actions/creators/creators'
+import logo from '../../img/logo-black.png'
 
 export default function AuthPage() {
   const { toggleUser } = useUserContext()
@@ -52,6 +53,8 @@ export default function AuthPage() {
       // после того как получим ответ, записываем его в localstorage
       const newToken = await getToken({ email, password })
       console.log(newToken)
+      console.log(newToken.detail)
+      setError(newToken.detail)
       // в localStorage в переменную tokenRefresh сохраняем ответ от апи: newToken.refresh
 
       //! tokenAccess нужен для всего взаимодействия пользователя с кнопками - добавить лайк/убрать/перейти на все мои треки(лайкнутые)
@@ -86,7 +89,7 @@ export default function AuthPage() {
       <S.ModalForm>
         <Link to="/login">
           <S.ModalLogo>
-            <S.ModalLogoImage src="/img/logo_modal.png" alt="logo" />
+            <S.ModalLogoImage src={logo} alt="logo" />
           </S.ModalLogo>
         </Link>
         <S.Inputs>

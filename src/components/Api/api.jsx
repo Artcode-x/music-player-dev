@@ -44,6 +44,13 @@ export async function Login({ email, password }) {
     }
   )
   const data = await response.json()
+  if (response.status === 401) {
+    throw new Error('Пользователь с таким паролем или емейл не найден')
+  }
+  if (response.status === 400) {
+    throw new Error('Пользователь с таким именем/email уже зарегестрирован')
+  }
+  console.log(data)
   return data
 }
 
@@ -74,10 +81,16 @@ export async function handleReg({ email, password, username }) {
       },
     }
   )
+  console.log(response)
   if (response === 500) {
     throw new Error('Сервер сломался')
   }
+  // if (response.status === 400) {
+  //   throw new Error('что то введено некорректно')
+  // }
+
   const data = await response.json()
+
   return data
 }
 
@@ -127,48 +140,39 @@ export function getToken({ email, password }) {
 
 export function refreshToken(token) {
   return fetch(`${apiAddress}/user/token/refresh/`, {
-
-    method: "POST",
+    method: 'POST',
 
     body: JSON.stringify({
       refresh: token,
     }),
     headers: {
-
-      "content-type": "application/json",
+      'content-type': 'application/json',
     },
-  }).then((response) => response.json());
-
+  }).then((response) => response.json())
 }
 
 export function addLike({ token, id }) {
   return fetch(`${apiAddress}/catalog/track/${id}/favorite/`, {
-
-    method: "POST",
+    method: 'POST',
 
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }).then((response) => {
-
-    if (response.status === 401) throw new Error("Токен протух");
-    return response.json();
-  });
-
+    if (response.status === 401) throw new Error('Токен протух')
+    return response.json()
+  })
 }
 
 export function disLike({ token, id }) {
   return fetch(`${apiAddress}/catalog/track/${id}/favorite/`, {
-
-    method: "DELETE",
+    method: 'DELETE',
 
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }).then((response) => {
-
-    if (response.status === 401) throw new Error("Токен протух");
-    return response.json();
-  });
+    if (response.status === 401) throw new Error('Токен протух')
+    return response.json()
+  })
 }
-
