@@ -39,17 +39,13 @@ function Ma1nNav() {
       setDisabled(true) // выкл кноп
 
       const likesTrack = await getFavoriteTracks(tokenAccess)
-      console.log(likesTrack)
       dispatch(addFavoriteTracks(likesTrack))
-
       navigate('/Favorites')
       // dispatch(addAllandFav('Favorites'))
     } catch (error) {
       if (error.message === 'Токен протух') {
-        console.log(tokenAccess)
         const newAccess = await refreshToken(tokenRefresh)
         localStorage.setItem('tokenAccess', JSON.stringify(newAccess.access))
-        console.log(newAccess)
         const likesTrack = await getFavoriteTracks(newAccess.access)
         dispatch(addFavoriteTracks(likesTrack))
         navigate('/Favorites')

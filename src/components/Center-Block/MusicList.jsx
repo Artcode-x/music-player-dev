@@ -66,11 +66,9 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
       //   dispatch(addFavoriteTracks(response))
       // }
     } catch (error) {
-      console.log(error.message)
       // если токен протух по таймауту, обновляем его
       if (error.message === 'Токен протух') {
         const newAccess = await refreshToken(tokenRefresh)
-        console.log(newAccess.access)
         localStorage.setItem('tokenAccess', JSON.stringify(newAccess.access))
         // используя уже обновленный токен newAccess, проходимся по всем трекам, уже по каждому в отдельности и ищем совпадает ли id конкретного userа с id в лайкнутых треках.
         if (track.stared_user.find((el) => el.id === user.id)) {

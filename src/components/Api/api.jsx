@@ -50,7 +50,6 @@ export async function Login({ email, password }) {
   if (response.status === 400) {
     throw new Error('Пользователь с таким именем/email уже зарегестрирован')
   }
-  console.log(data)
   return data
 }
 
@@ -81,7 +80,7 @@ export async function handleReg({ email, password, username }) {
       },
     }
   )
-  console.log(response)
+
   if (response === 500) {
     throw new Error('Сервер сломался')
   }

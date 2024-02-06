@@ -36,7 +36,6 @@ export default function Register() {
       checkInputs()
       setButtonDisable(true) // делаем кнопку неактивной до ответа с апи
       const newUserReg = await handleReg({ email, password, username })
-      console.log(newUserReg)
 
       if (!newUserReg.id) {
         if (newUserReg.username) {
@@ -55,9 +54,6 @@ export default function Register() {
       getRegisterCheck(newUserReg)
     } catch (someerror) {
       setError(someerror.message)
-      //   console.log(someerror.message)
-      // if (someerror.message === 'что то введено некорректно') {
-      // }
     } finally {
       setButtonDisable(false) // делаем кнопку активной
     }
