@@ -26,7 +26,6 @@ function Main({ loading, setTimeLoading, isPlaying, setIsPlaying }) {
       dispatch(addTracks(spisokTrackov)) // передаю в action, то что нужно сохранить
       setAllTracks(spisokTrackov)
     } catch (error) {
-      // console.log(error.message)
       setAddError(error.message)
     }
   }

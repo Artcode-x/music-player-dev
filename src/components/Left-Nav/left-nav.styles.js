@@ -62,6 +62,7 @@ export const MenuLink1 = styled(NavLink)`
   line-height: 24px;
 `
 export const MenuLink = styled.button`
+  cursor: pointer;
   color: #ffffff;
   font-weight: 400;
   font-size: 16px;
@@ -79,6 +80,7 @@ export const MenuLink = styled.button`
 `
 
 export const MenuExit = styled.div`
+  cursor: pointer;
   color: #ffffff;
   font-weight: 400;
   font-size: 16px;

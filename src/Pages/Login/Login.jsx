@@ -21,7 +21,6 @@ export default function AuthPage() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
   const [isLoading, setisLoading] = useState(false) // Создаем состояние для активности/неактивности кнопки логина
 
   function checkInputs() {
@@ -52,8 +51,6 @@ export default function AuthPage() {
       // передаем в getToken емейл и пасс /?
       // после того как получим ответ, записываем его в localstorage
       const newToken = await getToken({ email, password })
-      console.log(newToken)
-      console.log(newToken.detail)
       setError(newToken.detail)
       // в localStorage в переменную tokenRefresh сохраняем ответ от апи: newToken.refresh
 
