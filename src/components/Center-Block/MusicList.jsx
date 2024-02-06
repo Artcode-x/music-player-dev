@@ -21,15 +21,16 @@ import getAllTracksFromApi, {
 } from '../Api/api'
 
 export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
-  const activeTrack = useSelector(activeTrackSelector) // исп-ем знания из state/store
-
+  const activeTrack = useSelector(activeTrackSelector)
   const playPause = useSelector((store) => store.tracks.playPause)
-
   const allTracks = useSelector((store) => store.tracks.allTracks)
-  // console.log(allTracks)
-  const [disabled, setDisabled] = useState(false) // для отключения кнопки на время обращения к апи
+  // добавляем наш userID (чтобы смогли далее сравнивать, поставлен лайк или нет)
+  const user = useSelector((store) => store.tracks.userID)
+  // const vseTrekiAndLikesTracks = useSelector((store) => store.tracks.AllandFav)
+  // const searchInputText = useSelector((store) => store.tracks.search)
+  const searchInputText = useSelector(searchSelector)
 
-  const vseTrekiAndLikesTracks = useSelector((store) => store.tracks.AllandFav)
+  const [disabled, setDisabled] = useState(false) // для отключения кнопки на время обращения к апи
 
   const dispatch = useDispatch()
 
@@ -40,11 +41,8 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
     dispatch(addActiveTrack(track))
   }
 
-  // добавляем наш userID (чтобы смогли далее сравнивать, поставлен лайк или нет)
-  const user = useSelector((store) => store.tracks.userID)
-
   // Достаем токены из localStorage (для дальнейшей работы с лайками)
-  // parse - записать из локалсторадж tokenRefresh в tokenAccess
+  // parse - записать из локалсторадж в const
   const tokenAccess = JSON.parse(localStorage.getItem('tokenAccess'))
   const tokenRefresh = JSON.parse(localStorage.getItem('tokenRefresh'))
 
@@ -72,21 +70,19 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
       // если токен протух по таймауту, обновляем его
       if (error.message === 'Токен протух') {
         const newAccess = await refreshToken(tokenRefresh)
-        localStorage.setItem('tokenAccess', JSON.stringify(newAccess))
+        console.log(newAccess.access)
+        localStorage.setItem('tokenAccess', JSON.stringify(newAccess.access))
         // используя уже обновленный токен newAccess, проходимся по всем трекам, уже по каждому в отдельности и ищем совпадает ли id конкретного userа с id в лайкнутых треках.
         if (track.stared_user.find((el) => el.id === user.id)) {
-          await disLike({ token: newAccess, id: track.id })
+          await disLike({ token: newAccess.access, id: track.id })
         } else {
-          await addLike({ token: newAccess, id: track.id })
+          await addLike({ token: newAccess.access, id: track.id })
         }
       }
     } finally {
-      setDisabled(false) // вкл кнопку
+      setDisabled(false)
     }
   }
-
-  // const searchInputText = useSelector((store) => store.tracks.search)
-  const searchInputText = useSelector(searchSelector)
 
   //  принимаем track.name для дальнейшего его сравнения с вводимым юзером текстом
   const searchItem = (name) => {

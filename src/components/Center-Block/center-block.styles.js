@@ -417,6 +417,7 @@ export const TrackTimeSvg = styled.svg`
 export const TrackLike = styled.button`
   background: transparent;
   border: none;
+  cursor: pointer;
 `
 
 export const TrackTitleSvg = styled.svg`

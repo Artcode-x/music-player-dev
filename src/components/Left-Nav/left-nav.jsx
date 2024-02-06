@@ -48,7 +48,7 @@ function Ma1nNav() {
       if (error.message === 'Токен протух') {
         console.log(tokenAccess)
         const newAccess = await refreshToken(tokenRefresh)
-        localStorage.setItem('tokenAccess', JSON.stringify(newAccess))
+        localStorage.setItem('tokenAccess', JSON.stringify(newAccess.access))
         console.log(newAccess)
         const likesTrack = await getFavoriteTracks(newAccess.access)
         dispatch(addFavoriteTracks(likesTrack))
