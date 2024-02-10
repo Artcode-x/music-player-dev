@@ -25,7 +25,7 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const playPause = useSelector((store) => store.tracks.playPause)
   const allTracks = useSelector((store) => store.tracks.allTracks)
   // добавляем наш userID (чтобы смогли далее сравнивать, поставлен лайк или нет)
-  const user = useSelector((store) => store.tracks.userID)
+  let user = useSelector((store) => store.tracks.userID)
   // const vseTrekiAndLikesTracks = useSelector((store) => store.tracks.AllandFav)
   // const searchInputText = useSelector((store) => store.tracks.search)
   const searchInputText = useSelector(searchSelector)
@@ -97,7 +97,9 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const filteredArray = searchInputText
     ? allTracks.filter((ad) => searchItem(ad.name, searchInputText))
     : allTracks
-
+  if (!user.id) {
+    user = JSON.parse(localStorage.getItem('user'))
+  }
   return (
     <S.ContentPlaylist>
       <S.PlaylistItem>
