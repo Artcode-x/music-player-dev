@@ -1,11 +1,14 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { GlobalStyle } from '../GlobalStyles'
 import AppRoutes from '../routes'
 import { UserContext } from './Context/Context'
+import addTracks, { addUser } from '../store/actions/creators/creators'
+import { useDispatch } from 'react-redux'
 // import NavBar from './Nav-Bar/navbar'
 
 function App() {
+  const dispatch = useDispatch()
   const [loading, setTimeLoading] = useState(true)
   const [login, setLogin] = useState(false)
 
@@ -34,6 +37,10 @@ function App() {
     }),
     [user]
   )
+
+  useEffect(() => {
+    dispatch(addUser(user))
+  }, [])
 
   return (
     <UserContext.Provider value={valueTest}>
