@@ -3,7 +3,7 @@ import RybkaForImport from '../Skeleton/skeleton-fish-import'
 
 import sprite from '../../img/icon/sprite.svg'
 import ContentTitlePlayList from './Title-playlist'
-// export default const Skeletons = () => {
+
 export default function Skeletons() {
   return (
     <S.centerblockContent>

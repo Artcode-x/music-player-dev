@@ -53,7 +53,6 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-decoration: none;
-
   width: 278px;
   height: 52px;
   border-radius: 6px;

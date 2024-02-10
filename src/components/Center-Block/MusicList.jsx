@@ -16,7 +16,6 @@ import { useState } from 'react'
 import getAllTracksFromApi, {
   addLike,
   disLike,
-  getFavoriteTracks,
   refreshToken,
 } from '../Api/api'
 
@@ -26,11 +25,10 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const allTracks = useSelector((store) => store.tracks.allTracks)
   // добавляем наш userID (чтобы смогли далее сравнивать, поставлен лайк или нет)
   let user = useSelector((store) => store.tracks.userID)
-  // const vseTrekiAndLikesTracks = useSelector((store) => store.tracks.AllandFav)
-  // const searchInputText = useSelector((store) => store.tracks.search)
+
   const searchInputText = useSelector(searchSelector)
 
-  const [disabled, setDisabled] = useState(false) // для отключения кнопки на время обращения к апи
+  const [disabled, setDisabled] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -48,7 +46,7 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
 
   const toggleLike = async (track) => {
     try {
-      setDisabled(true) // откл копку
+      setDisabled(true) 
 
       if (track.stared_user.find((el) => el.id === user.id)) {
         await disLike({ token: tokenAccess, id: track.id })
@@ -58,13 +56,6 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
 
       const response = await getAllTracksFromApi()
       dispatch(addTracks(response))
-      // if (vseTrekiAndLikesTracks === 'All') {
-      //   const response = await getAllTracksFromApi()
-      //   dispatch(addTracks(response))
-      // } else {
-      //   const response = await getFavoriteTracks()
-      //   dispatch(addFavoriteTracks(response))
-      // }
     } catch (error) {
       // если токен протух по таймауту, обновляем его
       if (error.message === 'Токен протух') {
@@ -82,7 +73,7 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
     }
   }
 
-  //  принимаем track.name для дальнейшего его сравнения с вводимым юзером текстом
+  // Принимаем track.name для дальнейшего его сравнения с вводимыми в поиск данными
   const searchItem = (name) => {
     if (name.toLowerCase().search(searchInputText.toLowerCase()) === -1)
       return false
@@ -91,7 +82,6 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   }
 
   // Пришел массив с сервера - отображаем целиком. Если что то введено в поисковую строку (searhUpdate) - отображаем отфильтрованный массив
-
   // если searchInputText = true, тогда к массиву со всеми треками allTracks применяем метод filter, который сравнивает каждый отдельный трек из массива всех треков с тем что ввел пользователь. Используем функцию searchItem, которая осуществляет сравнение
   // если хоть какое то значение введенно в инпут , то это true
   const filteredArray = searchInputText
@@ -106,7 +96,6 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
         {filteredArray.map((track, index) => (
           <S.PlaylistTrack
             key={track.id}
-            // search={searchItem(track.name)}
           >
             <S.TrackTitle onClick={() => todoClick(track, index)}>
               <S.TrackTitleImage>

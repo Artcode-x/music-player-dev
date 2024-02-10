@@ -4,14 +4,12 @@ import iconRandom1 from '../../img/playlist02.png'
 import iconRandom2 from '../../img/playlist03.png'
 import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import { useUserContext } from '../Context/Context'
-import { UserInfo } from './UserInfo'
 
 function RenderRbar({ loading }) {
   const { user } = useUserContext()
 
   return (
     <S.MainSidebar>
-      {/* <UserInfo /> */}
       {loading ? (
         <S.SidebarBlock>
           <S.SidebarList>

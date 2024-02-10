@@ -17,15 +17,14 @@ import ContentTitlePlayList from './Title-playlist'
 import { MusicList } from './MusicList'
 
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
-  //  const [isPlaying, setIsPlaying] = useState(null)
-
-  // чтобы получить состояние, исп-ем хук useSelector
-  // Параметром он принимает ф-ию, а эта ф-ия в свою очередь параметром принимает состояние, и из этого состояния мы уже получаем нужную переменную (в данном примере allTracks)
+ 
   const allTracks = useSelector((store) => store.tracks.allTracks)
 
   const playPause = useSelector((store) => store.tracks.playPause)
 
-  const activeTrack = useSelector((store) => store.tracks.activeTrack) // исп-ем знания из state/store
+  const activeTrack = useSelector((store) => store.tracks.activeTrack) 
+
+  const [visible, changeOfState] = useState('CloseList')
 
   const dispatch = useDispatch()
 
@@ -65,8 +64,7 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
     </S.Filterlist>
   )
 
-  const [visible, changeOfState] = useState('CloseList')
-  // const [allTracks, setAllTracks] = useState(null)
+  
 
   const changeState = (OpenList) =>
     changeOfState(visible === OpenList ? 'CloseList' : OpenList)
@@ -88,8 +86,6 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
     }
   }
 
-  // if (loading1) return <Skeletons />
-
   if (addError) return <Error />
 
   return (
@@ -105,10 +101,6 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
           tabIndex={0}
           onKeyDown={onEnterArtist}
           onClick={() => changeState('OpenListArtist')}
-          // логика активной кнопки
-          // className={`filter__button button-author _btn-text ${
-          //   visible === 'OpenListArtist' ? 'active' : null
-          // }`}
         >
           исполнителю
         </S.FilterButtonArtist>
@@ -119,10 +111,6 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
           tabIndex={0}
           onKeyDown={onEnterYear}
           onClick={() => changeState('OpenYear')}
-          // логика активной кнопки
-          // className={`filter__button button-year _btn-text ${
-          //   visible === 'OpenYear' ? 'active' : null
-          // }`}
         >
           году выпуска
         </S.FilterButtonYear>
@@ -132,10 +120,6 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
           tabIndex={0}
           onKeyDown={onEnterGenre}
           onClick={() => changeState('OpenGenre')}
-          // логика активной кнопки
-          // className={`filter__button button-genre _btn-text ${
-          //   visible === 'OpenGenre' ? 'active' : null
-          // }`}
         >
           жанру
         </S.FilterButtonGenre>

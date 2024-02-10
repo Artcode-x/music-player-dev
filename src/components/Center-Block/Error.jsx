@@ -7,7 +7,6 @@ export default function Error({ addError }) {
       <S.centerblockContent>
         {contentTitlePlayList}
         <S.ContentPlaylist>
-          {/* <p>{addError}</p> */}
           <S.PlaylistItem>
             <S.ErrorItem>
               <p>{addError}</p>

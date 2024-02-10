@@ -48,8 +48,6 @@ export const SidebarList = styled.div`
 `
 
 export const SidebarItem = styled.div`
-  /* width: 250px;
-  height: 150px; */
   width: auto;
   height: auto;
   &:not(:last-child) {
@@ -61,8 +59,6 @@ export const SidebarLink = styled(Link)`
   height: 100%;
 `
 export const SidebarImg = styled.img`
-  /* width: 100%;
-  height: auto; */
   max-width: 100%;
   height: auto;
 `

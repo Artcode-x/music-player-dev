@@ -10,7 +10,6 @@ import {
   addIdTrack,
   addSetPause,
 } from '../../store/actions/creators/creators'
-import { MusicList } from '../../components/Center-Block/MusicList'
 import RybkaForImport from '../../components/Skeleton/skeleton-fish-import'
 import * as S from '../../components/Center-Block/center-block.styles'
 import sprite from '../../img/icon/sprite.svg'
@@ -19,33 +18,28 @@ import Zagolovok from '../../components/Center-Block/Zagolovok'
 import { useEffect, useState } from 'react'
 
 export default function MyPlaylist({ setIsPlaying }) {
-  // обр к апи
-  // полученый отв записать в стор
-  // из стора достать и отобразить тут
-  // getFavoriteTracks()
-  const dispatch = useDispatch()
+
   const favor = useSelector((store) => store.tracks.vseIzbranniyeTreki)
+  const playPause = useSelector((store) => store.tracks.playPause)
+  const activeTrack = useSelector(activeTrackSelector) 
+
+  const [disabled, setDisabled] = useState(false)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     console.log(favor)
   }, [favor])
 
-  //vconst allTracks = useSelector((store) => store.tracks.allTracks)
 
-  const playPause = useSelector((store) => store.tracks.playPause)
-  const activeTrack = useSelector(activeTrackSelector) // исп-ем знания из state/store
-  const user = useSelector((store) => store.tracks.userID)
-  const [disabled, setDisabled] = useState(false)
-  const [dis, setDis] = useState(false)
+
   const todoClick = (track) => {
     setIsPlaying(false)
     dispatch(addIdTrack({ index: track.id }))
     // Чтобы изменить состояние, нам потребуется dispatch. dispatch - Это ф-ия, и при вызове ее, параметром она принимает ACTION. Action - это объект, у которого обязательно должен быть тип. (тип мы указывали в редюсере)
     // Второе св-во объекта - это какие то данные, в данном случае это зн-ие true/false
     dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true
-
-    dispatch(addActiveTrack(track)) // хранится тек-ий играющий трек
-    // setKeyItem(track)
+    dispatch(addActiveTrack(track)) 
   }
   const tokenAccess = JSON.parse(localStorage.getItem('tokenAccess'))
   const tokenRefresh = JSON.parse(localStorage.getItem('tokenRefresh'))
@@ -56,7 +50,7 @@ export default function MyPlaylist({ setIsPlaying }) {
       await disLike({ token: tokenAccess, id: track.id })
 
       const refreshApi = await getFavoriteTracks(tokenAccess)
-      // получаем список обновленных фаворитных треков без дизлайкнутого
+      // получаем список обновленных фаворитных треков без дизлайкнутых
       dispatch(addFavoriteTracks(refreshApi))
     } catch (error) {
       // сюда заходим если токен сгорает по таймауту
@@ -69,15 +63,11 @@ export default function MyPlaylist({ setIsPlaying }) {
         await disLike({ token: newAccess.access, id: track.id })
         // с новым токеном обр к апи
         const response = await getFavoriteTracks(newAccess.access)
-        //чтобы лайнутый трек исчез со страницы делаем диспатч
+        // чтобы лайнутый трек исчез со страницы делаем диспатч
         dispatch(addFavoriteTracks(response))
       }
     } finally {
       setDisabled(false)
-
-      setDis(true)
-
-      // getFavoriteTracks()
     }
   }
 
@@ -127,18 +117,6 @@ export default function MyPlaylist({ setIsPlaying }) {
                 >
                   <S.TrackTimeSvg alt="time">
                     <use xlinkHref={`${sprite}#icon-likeActive`} />
-
-                    {/* {!track.id ? (
-                      <use xlinkHref={`${sprite}#icon-like`} />
-                    ) : (
-                      <use xlinkHref={`${sprite}#icon-likeActive`} />
-                    )} */}
-
-                    {/* {track.stared_user.find((el) => el.id === user.id) ? (
-                      <use xlinkHref={`${sprite}#icon-likeActive`} />
-                    ) : (
-                      <use xlinkHref={`${sprite}#icon-like`} />
-                    )} */}
                   </S.TrackTimeSvg>
                 </S.TrackLike>
                 <S.TrackTimeText>{track.duration_in_seconds}</S.TrackTimeText>

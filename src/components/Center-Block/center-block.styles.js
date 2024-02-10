@@ -232,68 +232,13 @@ export const FilterButtonYear = styled(FilterButton)`
     props.propsKeyVisible === 'OpenYear' ? '#ad61ff' : null};
 `
 
-// export const FilterButtonYear = styled.div`
-//   font-style: normal;
-//   font-weight: 400;
-//   font-size: 16px;
-//   line-height: 24px;
-//   border: 1px solid #ffffff;
-//   border-radius: 60px;
-//   padding: 6px 20px;
-
-//   color: ${(props) =>
-//     props.propsKeyVisible === 'OpenYear' ? '#ad61ff' : null};
-//   border-color: ${(props) =>
-//     props.propsKeyVisible === 'OpenYear' ? '#ad61ff' : null};
-
-//   &:not(:last-child) {
-//     margin-right: 10px;
-//   }
-//   &:hover {
-//     border-color: #d9b6ff;
-//     color: #d9b6ff;
-//     cursor: pointer;
-//   }
-//   &:active {
-//     border-color: #ad61ff;
-//     color: #ad61ff;
-//     cursor: pointer;
-//   }
-// `
 export const FilterButtonGenre = styled(FilterButton)`
   color: ${(props) =>
     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
   border-color: ${(props) =>
     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
 `
-// export const FilterButtonGenre = styled.div`
-//   font-style: normal;
-//   font-weight: 400;
-//   font-size: 16px;
-//   line-height: 24px;
-//   border: 1px solid #ffffff;
-//   border-radius: 60px;
-//   padding: 6px 20px;
 
-//   color: ${(props) =>
-//     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
-//   border-color: ${(props) =>
-//     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
-
-//   &:not(:last-child) {
-//     margin-right: 10px;
-//   }
-//   &:hover {
-//     border-color: #d9b6ff;
-//     color: #d9b6ff;
-//     cursor: pointer;
-//   }
-//   &:active {
-//     border-color: #ad61ff;
-//     color: #ad61ff;
-//     cursor: pointer;
-//   }
-// `
 export const ContentPlaylist = styled.div`
   display: flex;
   flex-direction: column;
@@ -315,18 +260,6 @@ export const centerblockContent = styled.div`
     border-radius: 4px;
     overflow-y: auto;
   }
-
-  /* &::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: #ffffff;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background-color: #4b4949;
-  } */
 `
 export const PlaylistItem = styled.div`
   width: 100%;
@@ -349,7 +282,6 @@ export const bubbleOut = keyframes`
   }
 `
 export const PlayingDot = styled.div`
-  // Тут стили, если трек проигрывается
   width: 16px;
   height: 16px;
   background-color: #b672ff;
@@ -367,15 +299,11 @@ export const PlaylistTrack = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  // Вместо flex - условно нужно было показать/ иначе скрыть
-  // мешает логике появлени избранных треков
-  // display: ${(props) => (props.search ? 'flex' : 'none')};
 
   &:hover {
     text-decoration: underline;
     color: coral;
     cursor: pointer;
-
     background: coral;
     opacity: 0.6;
   }

@@ -86,8 +86,3 @@ export const MenuExit = styled.div`
   font-size: 16px;
   line-height: 24px;
 `
-// export const activeClassName = 'underline'
-// export const MenuLink2 = styled(MenuLink)`
-// className={{ isActive }} => cn(MenuLink,{[activeClassName]:isActive})
-// `
-// export const  = styled.div``

@@ -36,14 +36,6 @@ export const PlayerControls = styled.div`
   flex-direction: row;
   padding: 0 27px 0 31px;
 `
-// export const PlayerBtnPrev = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: flex-start;
-//   padding: 0 27px 0 31px;
-//   &__btn-prev,
-// `
 
 export const PlayerBtn = styled.div`
   padding: 5px;
@@ -55,9 +47,7 @@ export const PlayerBtn = styled.div`
 export const PlayerBtnPlay = styled(PlayerBtn)`
   margin-right: 23px;
 `
-// export const PlayerBtnPlayBtn = styled(PlayerBtn)`
 
-// `
 export const PlayerBtnNext = styled(PlayerBtn)`
   margin-right: 28px;
   fill: #a53939;
@@ -102,7 +92,7 @@ export const PlayerBtnShuffleSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `
-// export const PlayerBtnRepeat = styled.div``
+
 export const PlayerBtnPrevSvg = styled.svg`
   width: 15px;
   height: 14px;

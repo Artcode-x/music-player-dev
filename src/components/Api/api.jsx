@@ -3,7 +3,6 @@ const apiAddress = 'https://skypro-music-api.skyeng.tech'
 export default async function getAllTracksFromApi() {
   const response = await fetch(
     'https://skypro-music-api.skyeng.tech/catalog/track/all/',
-    // 'https://painassasin.online/catalog/track/all/',
     {
       method: 'GET',
     }
@@ -14,18 +13,6 @@ export default async function getAllTracksFromApi() {
   const data = await response.json()
   return data
 }
-
-// альтернатива
-// export default async function GetAllTracksFromApi() {
-// return fetch('https://painassasin.online/catalog/track/all/', {
-//   method: 'GET'
-// }).then((vsetracki) => {
-//   return vsetracki.json()
-// })
-
-// if (response.status !== 200) {
-//   throw new Error('Ты не пройдешь!')
-// }
 
 export async function Login({ email, password }) {
   // получаем тут пропсы со страницы логина - то что вводят в инпуты
@@ -38,7 +25,6 @@ export async function Login({ email, password }) {
         password,
       }),
       headers: {
-        // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
         'content-type': 'application/json',
       },
     }
@@ -60,7 +46,6 @@ fetch('https://skypro-music-api.skyeng.tech/user/login/', {
     password: 'gleb@fokin.ru',
   }),
   headers: {
-    // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
     'content-type': 'application/json',
   },
 }).then((response) => response.json())
@@ -84,30 +69,9 @@ export async function handleReg({ email, password, username }) {
   if (response === 500) {
     throw new Error('Сервер сломался')
   }
-  // if (response.status === 400) {
-  //   throw new Error('что то введено некорректно')
-  // }
-
   const data = await response.json()
-
   return data
 }
-
-//   fetch('https://painassasin.online/user/signup/', {
-//     method: 'POST',
-//     body: JSON.stringify({
-//       email: 'gleb@fokin.ru',
-//       password: 'Aa12345!!',
-//       username: 'gleb@fokin.ru',
-//     }),
-//     headers: {
-//       // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
-//       'content-type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((json) => console.log(json))
-// }
 
 export function getFavoriteTracks(token) {
   return fetch(

@@ -38,7 +38,6 @@ function RenderBar({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
                 audioRef={audioRef}
                 isPlaying={isPlaying}
                 setIsPlaying={setIsPlaying}
-                //  setKeyItem={setKeyItem}
               />
               <S.PlayerTrackPlay>
                 {loading ? (

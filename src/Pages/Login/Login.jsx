@@ -8,20 +8,19 @@ import { addUser } from '../../store/actions/creators/creators'
 import logo from '../../img/logo-black.png'
 
 export default function AuthPage() {
+  const [error, setError] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isLoading, setisLoading] = useState(false) // Создаем состояние для активности/неактивности кнопки логина
+
   const { toggleUser } = useUserContext()
   const navigate = useNavigate()
-  const [error, setError] = useState(null)
-
   const dispatch = useDispatch()
 
   const getLoginCheck = (newUser) => {
     toggleUser(newUser) // в ф-ию toggleUser передаем ответ с апи
     navigate('/')
   }
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isLoading, setisLoading] = useState(false) // Создаем состояние для активности/неактивности кнопки логина
 
   function checkInputs() {
     if (!email || !password) {

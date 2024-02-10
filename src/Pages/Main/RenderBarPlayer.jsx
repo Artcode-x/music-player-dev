@@ -13,8 +13,6 @@ export const RenderBarPlayer = ({ loading, isPlaying, setIsPlaying }) => {
             active={activeTrack}
             repeat={repeat}
             setRepeat={setRepeat}
-            // keyItem={keyItem}
-            // setKeyItem={setKeyItem}
             loading={loading}
             isPlaying={isPlaying}
             setIsPlaying={setIsPlaying}

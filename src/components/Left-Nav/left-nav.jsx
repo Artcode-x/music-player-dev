@@ -1,7 +1,5 @@
-// import '../css/style.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import logo from '../../img/logo.png'
 import * as S from './left-nav.styles'
 import { useUserContext } from '../Context/Context'
@@ -10,13 +8,13 @@ import { useDispatch } from 'react-redux'
 import { addFavoriteTracks } from '../../store/actions/creators/creators'
 
 function Ma1nNav() {
-  const dispatch = useDispatch()
   const [disabled, setDisabled] = useState(false)
-
   const [visible, close] = useState(true)
-  const changeState = () => close(!visible)
 
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const changeState = () => close(!visible)
 
   const onEnter = (event) => {
     if (event.key === 'Enter') {
@@ -28,7 +26,7 @@ function Ma1nNav() {
 
   const handleExit = () => {
     toggleLogout()
-    navigate('/Login') // делаем редирект на страницу логина
+    navigate('/Login') 
   }
 
   const tokenAccess = JSON.parse(localStorage.getItem('tokenAccess'))
@@ -36,12 +34,11 @@ function Ma1nNav() {
 
   const handleFavorite = async () => {
     try {
-      setDisabled(true) // выкл кноп
+      setDisabled(true) 
 
       const likesTrack = await getFavoriteTracks(tokenAccess)
       dispatch(addFavoriteTracks(likesTrack))
       navigate('/Favorites')
-      // dispatch(addAllandFav('Favorites'))
     } catch (error) {
       if (error.message === 'Токен протух') {
         const newAccess = await refreshToken(tokenRefresh)

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as S from './PlayerControls.style'
 import sprite from '../../img/icon/sprite.svg'
@@ -18,15 +17,8 @@ export default function PlayersControls({
   setRepeat,
   isPlaying,
   setIsPlaying,
-  // setKeyItem,
 }) {
-  // const [isPlaying, setIsPlaying] = useState(false)
-
-  // состояние текущего трека - играет или нет
-  // const activeTrack = useSelector(activeTrackSelector)
-
   const shuffled = useSelector((store) => store.tracks.shuffled)
-
   const shuffleTracks = useSelector((store) => store.tracks.shuffleTracks)
 
   const dispatch = useDispatch()
@@ -45,25 +37,19 @@ export default function PlayersControls({
       case 'play':
         audioRef.current.play()
         dispatch(addSetPause(true))
-
         setIsPlaying(false) // на основе стейта меняем иконку плей паузыы
-      
         break
       case 'stop':
         audioRef.current.pause()
-        dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимация
-
+        dispatch(addSetPause(false)) // отправляем в стейт false чтобы остановилась анимацию
         setIsPlaying(true)
-      
         break
       case 'next':
         if (shuffled === 'buttonClickFirst') {
           if (shuffleTracks) {
             dispatch(addActiveTrack(shuffleTracks[0]))
           }
-
           dispatch(addIdTrack({ index: shuffleTracks[0].id }))
-
           dispatch(addShuffled(true))
           dispatch(addSetPause(true))
           setIsPlaying(false)
@@ -71,11 +57,9 @@ export default function PlayersControls({
         }
         if (shuffled === false) {
           dispatch(addSetPause(true))
-
           dispatch(addNextTrack())
         } else {
           dispatch(addSetPause(true))
-
           dispatch(addNextTrack())
         }
         setIsPlaying(false)
@@ -85,19 +69,6 @@ export default function PlayersControls({
 
         break
       case 'shuffle':
-        // if (
-        //   shufflePlayStop === true ||
-        //   shufflePlayStop === 'buttonClickFirst'
-        // ) {
-        //   dispatch(addShuffleTrack(false))
-        // } else {
-        //   dispatch(addShuffled('buttonClickFirst'))
-
-        //   const newShuffleTracks = allTracks.map((track) => track)
-        //   newShuffleTracks.sort(() => Math.random() - 0.5)
-
-        //   dispatch(addShuffleTrack(newShuffleTracks))
-        // }
         dispatch(addShuffleTrack())
         break
       default:
