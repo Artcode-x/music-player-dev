@@ -2,8 +2,8 @@ import {
   activeTrackSelector,
   searchSelector,
 } from '../../store/selectors/selectors'
-import Skeleton from '../Skeleton/Skeleton'
-import * as S from './center-block.styles'
+import SkeletSizeTempl from '../Skeleton/Skeleton'
+import * as S from './MusicList.styled'
 import sprite from '../../img/icon/sprite.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import addTracks, {
@@ -93,7 +93,7 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
           <S.PlaylistTrack key={track.id}>
             <S.TrackTitle onClick={() => todoClick(track, index)}>
               <S.TrackTitleImage>
-                <Skeleton IamWidth="51" IamHeight="51" />
+                <SkeletSizeTempl IamWidth="51" IamHeight="51" />
 
                 {activeTrack ? (
                   track.id === activeTrack.id ? (

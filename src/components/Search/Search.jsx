@@ -1,11 +1,9 @@
-Search
-
-import * as S from './center-block.styles'
+import * as S from './Search.styled'
 import sprite from '../../img/icon/sprite.svg'
 import { useDispatch } from 'react-redux'
 import { addUpdateSearch } from '../../store/actions/creators/creators'
 
-export default function Search() {
+function Search() {
   const dispatch = useDispatch()
 
   const setSearchType = (e) => {
@@ -25,3 +23,5 @@ export default function Search() {
     </S.CenterblockSearch>
   )
 }
+
+export default Search

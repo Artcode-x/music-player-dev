@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import * as S from './center-block.styles'
+import * as S from './Zagolovok.styled'
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 

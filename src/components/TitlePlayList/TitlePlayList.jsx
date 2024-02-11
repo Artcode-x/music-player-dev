@@ -1,7 +1,7 @@
-import * as S from './center-block.styles'
+import * as S from './TitlePlayList.styled'
 import sprite from '../../img/icon/sprite.svg'
 
-export default function ContentTitlePlayList() {
+export default function TitlePlayList() {
   return (
     <S.ContentTitle>
       <S.PlaylistTitleCol01>Трек</S.PlaylistTitleCol01>

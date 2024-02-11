@@ -2,7 +2,7 @@ import * as S from './RenderRbar.styled'
 import iconRandom from '../../img/playlist01.png'
 import iconRandom1 from '../../img/playlist02.png'
 import iconRandom2 from '../../img/playlist03.png'
-import Skeleton from '../Skeleton/Skeleton'
+import SkeletSizeTempl from '../Skeleton/Skeleton'
 import { useUserContext } from '../Context/Context'
 
 function RenderRbar({ loading }) {
@@ -14,13 +14,13 @@ function RenderRbar({ loading }) {
         <S.SidebarBlock>
           <S.SidebarList>
             <S.SidebarItem>
-              <Skeleton IamWidth="250px" IamHeight="150px" />
+              <SkeletSizeTempl IamWidth="250px" IamHeight="150px" />
             </S.SidebarItem>
             <S.SidebarItem>
-              <Skeleton IamWidth="250px" IamHeight="150px" />
+              <SkeletSizeTempl IamWidth="250px" IamHeight="150px" />
             </S.SidebarItem>
             <S.SidebarItem>
-              <Skeleton IamWidth="250px" IamHeight="150px" />
+              <SkeletSizeTempl IamWidth="250px" IamHeight="150px" />
             </S.SidebarItem>
           </S.SidebarList>
         </S.SidebarBlock>

@@ -10,11 +10,11 @@ import {
   addIdTrack,
   addSetPause,
 } from '../../store/actions/creators/creators'
-import Skeleton from '../../components/Skeleton/Skeleton'
-import * as S from '../../components/Center-Block/center-block.styles'
+import SkeletSizeTempl from '../../components/Skeleton/Skeleton'
+import * as S from './MyPlaylist.styled'
 import sprite from '../../img/icon/sprite.svg'
 import { activeTrackSelector } from '../../store/selectors/selectors'
-import Zagolovok from '../../components/Center-Block/Zagolovok'
+import Zagolovok from '../../components/Zagolovok/Zagolovok'
 import { useEffect, useState } from 'react'
 
 export default function MyPlaylist({ setIsPlaying }) {
@@ -77,7 +77,7 @@ export default function MyPlaylist({ setIsPlaying }) {
             <S.PlaylistTrack key={track.id}>
               <S.TrackTitle onClick={() => todoClick(track, index)}>
                 <S.TrackTitleImage>
-                  <Skeleton IamWidth="51" IamHeight="51" />
+                  <SkeletSizeTempl IamWidth="51" IamHeight="51" />
 
                   {activeTrack ? (
                     track.id === activeTrack.id ? (

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import BarBelow from '../Bar-Below/BarBelow'
+import BarBelow from '../BarBelow/BarBelow'
 import * as S from './RenderBarPlayer.styled'
 import { useState } from 'react'
 export const RenderBarPlayer = ({ loading, isPlaying, setIsPlaying }) => {

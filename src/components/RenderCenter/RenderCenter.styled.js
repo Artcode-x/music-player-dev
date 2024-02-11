@@ -1,68 +1,5 @@
 import { styled, keyframes, css } from 'styled-components'
 
-export const ContentTitle = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-`
-export const PlaylistTitleCol01 = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 2px;
-  color: #696969;
-  text-transform: uppercase;
-
-  width: 40%;
-`
-
-export const PlaylistTitleCol02 = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 2px;
-  color: #696969;
-  text-transform: uppercase;
-
-  width: 30%;
-`
-
-export const PlaylistTitleCol03 = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 2px;
-  color: #696969;
-  text-transform: uppercase;
-
-  width: 20%;
-`
-
-export const PlaylistTitleCol04 = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 2px;
-  color: #696969;
-  text-transform: uppercase;
-
-  width: 10%;
-  text-align: end;
-`
-
-export const PlaylistTitleSvg = styled.svg`
-  width: 12px;
-  height: 12px;
-  fill: transparent;
-  stroke: #696969;
-`
-
 export const Filterlist = styled.div`
   position: absolute;
   box-sizing: border-box;
@@ -173,14 +110,7 @@ export const SearchText = styled.input`
     line-height: 24px;
   }
 `
-export const CenterblockH2 = styled.h2`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 64px;
-  line-height: 72px;
-  letter-spacing: -0.8px;
-  margin-bottom: 45px;
-`
+
 export const CenterblockFilter = styled.h2`
   display: flex;
   flex-direction: row;
@@ -273,27 +203,27 @@ export const ErrorItem = styled.div`
   text-align: center;
   font-size: xx-large;
 `
-export const bubbleOut = keyframes`
-  0%, to {
-    transform: scale(0.5);
-  }
-  50% {
-    transform: scale(1);
-  }
-`
-export const PlayingDot = styled.div`
-  width: 16px;
-  height: 16px;
-  background-color: #b672ff;
-  border-radius: 8px;
-  display: block;
-  animation: ${bubbleOut} 0.6s ease-in-out infinite both;
-  ${(props) =>
-    !props.playPause &&
-    css`
-      animation: none;
-    `}
-`
+// export const bubbleOut = keyframes`
+//   0%, to {
+//     transform: scale(0.5);
+//   }
+//   50% {
+//     transform: scale(1);
+//   }
+// `
+// export const PlayingDot = styled.div`
+//   width: 16px;
+//   height: 16px;
+//   background-color: #b672ff;
+//   border-radius: 8px;
+//   display: block;
+//   animation: ${bubbleOut} 0.6s ease-in-out infinite both;
+//   ${(props) =>
+//     !props.playPause &&
+//     css`
+//       animation: none;
+//     `}
+// `
 
 export const PlaylistTrack = styled.div`
   display: flex;

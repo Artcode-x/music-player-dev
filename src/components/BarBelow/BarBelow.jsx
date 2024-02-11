@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
-import Skeleton from '../Skeleton/Skeleton'
+import SkeletSizeTempl from '../Skeleton/Skeleton'
 import * as S from './BarBelow.styled'
 import PlayersControls from '../PlayerControls/PlayerControls'
 import VolumeBar from '../VolumeBar/VolumeBar'
@@ -43,16 +43,16 @@ function BarBelow({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
                 {loading ? (
                   <S.TrackPlayContain>
                     <S.TrackPlayImage>
-                      <Skeleton IamWidth="51px" IamHeight="51px" />
+                      <SkeletSizeTempl IamWidth="51px" IamHeight="51px" />
                       <S.TrackPlaySvg alt="music">
                         <use xlinkHref={`${sprite}#icon-note`} />
                       </S.TrackPlaySvg>
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
-                      <Skeleton IamWidth="59px" IamHeight="15px" />
+                      <SkeletSizeTempl IamWidth="59px" IamHeight="15px" />
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
-                      <Skeleton IamWidth="59px" IamHeight="15px" />
+                      <SkeletSizeTempl IamWidth="59px" IamHeight="15px" />
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>
                 ) : (

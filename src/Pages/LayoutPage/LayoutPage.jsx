@@ -1,6 +1,6 @@
 import * as S from './LayoutPage.styled'
 import { Outlet } from 'react-router-dom'
-import Search from '../../components/Center-Block/Search'
+import Search from '../../components/Search/Search'
 import LeftMenu from '../../components/LeftMenu/LeftMenu'
 import { UserInfo } from '../../components/UserInfo/UserInfo'
 import RenderRbar from '../../components/RenderRbar/RenderRbar'

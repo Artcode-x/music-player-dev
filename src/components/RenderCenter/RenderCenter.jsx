@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import * as S from './center-block.styles'
-import Error from './Error'
-import Skeletons from './Skeletons'
-import Zagolovok from './Zagolovok'
-import ContentTitlePlayList from './Title-playlist'
-import { MusicList } from './MusicList'
+import * as S from './RenderCenter.styled'
+import Error from '../Error/Error'
+import Skeletons from '../Skeletons/Skeletons'
+import Zagolovok from '../Zagolovok/Zagolovok'
+import TitlePlayList from '../TitlePlayList/TitlePlayList'
+import { MusicList } from '../MusicList/MusicList'
 
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
-
   const [visible, changeOfState] = useState('CloseList')
 
   const list = (
@@ -45,8 +44,6 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
       </S.FilterListUl>
     </S.Filterlist>
   )
-
-  
 
   const changeState = (OpenList) =>
     changeOfState(visible === OpenList ? 'CloseList' : OpenList)
@@ -114,7 +111,7 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
         <Skeletons />
       ) : (
         <S.centerblockContent>
-          <ContentTitlePlayList />
+          <TitlePlayList />
           <MusicList isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
         </S.centerblockContent>
       )}

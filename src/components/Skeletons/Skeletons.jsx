@@ -1,29 +1,28 @@
-import * as S from './center-block.styles'
-import Skeleton from '../Skeleton/Skeleton'
-
+import * as S from './Skeletons.styled'
+import SkeletSizeTempl from '../Skeleton/Skeleton'
 import sprite from '../../img/icon/sprite.svg'
-import ContentTitlePlayList from './Title-playlist'
+import TitlePlayList from '../TitlePlayList/TitlePlayList'
 
 export default function Skeletons() {
   return (
     <S.centerblockContent>
-      <ContentTitlePlayList />
+      <TitlePlayList />
       <S.ContentPlaylist>
         <S.PlaylistItem>
           <S.PlaylistTrack>
             <S.TrackTitle>
               <S.TrackTitleImage>
-                <Skeleton IamWidth="51px" IamHeight="51px" />
+                <SkeletSizeTempl IamWidth="51px" IamHeight="51px" />
               </S.TrackTitleImage>
               <S.TrackTitleText>
-                <Skeleton IamWidth="356px" IamHeight="19px" />
+                <SkeletSizeTempl IamWidth="356px" IamHeight="19px" />
               </S.TrackTitleText>
             </S.TrackTitle>
             <S.TrackAuthor>
-              <Skeleton IamWidth="271px" IamHeight="19px" />
+              <SkeletSizeTempl IamWidth="271px" IamHeight="19px" />
             </S.TrackAuthor>
             <S.TrackAlbum>
-              <Skeleton IamWidth="305px" IamHeight="19px" />
+              <SkeletSizeTempl IamWidth="305px" IamHeight="19px" />
             </S.TrackAlbum>
             <S.TrackTime>
               <S.TrackTimeSvg alt="time">
