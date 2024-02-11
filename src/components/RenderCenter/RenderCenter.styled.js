@@ -149,11 +149,11 @@ export const FilterButton = styled.div`
   }
 `
 export const FilterButtonArtist = styled(FilterButton)`
-  height: 40px;
   color: ${(props) =>
     props.propsKeyVisible === 'OpenListArtist' ? '#ad61ff' : null};
   border-color: ${(props) =>
     props.propsKeyVisible === 'OpenListArtist' ? '#ad61ff' : null};
+  height: 40px;
 `
 
 export const FilterButtonYear = styled(FilterButton)`

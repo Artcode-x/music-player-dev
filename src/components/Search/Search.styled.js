@@ -1,14 +1,24 @@
 import styled from 'styled-components'
 
 export const CenterblockSearch = styled.div`
-  grid-template-columns: 2 / 3;
+  /* grid-template-columns: 2 / 3;
   grid-template-rows: 1 / 2;
   width: 100%;
   border-bottom: 1px solid #4e4e4e;
   margin-bottom: 51px;
   display: flex;
   flex-direction: row;
+  align-items: center; */
+  grid-template-columns: 2/3;
+  grid-template-rows: 1/2;
+  width: 100%;
+  border-bottom: 1px solid #4e4e4e;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
 `
 
 export const SearchSvg = styled.svg`
