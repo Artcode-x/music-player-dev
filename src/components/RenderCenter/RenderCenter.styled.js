@@ -149,6 +149,7 @@ export const FilterButton = styled.div`
   }
 `
 export const FilterButtonArtist = styled(FilterButton)`
+  height: 40px;
   color: ${(props) =>
     props.propsKeyVisible === 'OpenListArtist' ? '#ad61ff' : null};
   border-color: ${(props) =>
@@ -287,4 +288,32 @@ export const TrackTimeText = styled.span`
   line-height: 24px;
   text-align: right;
   color: #696969;
+`
+export const Metka = styled.div`
+  /* border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  background-color: #ad61ff;
+  position: absolute;
+  top: -13px;
+  right: 10px;
+  display: flex;
+  // justify-content: right;
+  justify-content: center;
+  align-items: center;
+  color: white; */
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  background-color: #ad61ff;
+  position: relative;
+  top: -43px;
+  right: -95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+`
+export const Color = styled.div`
+  color: white;
 `

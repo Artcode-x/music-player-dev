@@ -9,4 +9,7 @@ export const activeTrackSelector = (store) =>
 
 export const searchSelector = (store) => trackSelector(store)?.search
 
+export const filteredArrayTracksSelector = (store) =>
+  trackSelector(store)?.filteredTracksArray
+
 export default allTracksSelector

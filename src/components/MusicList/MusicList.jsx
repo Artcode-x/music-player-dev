@@ -1,5 +1,6 @@
 import {
   activeTrackSelector,
+  filteredArrayTracksSelector,
   searchSelector,
 } from '../../store/selectors/selectors'
 import SkeletSizeTempl from '../SkeletSizeTempl/SkeletSizeTempl'
@@ -16,6 +17,7 @@ import { useState } from 'react'
 import getAllTracksFromApi, { addLike, disLike, refreshToken } from '../Api/api'
 
 export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
+  const filteredByAuthor = useSelector(filteredArrayTracksSelector)
   const activeTrack = useSelector(activeTrackSelector)
   const playPause = useSelector((store) => store.tracks.playPause)
   const allTracks = useSelector((store) => store.tracks.allTracks)
@@ -86,10 +88,19 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   if (!user.id) {
     user = JSON.parse(localStorage.getItem('user'))
   }
+
+  // тут работаем уже с фильтром по исполнителям. Если filteredByAuthor включает в себя название на которое нажали, вывести только эти треки
+  const actuallyTracks = filteredArray.filter((el) => {
+    if (filteredByAuthor.length == 0) return el
+    else {
+      return filteredByAuthor.includes(el.author)
+    }
+  })
+
   return (
     <S.ContentPlaylist>
       <S.PlaylistItem>
-        {filteredArray.map((track, index) => (
+        {actuallyTracks.map((track, index) => (
           <S.PlaylistTrack key={track.id}>
             <S.TrackTitle onClick={() => todoClick(track, index)}>
               <S.TrackTitleImage>

@@ -13,6 +13,7 @@ import {
   FAVORITES_TRACKS,
   ALLTRACKS_FAVORITETRACKS,
   SEARCH,
+  ARRAY_FILTERED_TRACKS,
 } from '../actions/types/types'
 
 // state - состояние, может быть объектом или массивом либо приметивное зн-ие, которое хранит какие то данные. Чаще всего это объект, у которого уже есть конкретные поля, которые могут быть как объектами, так и массивами/примитивами.
@@ -28,6 +29,7 @@ const initialTracks = {
   vseIzbranniyeTreki: [],
   AllandFav: 'All',
   search: '',
+  filteredTracksArray: [],
 }
 
 // reducer - ф-ия может быть обьявл-на через func-on, либо через стрел ф-ию. Первым параметром принимает состояние, а вторым - action.
@@ -172,6 +174,14 @@ function tracksReducer(state = initialTracks, action) {
       return {
         ...state,
         search,
+      }
+    }
+
+    case ARRAY_FILTERED_TRACKS: {
+      const [filteredTracksArray] = action.payload
+      return {
+        ...state,
+        filteredTracksArray,
       }
     }
 

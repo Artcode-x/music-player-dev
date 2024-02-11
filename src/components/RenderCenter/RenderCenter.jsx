@@ -5,31 +5,58 @@ import Skeletons from '../Skeletons/Skeletons'
 import Zagolovok from '../Zagolovok/Zagolovok'
 import TitlePlayList from '../TitlePlayList/TitlePlayList'
 import { MusicList } from '../MusicList/MusicList'
+import { useDispatch, useSelector } from 'react-redux'
+import allTracksSelector, {
+  filteredArrayTracksSelector,
+} from '../../store/selectors/selectors'
+import { setArrayFilteredTracks } from '../../store/actions/creators/creators'
 
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
   const [visible, changeOfState] = useState('CloseList')
+  const dispatch = useDispatch()
 
+  let filteredByAuthor = []
+  filteredByAuthor = useSelector(filteredArrayTracksSelector)
+  const allTracks = useSelector(allTracksSelector)
+
+  // Создаем массив с авторами трека
+  const newArr = allTracks.map((key) => {
+    return key.author
+  })
+
+  // Делаем так чтобы авторы не повторялись
+  const UniqArrAuthors = [...new Set(newArr.sort())]
+
+  // Для отображения всех авторов, применяем map к ранее созданному массиву
   const list = (
-    <S.Filterlist>
-      <S.FilterListUl>
-        <S.filterListtext>Michael Jackson</S.filterListtext>
-        <S.filterListtext>Frank Sinatra</S.filterListtext>
-        <S.filterListtext>Calvin Harris</S.filterListtext>
-        <S.filterListtext>Zhu</S.filterListtext>
-        <S.filterListtext>Arctic Monkeys</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-        <S.filterListtext>Test</S.filterListtext>
-      </S.FilterListUl>
-    </S.Filterlist>
+    <>
+      <S.Filterlist>
+        <S.FilterListUl>
+          {UniqArrAuthors.map((author) => (
+            <S.filterListtext
+              onClick={(e) => handleClickAuthor(e)}
+              key={author.id}
+            >
+              {author}
+            </S.filterListtext>
+          ))}
+        </S.FilterListUl>
+      </S.Filterlist>
+    </>
   )
+  // Когда кликаем на выбранного автора
+  const handleClickAuthor = (e) => {
+    const author = e.target.textContent
+
+    console.log(filteredByAuthor)
+    if (filteredByAuthor.includes(author)) {
+      dispatch(
+        setArrayFilteredTracks(filteredByAuthor.filter((el) => el != author))
+      )
+    } else {
+      dispatch(setArrayFilteredTracks([...filteredByAuthor, author]))
+    }
+  }
 
   const yearUl = <S.filterListyear />
 
@@ -74,6 +101,7 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
       {/* Outlet  */}
       <S.CenterblockFilter>
         <S.FilterTitle>Искать по:</S.FilterTitle>
+
         <S.FilterButtonArtist
           $propsKeyVisible={visible}
           role="button"
@@ -82,6 +110,11 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
           onClick={() => changeState('OpenListArtist')}
         >
           исполнителю
+          {filteredByAuthor.length !== 0 && (
+            <S.Metka>
+              <S.Color>{filteredByAuthor.length}</S.Color>
+            </S.Metka>
+          )}
         </S.FilterButtonArtist>
 
         <S.FilterButtonYear
