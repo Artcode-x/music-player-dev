@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
-import SkeletSizeTempl from '../Skeleton/Skeleton'
+import SkeletSizeTempl from '../SkeletSizeTempl/SkeletSizeTempl'
 import * as S from './BarBelow.styled'
 import PlayersControls from '../PlayerControls/PlayerControls'
 import VolumeBar from '../VolumeBar/VolumeBar'

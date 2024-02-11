@@ -1,5 +1,5 @@
 import * as S from './Skeletons.styled'
-import SkeletSizeTempl from '../Skeleton/Skeleton'
+import SkeletSizeTempl from '../SkeletSizeTempl/SkeletSizeTempl'
 import sprite from '../../img/icon/sprite.svg'
 import TitlePlayList from '../TitlePlayList/TitlePlayList'
 

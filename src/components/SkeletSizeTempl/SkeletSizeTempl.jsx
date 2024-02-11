@@ -1,4 +1,4 @@
-import * as S from './Skeleton.styled'
+import * as S from './SkeletSizeTempl.styled'
 
 function SkeletSizeTempl({ IamWidth, IamHeight }) {
   // Передаем ключи внутрь компонента с переменными $IamHeight, $IamWidth внутри которых конкретные значения в px которые мы получаем в компонентах

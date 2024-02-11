@@ -10,7 +10,7 @@ import {
   addIdTrack,
   addSetPause,
 } from '../../store/actions/creators/creators'
-import SkeletSizeTempl from '../../components/Skeleton/Skeleton'
+import SkeletSizeTempl from '../../components/SkeletSizeTempl/SkeletSizeTempl'
 import * as S from './MyPlaylist.styled'
 import sprite from '../../img/icon/sprite.svg'
 import { activeTrackSelector } from '../../store/selectors/selectors'

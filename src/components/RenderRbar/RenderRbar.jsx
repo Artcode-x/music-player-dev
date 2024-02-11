@@ -2,7 +2,7 @@ import * as S from './RenderRbar.styled'
 import iconRandom from '../../img/playlist01.png'
 import iconRandom1 from '../../img/playlist02.png'
 import iconRandom2 from '../../img/playlist03.png'
-import SkeletSizeTempl from '../Skeleton/Skeleton'
+import SkeletSizeTempl from '../SkeletSizeTempl/SkeletSizeTempl'
 import { useUserContext } from '../Context/Context'
 
 function RenderRbar({ loading }) {

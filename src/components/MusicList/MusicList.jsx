@@ -2,7 +2,7 @@ import {
   activeTrackSelector,
   searchSelector,
 } from '../../store/selectors/selectors'
-import SkeletSizeTempl from '../Skeleton/Skeleton'
+import SkeletSizeTempl from '../SkeletSizeTempl/SkeletSizeTempl'
 import * as S from './MusicList.styled'
 import sprite from '../../img/icon/sprite.svg'
 import { useDispatch, useSelector } from 'react-redux'
