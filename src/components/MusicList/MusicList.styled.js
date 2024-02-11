@@ -25,6 +25,11 @@ export const PlayingDot = styled.div`
 export const ContentPlaylist = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  scrollbar-color: #423189 gray;
+  // scrollbar-color: #fbceb1 gray;
+  //scrollbar-color: #FFCA86 gray;
+  scrollbar-width: thin;
 `
 
 export const PlaylistItem = styled.div`
