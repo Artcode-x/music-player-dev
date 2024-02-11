@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../../img/logo.png'
-import * as S from './left-nav.styles'
+import * as S from './LeftMenu.styled'
 import { useUserContext } from '../Context/Context'
 import { getFavoriteTracks, refreshToken } from '../Api/api'
 import { useDispatch } from 'react-redux'
 import { addFavoriteTracks } from '../../store/actions/creators/creators'
 
-function Ma1nNav() {
+function LeftMenu() {
   const [disabled, setDisabled] = useState(false)
   const [visible, close] = useState(true)
 
@@ -26,7 +26,7 @@ function Ma1nNav() {
 
   const handleExit = () => {
     toggleLogout()
-    navigate('/Login') 
+    navigate('/Login')
   }
 
   const tokenAccess = JSON.parse(localStorage.getItem('tokenAccess'))
@@ -34,7 +34,7 @@ function Ma1nNav() {
 
   const handleFavorite = async () => {
     try {
-      setDisabled(true) 
+      setDisabled(true)
 
       const likesTrack = await getFavoriteTracks(tokenAccess)
       dispatch(addFavoriteTracks(likesTrack))
@@ -89,4 +89,4 @@ function Ma1nNav() {
   )
 }
 
-export default Ma1nNav
+export default LeftMenu

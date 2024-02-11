@@ -3,14 +3,14 @@
 import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import sprite from '../../img/icon/sprite.svg'
-import RybkaForImport from '../Skeleton/skeleton-fish-import'
-import * as S from './bar-below.styles'
+import Skeleton from '../Skeleton/Skeleton'
+import * as S from './BarBelow.styled'
 import PlayersControls from '../PlayerControls/PlayerControls'
 import VolumeBar from '../VolumeBar/VolumeBar'
-import ProgressBar from '../ProgressBar/progressBar'
+import ProgressBar from '../ProgressBar/ProgressBar'
 import { addNextTrack } from '../../store/actions/creators/creators'
 
-function RenderBar({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
+function BarBelow({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
   const audioRef = useRef(null)
 
   const activeTrack = useSelector((store) => store.tracks.activeTrack)
@@ -43,16 +43,16 @@ function RenderBar({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
                 {loading ? (
                   <S.TrackPlayContain>
                     <S.TrackPlayImage>
-                      <RybkaForImport IamWidth="51px" IamHeight="51px" />
+                      <Skeleton IamWidth="51px" IamHeight="51px" />
                       <S.TrackPlaySvg alt="music">
                         <use xlinkHref={`${sprite}#icon-note`} />
                       </S.TrackPlaySvg>
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
-                      <RybkaForImport IamWidth="59px" IamHeight="15px" />
+                      <Skeleton IamWidth="59px" IamHeight="15px" />
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
-                      <RybkaForImport IamWidth="59px" IamHeight="15px" />
+                      <Skeleton IamWidth="59px" IamHeight="15px" />
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>
                 ) : (
@@ -97,4 +97,4 @@ function RenderBar({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
   )
 }
 
-export default RenderBar
+export default BarBelow

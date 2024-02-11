@@ -1,5 +1,5 @@
 import { useUserContext } from '../Context/Context'
-import * as S from './right-bar.styles'
+import * as S from './UserInfo.styled'
 export const UserInfo = () => {
   const { user } = useUserContext()
 

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import * as S from './PlayerControls.style'
+import * as S from './PlayerControls.styled'
 import sprite from '../../img/icon/sprite.svg'
 import {
   addSetPause,

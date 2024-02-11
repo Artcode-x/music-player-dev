@@ -1,13 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { useState } from 'react'
-import * as S from './VolumeBar.styles'
+import * as S from './VolumeBar.styled'
 import sprite from '../../img/icon/sprite.svg'
 
 export default function VolumeBar({ audioRef }) {
   const [value, setValue] = useState('1') // value - пок-т какой ур-нь громкости
 
   const changeValue = (event) => {
-    // принимаем event
     setValue(event.target.value) // передаем значение event в setValue -> value
     // event содержит в себе текущую инф-ю на каком этапе находится value от 0 до 1
 

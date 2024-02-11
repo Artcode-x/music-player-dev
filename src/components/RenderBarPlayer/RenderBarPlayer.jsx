@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
-import RenderBar from '../../components/Bar-Below/BarBelow'
-import * as S from './fromApp-ToMain.styles'
+import BarBelow from '../Bar-Below/BarBelow'
+import * as S from './RenderBarPlayer.styled'
 import { useState } from 'react'
 export const RenderBarPlayer = ({ loading, isPlaying, setIsPlaying }) => {
   const activeTrack = useSelector((store) => store.tracks.activeTrack)
@@ -9,7 +9,7 @@ export const RenderBarPlayer = ({ loading, isPlaying, setIsPlaying }) => {
     <>
       {activeTrack && (
         <S.Bar>
-          <RenderBar
+          <BarBelow
             active={activeTrack}
             repeat={repeat}
             setRepeat={setRepeat}

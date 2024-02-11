@@ -1,32 +1,14 @@
 import { useState } from 'react'
-
-import { useDispatch, useSelector } from 'react-redux'
-import sprite from '../../img/icon/sprite.svg'
-import RybkaForImport from '../Skeleton/skeleton-fish-import'
 import * as S from './center-block.styles'
-import {
-  addActiveTrack,
-  addIdTrack,
-  addSetPause,
-} from '../../store/actions/creators/creators'
 import Error from './Error'
 import Skeletons from './Skeletons'
-import Search from './Search'
 import Zagolovok from './Zagolovok'
 import ContentTitlePlayList from './Title-playlist'
 import { MusicList } from './MusicList'
 
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
- 
-  const allTracks = useSelector((store) => store.tracks.allTracks)
-
-  const playPause = useSelector((store) => store.tracks.playPause)
-
-  const activeTrack = useSelector((store) => store.tracks.activeTrack) 
 
   const [visible, changeOfState] = useState('CloseList')
-
-  const dispatch = useDispatch()
 
   const list = (
     <S.Filterlist>

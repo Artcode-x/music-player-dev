@@ -2,7 +2,7 @@ import {
   activeTrackSelector,
   searchSelector,
 } from '../../store/selectors/selectors'
-import RybkaForImport from '../Skeleton/skeleton-fish-import'
+import Skeleton from '../Skeleton/Skeleton'
 import * as S from './center-block.styles'
 import sprite from '../../img/icon/sprite.svg'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,11 +13,7 @@ import addTracks, {
 } from '../../store/actions/creators/creators'
 
 import { useState } from 'react'
-import getAllTracksFromApi, {
-  addLike,
-  disLike,
-  refreshToken,
-} from '../Api/api'
+import getAllTracksFromApi, { addLike, disLike, refreshToken } from '../Api/api'
 
 export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const activeTrack = useSelector(activeTrackSelector)
@@ -46,7 +42,7 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
 
   const toggleLike = async (track) => {
     try {
-      setDisabled(true) 
+      setDisabled(true)
 
       if (track.stared_user.find((el) => el.id === user.id)) {
         await disLike({ token: tokenAccess, id: track.id })
@@ -94,12 +90,10 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
     <S.ContentPlaylist>
       <S.PlaylistItem>
         {filteredArray.map((track, index) => (
-          <S.PlaylistTrack
-            key={track.id}
-          >
+          <S.PlaylistTrack key={track.id}>
             <S.TrackTitle onClick={() => todoClick(track, index)}>
               <S.TrackTitleImage>
-                <RybkaForImport IamWidth="51" IamHeight="51" />
+                <Skeleton IamWidth="51" IamHeight="51" />
 
                 {activeTrack ? (
                   track.id === activeTrack.id ? (

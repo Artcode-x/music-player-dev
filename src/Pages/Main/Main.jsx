@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Ma1nNav from '../../components/Left-Nav/left-nav'
 import RenderCenter from '../../components/Center-Block/center-block'
-import * as S from './fromApp-ToMain.styles'
+import * as S from './Main.styled'
 import getAllTracksFromApi from '../../components/Api/api'
 import addTracks from '../../store/actions/creators/creators'
 

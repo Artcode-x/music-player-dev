@@ -1,16 +1,16 @@
-import * as S from './Layout-page.style'
+import * as S from './LayoutPage.styled'
 import { Outlet } from 'react-router-dom'
 import Search from '../../components/Center-Block/Search'
-import Ma1nNav from '../../components/Left-Nav/left-nav'
-import { UserInfo } from '../../components/Right-Bar/UserInfo'
-import RenderRbar from '../../components/Right-Bar/right-bar'
-import { RenderBarPlayer } from '../Main/RenderBarPlayer'
+import LeftMenu from '../../components/LeftMenu/LeftMenu'
+import { UserInfo } from '../../components/UserInfo/UserInfo'
+import RenderRbar from '../../components/RenderRbar/RenderRbar'
+import { RenderBarPlayer } from '../../components/RenderBarPlayer/RenderBarPlayer'
 
 export const LayoutPage = ({ loading, isPlaying, setIsPlaying }) => {
   return (
     <S.wrapper>
       {/* left part, menu */}
-      <Ma1nNav />
+      <LeftMenu />
       {/* search with logo  */}
       <Search />
       {/* email usera */}

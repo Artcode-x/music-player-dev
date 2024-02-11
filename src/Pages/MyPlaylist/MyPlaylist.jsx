@@ -10,7 +10,7 @@ import {
   addIdTrack,
   addSetPause,
 } from '../../store/actions/creators/creators'
-import RybkaForImport from '../../components/Skeleton/skeleton-fish-import'
+import Skeleton from '../../components/Skeleton/Skeleton'
 import * as S from '../../components/Center-Block/center-block.styles'
 import sprite from '../../img/icon/sprite.svg'
 import { activeTrackSelector } from '../../store/selectors/selectors'
@@ -18,10 +18,9 @@ import Zagolovok from '../../components/Center-Block/Zagolovok'
 import { useEffect, useState } from 'react'
 
 export default function MyPlaylist({ setIsPlaying }) {
-
   const favor = useSelector((store) => store.tracks.vseIzbranniyeTreki)
   const playPause = useSelector((store) => store.tracks.playPause)
-  const activeTrack = useSelector(activeTrackSelector) 
+  const activeTrack = useSelector(activeTrackSelector)
 
   const [disabled, setDisabled] = useState(false)
 
@@ -31,15 +30,13 @@ export default function MyPlaylist({ setIsPlaying }) {
     console.log(favor)
   }, [favor])
 
-
-
   const todoClick = (track) => {
     setIsPlaying(false)
     dispatch(addIdTrack({ index: track.id }))
     // Чтобы изменить состояние, нам потребуется dispatch. dispatch - Это ф-ия, и при вызове ее, параметром она принимает ACTION. Action - это объект, у которого обязательно должен быть тип. (тип мы указывали в редюсере)
     // Второе св-во объекта - это какие то данные, в данном случае это зн-ие true/false
     dispatch(addSetPause(true)) // при нажатиии на первй трек - записали в action зн-ие  true
-    dispatch(addActiveTrack(track)) 
+    dispatch(addActiveTrack(track))
   }
   const tokenAccess = JSON.parse(localStorage.getItem('tokenAccess'))
   const tokenRefresh = JSON.parse(localStorage.getItem('tokenRefresh'))
@@ -80,7 +77,7 @@ export default function MyPlaylist({ setIsPlaying }) {
             <S.PlaylistTrack key={track.id}>
               <S.TrackTitle onClick={() => todoClick(track, index)}>
                 <S.TrackTitleImage>
-                  <RybkaForImport IamWidth="51" IamHeight="51" />
+                  <Skeleton IamWidth="51" IamHeight="51" />
 
                   {activeTrack ? (
                     track.id === activeTrack.id ? (
