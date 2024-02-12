@@ -16,10 +16,15 @@ import {
   setArrayFilteredTracks,
   setArrayFilteredYear,
 } from '../../store/actions/creators/creators'
+import FilterYearButton from '../FilterYearButton/FilterYearButton'
 
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
   const [visible, changeOfState] = useState('CloseList')
   const dispatch = useDispatch()
+
+  let filteredArrayYear
+  filteredArrayYear = useSelector(filteredArrayYearSelector)
+  const yearUl = FilterYearButton()
 
   let filteredByAuthor = []
   filteredByAuthor = useSelector(filteredArrayTracksSelector)
@@ -104,31 +109,6 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
       dispatch(setArrayFilteredGenre([...filteredArrayGenre, genreClick]))
     }
   }
-
-  let filteredArrayYear
-  filteredArrayYear = useSelector(filteredArrayYearSelector)
-
-  const yearUl = (
-    <S.YearFilter>
-      <S.FilterListUl>
-        <S.filterListtext
-          onClick={() => dispatch(setArrayFilteredYear('по умолчанию'))}
-        >
-          По умолчанию
-        </S.filterListtext>
-        <S.filterListtext
-          onClick={() => dispatch(setArrayFilteredYear('сначала новые'))}
-        >
-          Сначала новые
-        </S.filterListtext>
-        <S.filterListtext
-          onClick={() => dispatch(setArrayFilteredYear('сначала старые'))}
-        >
-          Сначала Старые
-        </S.filterListtext>
-      </S.FilterListUl>
-    </S.YearFilter>
-  )
 
   const changeState = (OpenList) =>
     changeOfState(visible === OpenList ? 'CloseList' : OpenList)
