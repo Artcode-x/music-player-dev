@@ -7,9 +7,13 @@ import TitlePlayList from '../TitlePlayList/TitlePlayList'
 import { MusicList } from '../MusicList/MusicList'
 import { useDispatch, useSelector } from 'react-redux'
 import allTracksSelector, {
+  filteredArrayGenreSelector,
   filteredArrayTracksSelector,
 } from '../../store/selectors/selectors'
-import { setArrayFilteredTracks } from '../../store/actions/creators/creators'
+import {
+  setArrayFilteredGenre,
+  setArrayFilteredTracks,
+} from '../../store/actions/creators/creators'
 
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
   const [visible, changeOfState] = useState('CloseList')
@@ -58,19 +62,48 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
     }
   }
 
-  const yearUl = <S.filterListyear />
+  let filteredArrayGenre = []
+  filteredArrayGenre = useSelector(filteredArrayGenreSelector)
 
+  // Создаем массив с жанрами
+  const newArrGenre = allTracks.map((el) => {
+    return el.genre
+  })
+
+  // исключаем повторение эл-ов в масиве
+  const uniqGenre = [...new Set(newArrGenre.sort())]
+
+  // Для отображения всех жанров при нажатии на кнопку, применяем map к ранее созданному массиву
   const genre = (
-    <S.Filterlist>
+    <S.GenreFilter>
       <S.FilterListUl>
-        <S.filterListtext>Рок</S.filterListtext>
-        <S.filterListtext>Хип-хоп</S.filterListtext>
-        <S.filterListtext>Поп-музыка</S.filterListtext>
-        <S.filterListtext>Техно</S.filterListtext>
-        <S.filterListtext>Инди</S.filterListtext>
+        {uniqGenre.map((genre) => (
+          <S.filterListtext onClick={(e) => handleGenreClick(e)} key={genre.id}>
+            {genre}
+          </S.filterListtext>
+        ))}
       </S.FilterListUl>
-    </S.Filterlist>
+    </S.GenreFilter>
   )
+
+  // Когда кликаем на выбранный жанр
+  const handleGenreClick = (e) => {
+    const genreClick = e.target.textContent
+    // если в store содержится текст жанра
+    if (filteredArrayGenre.includes(genreClick)) {
+      // Выражение filteredArrayGenre.filter((el) => el != genreClick) выполняет фильтрацию массива filteredArrayGenre, оставляя только те элементы (обозначаемые el), для которых el не равен genreClick. Таким образом при повторном нажатии на жанр - убираем его из store
+      dispatch(
+        setArrayFilteredGenre(
+          filteredArrayGenre.filter((el) => el != genreClick)
+        )
+      )
+    } else {
+      // Сохраняем те жанры которые были нажаты до этого, при выборе нового, добавляем его новым эл-ом массива
+      dispatch(setArrayFilteredGenre([...filteredArrayGenre, genreClick]))
+    }
+  }
+
+  const yearUl = <S.filterListyear />
 
   const changeState = (OpenList) =>
     changeOfState(visible === OpenList ? 'CloseList' : OpenList)
@@ -134,6 +167,11 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
           onClick={() => changeState('OpenGenre')}
         >
           жанру
+          {filteredArrayGenre.length !== 0 && (
+            <S.MetkaGenre>
+              <S.Color>{filteredArrayGenre.length}</S.Color>
+            </S.MetkaGenre>
+          )}
         </S.FilterButtonGenre>
       </S.CenterblockFilter>
       {visible === 'OpenListArtist' ? list : null}

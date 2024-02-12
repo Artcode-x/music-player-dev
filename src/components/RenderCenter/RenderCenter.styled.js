@@ -3,7 +3,7 @@ import { styled, keyframes, css } from 'styled-components'
 export const Filterlist = styled.div`
   position: absolute;
   box-sizing: border-box;
-  margin-top: 10px;
+  margin-top: 0px;
   width: 248px;
   height: 305px;
   padding: 34px;
@@ -12,6 +12,33 @@ export const Filterlist = styled.div`
   border-radius: 12px;
   margin-left: 90px;
 `
+export const GenreFilter = styled.div`
+  position: absolute;
+  box-sizing: border-box;
+  margin-top: 0px;
+  width: 248px;
+  height: 305px;
+  padding: 34px;
+  background-color: #313131;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-left: 90px;
+  margin-left: 400px;
+`
+// export const YearFilter = styled.div`
+//   position: absolute;
+//   box-sizing: border-box;
+//   margin-top: 0px;
+//   width: 248px;
+//   height: 305px;
+//   padding: 34px;
+//   background-color: #313131;
+//   overflow: hidden;
+//   border-radius: 12px;
+//   margin-left: 250px;
+//   margin-left: 400px;
+// `
+
 export const FilterListUl = styled.ul`
   display: flex;
   flex-direction: column;
@@ -56,13 +83,13 @@ export const filterListtext = styled.li`
 export const filterListyear = styled.div`
   position: absolute;
   box-sizing: border-box;
-  margin-top: 10px;
+  margin-top: 0px;
 
   padding: 34px;
   background-color: #313131;
   overflow: hidden;
   border-radius: 12px;
-  margin-left: 90px;
+  margin-left: 250px;
   width: 403px;
   height: 92px;
 `
@@ -154,6 +181,7 @@ export const FilterButtonArtist = styled(FilterButton)`
   border-color: ${(props) =>
     props.propsKeyVisible === 'OpenListArtist' ? '#ad61ff' : null};
   height: 40px;
+  cursor: pointer;
 `
 
 export const FilterButtonYear = styled(FilterButton)`
@@ -161,6 +189,8 @@ export const FilterButtonYear = styled(FilterButton)`
     props.propsKeyVisible === 'OpenYear' ? '#ad61ff' : null};
   border-color: ${(props) =>
     props.propsKeyVisible === 'OpenYear' ? '#ad61ff' : null};
+  height: 40px;
+  cursor: pointer;
 `
 
 export const FilterButtonGenre = styled(FilterButton)`
@@ -168,6 +198,8 @@ export const FilterButtonGenre = styled(FilterButton)`
     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
   border-color: ${(props) =>
     props.propsKeyVisible === 'OpenGenre' ? '#ad61ff' : null};
+  height: 40px;
+  cursor: pointer;
 `
 
 export const ContentPlaylist = styled.div`
@@ -308,12 +340,39 @@ export const Metka = styled.div`
   background-color: #ad61ff;
   position: relative;
   top: -43px;
-  right: -95px;
+  right: -100px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
 `
+
 export const Color = styled.div`
+  color: white;
+`
+
+export const MetkaGenre = styled.div`
+  /* border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  background-color: #ad61ff;
+  position: absolute;
+  top: -13px;
+  right: 10px;
+  display: flex;
+  // justify-content: right;
+  justify-content: center;
+  align-items: center;
+  color: white; */
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  background-color: #ad61ff;
+  position: relative;
+  top: -43px;
+  right: -49px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
 `

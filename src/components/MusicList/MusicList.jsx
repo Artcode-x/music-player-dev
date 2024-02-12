@@ -1,5 +1,6 @@
 import {
   activeTrackSelector,
+  filteredArrayGenreSelector,
   filteredArrayTracksSelector,
   searchSelector,
 } from '../../store/selectors/selectors'
@@ -18,6 +19,7 @@ import getAllTracksFromApi, { addLike, disLike, refreshToken } from '../Api/api'
 
 export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const filteredByAuthor = useSelector(filteredArrayTracksSelector)
+  const filteredArrayGenre = useSelector(filteredArrayGenreSelector)
   const activeTrack = useSelector(activeTrackSelector)
   const playPause = useSelector((store) => store.tracks.playPause)
   const allTracks = useSelector((store) => store.tracks.allTracks)
@@ -97,10 +99,22 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
     }
   })
 
+  // Производим фильтрацию массива actuallyTracks на основе массива filteredArrayGenre взятого из store.
+  const genreArray = actuallyTracks.filter((el) => {
+    // Если ничего из жанров не будет нажато вернем весь массив actuallyTracks
+    if (filteredArrayGenre.length == 0) {
+      return el
+      // Еcли юзер нажал на жанр, и он есть в массиве actuallyTracks, вернутся все найденные совпадения. В Итоговый массив запишутся все найденные совпадения.
+    } else {
+      // Если filteredArrayGenre содержит текущий el.genre, то элемент добавляется в итоговый массив genreArray. Если не содержит, то элемент не добавляется.
+      return filteredArrayGenre.includes(el.genre)
+    }
+  })
+
   return (
     <S.ContentPlaylist>
       <S.PlaylistItem>
-        {actuallyTracks.map((track, index) => (
+        {genreArray.map((track, index) => (
           <S.PlaylistTrack key={track.id}>
             <S.TrackTitle onClick={() => todoClick(track, index)}>
               <S.TrackTitleImage>
