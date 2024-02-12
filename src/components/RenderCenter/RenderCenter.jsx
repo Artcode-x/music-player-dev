@@ -5,7 +5,7 @@ import Skeletons from '../Skeletons/Skeletons'
 import Zagolovok from '../Zagolovok/Zagolovok'
 import TitlePlayList from '../TitlePlayList/TitlePlayList'
 import { MusicList } from '../MusicList/MusicList'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   filteredArrayGenreSelector,
   filteredArrayTracksSelector,
@@ -18,17 +18,11 @@ import FilterGenreButton from '../FilterGenreButton/FilterGenreButton'
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
   const [visible, changeOfState] = useState('CloseList')
 
-  let filteredArrayYear
-  filteredArrayYear = useSelector(filteredArrayYearSelector)
+  const filteredArrayYear = useSelector(filteredArrayYearSelector)
+  const filteredByAuthor = useSelector(filteredArrayTracksSelector)
+  const filteredArrayGenre = useSelector(filteredArrayGenreSelector)
   const yearUl = FilterYearButton()
-
-  let filteredByAuthor = []
-  filteredByAuthor = useSelector(filteredArrayTracksSelector)
   let list = FilterAuthorButton()
-
-  let filteredArrayGenre = []
-  filteredArrayGenre = useSelector(filteredArrayGenreSelector)
-
   let genre = FilterGenreButton()
 
   const changeState = (OpenList) =>
