@@ -25,19 +25,18 @@ export const GenreFilter = styled.div`
   margin-left: 90px;
   margin-left: 400px;
 `
-// export const YearFilter = styled.div`
-//   position: absolute;
-//   box-sizing: border-box;
-//   margin-top: 0px;
-//   width: 248px;
-//   height: 305px;
-//   padding: 34px;
-//   background-color: #313131;
-//   overflow: hidden;
-//   border-radius: 12px;
-//   margin-left: 250px;
-//   margin-left: 400px;
-// `
+export const YearFilter = styled.div`
+  position: absolute;
+  box-sizing: border-box;
+  margin-top: 0px;
+  width: 248px;
+  height: 305px;
+  padding: 34px;
+  background-color: #313131;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-left: 255px;
+`
 
 export const FilterListUl = styled.ul`
   display: flex;
@@ -79,20 +78,21 @@ export const filterListtext = styled.li`
     color: #b672ff;
     cursor: pointer;
   }
+  //
 `
-export const filterListyear = styled.div`
-  position: absolute;
-  box-sizing: border-box;
-  margin-top: 0px;
+// export const filterListyear = styled.div`
+//   position: absolute;
+//   box-sizing: border-box;
+//   margin-top: 0px;
 
-  padding: 34px;
-  background-color: #313131;
-  overflow: hidden;
-  border-radius: 12px;
-  margin-left: 250px;
-  width: 403px;
-  height: 92px;
-`
+//   padding: 34px;
+//   background-color: #313131;
+//   overflow: hidden;
+//   border-radius: 12px;
+//   margin-left: 250px;
+//   width: 403px;
+//   height: 92px;
+// `
 export const MainCenterblock = styled.div`
   width: auto;
   box-sizing: border-box;
@@ -340,7 +340,7 @@ export const Metka = styled.div`
   background-color: #ad61ff;
   position: relative;
   top: -43px;
-  right: -100px;
+  right: -101px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -352,25 +352,26 @@ export const Color = styled.div`
 `
 
 export const MetkaGenre = styled.div`
-  /* border-radius: 50%;
-  height: 25px;
-  width: 25px;
-  background-color: #ad61ff;
-  position: absolute;
-  top: -13px;
-  right: 10px;
-  display: flex;
-  // justify-content: right;
-  justify-content: center;
-  align-items: center;
-  color: white; */
   border-radius: 50%;
   height: 25px;
   width: 25px;
   background-color: #ad61ff;
   position: relative;
   top: -43px;
-  right: -49px;
+  right: -50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+`
+export const MetkaYear = styled.div`
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  background-color: #ad61ff;
+  position: relative;
+  top: -43px;
+  right: -100px;
   display: flex;
   justify-content: center;
   align-items: center;

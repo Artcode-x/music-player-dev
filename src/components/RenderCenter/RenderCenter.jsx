@@ -9,10 +9,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import allTracksSelector, {
   filteredArrayGenreSelector,
   filteredArrayTracksSelector,
+  filteredArrayYearSelector,
 } from '../../store/selectors/selectors'
 import {
   setArrayFilteredGenre,
   setArrayFilteredTracks,
+  setArrayFilteredYear,
 } from '../../store/actions/creators/creators'
 
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
@@ -103,7 +105,30 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
     }
   }
 
-  const yearUl = <S.filterListyear />
+  let filteredArrayYear
+  filteredArrayYear = useSelector(filteredArrayYearSelector)
+
+  const yearUl = (
+    <S.YearFilter>
+      <S.FilterListUl>
+        <S.filterListtext
+          onClick={() => dispatch(setArrayFilteredYear('по умолчанию'))}
+        >
+          По умолчанию
+        </S.filterListtext>
+        <S.filterListtext
+          onClick={() => dispatch(setArrayFilteredYear('сначала новые'))}
+        >
+          Сначала новые
+        </S.filterListtext>
+        <S.filterListtext
+          onClick={() => dispatch(setArrayFilteredYear('сначала старые'))}
+        >
+          Сначала Старые
+        </S.filterListtext>
+      </S.FilterListUl>
+    </S.YearFilter>
+  )
 
   const changeState = (OpenList) =>
     changeOfState(visible === OpenList ? 'CloseList' : OpenList)
@@ -158,6 +183,17 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
           onClick={() => changeState('OpenYear')}
         >
           году выпуска
+          {filteredArrayYear.length !== 0 && (
+            <S.MetkaYear>
+              <S.Color>
+                {filteredArrayYear == 'сначала новые'
+                  ? String.fromCodePoint(8593)
+                  : filteredArrayYear == 'сначала старые'
+                  ? String.fromCodePoint(8595)
+                  : '>'}
+              </S.Color>
+            </S.MetkaYear>
+          )}
         </S.FilterButtonYear>
         <S.FilterButtonGenre
           $propsKeyVisible={visible}

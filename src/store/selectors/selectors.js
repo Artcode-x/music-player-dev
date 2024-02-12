@@ -15,4 +15,7 @@ export const filteredArrayTracksSelector = (store) =>
 export const filteredArrayGenreSelector = (store) =>
   trackSelector(store)?.filteredGenreArray
 
+export const filteredArrayYearSelector = (store) =>
+  trackSelector(store)?.filteredYearArray
+
 export default allTracksSelector

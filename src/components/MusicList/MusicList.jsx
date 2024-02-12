@@ -2,6 +2,7 @@ import {
   activeTrackSelector,
   filteredArrayGenreSelector,
   filteredArrayTracksSelector,
+  filteredArrayYearSelector,
   searchSelector,
 } from '../../store/selectors/selectors'
 import SkeletSizeTempl from '../SkeletSizeTempl/SkeletSizeTempl'
@@ -20,6 +21,7 @@ import getAllTracksFromApi, { addLike, disLike, refreshToken } from '../Api/api'
 export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const filteredByAuthor = useSelector(filteredArrayTracksSelector)
   const filteredArrayGenre = useSelector(filteredArrayGenreSelector)
+  const filteredArrayYear = useSelector(filteredArrayYearSelector)
   const activeTrack = useSelector(activeTrackSelector)
   const playPause = useSelector((store) => store.tracks.playPause)
   const allTracks = useSelector((store) => store.tracks.allTracks)
@@ -111,10 +113,24 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
     }
   })
 
+  const allFiltersInclude =
+    filteredArrayYear == 'по умолчанию'
+      ? genreArray
+      : genreArray.sort(function (a, b) {
+          if (filteredArrayYear == 'сначала новые') [a, b] = [b, a]
+          if (a['release_date'] > b['release_date']) {
+            return 1
+          }
+          if (a['release_date'] < b['release_date']) {
+            return -1
+          }
+          return 0
+        })
+
   return (
     <S.ContentPlaylist>
       <S.PlaylistItem>
-        {genreArray.map((track, index) => (
+        {allFiltersInclude.map((track, index) => (
           <S.PlaylistTrack key={track.id}>
             <S.TrackTitle onClick={() => todoClick(track, index)}>
               <S.TrackTitleImage>
