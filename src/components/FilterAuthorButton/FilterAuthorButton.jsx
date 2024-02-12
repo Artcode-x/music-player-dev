@@ -39,7 +39,6 @@ function FilterAuthorButton() {
   const handleClickAuthor = (e) => {
     const author = e.target.textContent
 
-    console.log(filteredByAuthor)
     if (filteredByAuthor.includes(author)) {
       dispatch(
         setArrayFilteredTracks(filteredByAuthor.filter((el) => el != author))
