@@ -17,10 +17,12 @@ import {
   setArrayFilteredYear,
 } from '../../store/actions/creators/creators'
 import FilterYearButton from '../FilterYearButton/FilterYearButton'
+import FilterAuthorButton from '../FilterAuthorButton/FilterAuthorButton'
 
 function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
   const [visible, changeOfState] = useState('CloseList')
   const dispatch = useDispatch()
+  const allTracks = useSelector(allTracksSelector)
 
   let filteredArrayYear
   filteredArrayYear = useSelector(filteredArrayYearSelector)
@@ -28,46 +30,7 @@ function RenderCenter({ loading1, addError, isPlaying, setIsPlaying }) {
 
   let filteredByAuthor = []
   filteredByAuthor = useSelector(filteredArrayTracksSelector)
-  const allTracks = useSelector(allTracksSelector)
-
-  // Создаем массив с авторами трека
-  const newArr = allTracks.map((key) => {
-    return key.author
-  })
-
-  // Делаем так чтобы авторы не повторялись
-  const UniqArrAuthors = [...new Set(newArr.sort())]
-
-  // Для отображения всех авторов, применяем map к ранее созданному массиву
-  const list = (
-    <>
-      <S.Filterlist>
-        <S.FilterListUl>
-          {UniqArrAuthors.map((author) => (
-            <S.filterListtext
-              onClick={(e) => handleClickAuthor(e)}
-              key={author.id}
-            >
-              {author}
-            </S.filterListtext>
-          ))}
-        </S.FilterListUl>
-      </S.Filterlist>
-    </>
-  )
-  // Когда кликаем на выбранного автора
-  const handleClickAuthor = (e) => {
-    const author = e.target.textContent
-
-    console.log(filteredByAuthor)
-    if (filteredByAuthor.includes(author)) {
-      dispatch(
-        setArrayFilteredTracks(filteredByAuthor.filter((el) => el != author))
-      )
-    } else {
-      dispatch(setArrayFilteredTracks([...filteredByAuthor, author]))
-    }
-  }
+  let list = FilterAuthorButton()
 
   let filteredArrayGenre = []
   filteredArrayGenre = useSelector(filteredArrayGenreSelector)
