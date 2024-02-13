@@ -11,6 +11,9 @@ import {
   FAVORITES_TRACKS,
   ALLTRACKS_FAVORITETRACKS,
   SEARCH,
+  ARRAY_FILTERED_TRACKS,
+  ARRAY_FILTERED_GENRE,
+  ARRAY_FILTERED_YEAR,
 } from '../types/types'
 
 // Actions - получают какие то данные, затем куда то сохраняют их
@@ -75,6 +78,23 @@ export const addAllandFav = (AllandFav) => ({
 export const addUpdateSearch = (search) => ({
   type: SEARCH,
   payload: { search },
+})
+
+export const setArrayFilteredTracks = (filteredTracksArray) => ({
+  type: ARRAY_FILTERED_TRACKS,
+  payload: [filteredTracksArray],
+})
+
+ARRAY_FILTERED_GENRE
+
+export const setArrayFilteredGenre = (filteredGenreArray) => ({
+  type: ARRAY_FILTERED_GENRE,
+  payload: [filteredGenreArray],
+})
+
+export const setArrayFilteredYear = (filteredYearArray) => ({
+  type: ARRAY_FILTERED_YEAR,
+  payload: [filteredYearArray],
 })
 
 export default addTracks

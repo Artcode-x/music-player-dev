@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom'
-import Register from './Pages/Registration/Registration'
-import Login from './Pages/Login/Login'
-import Page404 from './Pages/404/404'
-import Main from './Pages/Main/Main'
-import Favorites from './Pages/My-playlist/My-playlist'
-import Category from './Pages/Categoty/Category'
-import ProtectedRoute from './components/Protect-Route/ProtectRout'
-import { LayoutPage } from './Pages/Layout-page/Layout-page'
+import Register from './pages/Registration/Registration'
+import Login from './pages/Login/Login'
+import Page404 from './pages/404/404'
+import Main from './pages/Main/Main'
+import Favorites from './pages/MyPlaylist/MyPlaylist'
+import Category from './pages/Categoty/Category'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import { LayoutPage } from './pages/LayoutPage/LayoutPage'
 
 export default function AppRoutes({
   setLogin,

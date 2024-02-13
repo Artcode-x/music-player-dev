@@ -34,7 +34,7 @@ export default function Register() {
   const handleRegister = async () => {
     try {
       checkInputs()
-      setButtonDisable(true) // делаем кнопку неактивной до ответа с апи
+      setButtonDisable(true)
       const newUserReg = await handleReg({ email, password, username })
 
       if (!newUserReg.id) {

@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import * as S from './Login.style'
+import * as S from './Login.styled'
 import { Login, getToken } from '../../components/Api/api'
 import { useUserContext } from '../../components/Context/Context'
 import { useDispatch } from 'react-redux'
@@ -8,20 +8,19 @@ import { addUser } from '../../store/actions/creators/creators'
 import logo from '../../img/logo-black.png'
 
 export default function AuthPage() {
+  const [error, setError] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isLoading, setisLoading] = useState(false) // Создаем состояние для активности/неактивности кнопки логина
+
   const { toggleUser } = useUserContext()
   const navigate = useNavigate()
-  const [error, setError] = useState(null)
-
   const dispatch = useDispatch()
 
   const getLoginCheck = (newUser) => {
     toggleUser(newUser) // в ф-ию toggleUser передаем ответ с апи
     navigate('/')
   }
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isLoading, setisLoading] = useState(false) // Создаем состояние для активности/неактивности кнопки логина
 
   function checkInputs() {
     if (!email || !password) {
@@ -48,7 +47,7 @@ export default function AuthPage() {
         }
         if (todoNewLogin.detail) setError(todoNewLogin.detail[0])
       }
-      // передаем в getToken емейл и пасс /?
+      // передаем в getToken емейл и пасс
       // после того как получим ответ, записываем его в localstorage
       const newToken = await getToken({ email, password })
       setError(newToken.detail)
