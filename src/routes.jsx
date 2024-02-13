@@ -4,7 +4,7 @@ import Login from './pages/Login/Login'
 import Page404 from './pages/404/404'
 import Main from './pages/Main/Main'
 import Favorites from './pages/MyPlaylist/MyPlaylist'
-import Category from './pages/Categoty/Category'
+import Category from './pages/Category/Category'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import { LayoutPage } from './pages/LayoutPage/LayoutPage'
 

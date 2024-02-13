@@ -95,7 +95,7 @@ export const PlayerBtnShuffleSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `
-// export const PlayerBtnRepeat = styled.div``
+
 export const PlayerBtnPrevSvg = styled.svg`
   width: 15px;
   height: 14px;
