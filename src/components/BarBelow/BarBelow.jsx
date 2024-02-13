@@ -7,7 +7,7 @@ import SkeletSizeTempl from '../SkeletSizeTempl/SkeletSizeTempl'
 import * as S from './BarBelow.styled'
 import PlayersControls from '../PlayerControls/PlayerControls'
 import VolumeBar from '../VolumeBar/VolumeBar'
-import ProgressBar from '../ProgressBar/ProgressBar'
+import ProgressBar from '../ProgressBar/progressBar'
 import { addNextTrack } from '../../store/actions/creators/creators'
 
 function BarBelow({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
