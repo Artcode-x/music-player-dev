@@ -27,8 +27,3 @@ npm run start
 ```
 
 Проект будет запущен по адресу: http://localhost:3000
-
-## Backend / документация
-
-- Документация: https://developer.github.com/v3/search/#search-users
-- Данные по пользователям берем с https://api.github.com/search/users?q={userName}
