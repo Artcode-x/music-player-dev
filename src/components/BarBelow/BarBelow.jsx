@@ -12,7 +12,6 @@ import { addNextTrack } from '../../store/actions/creators/creators'
 
 function BarBelow({ loading, repeat, setRepeat, isPlaying, setIsPlaying }) {
   const audioRef = useRef(null)
-
   const activeTrack = useSelector((store) => store.tracks.activeTrack)
   const dispatch = useDispatch()
   return (

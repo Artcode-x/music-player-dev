@@ -16,6 +16,7 @@ import sprite from '../../img/icon/sprite.svg'
 import { activeTrackSelector } from '../../store/selectors/selectors'
 import Zagolovok from '../../components/Zagolovok/Zagolovok'
 import { useEffect, useState } from 'react'
+import FormatTime from '../../helpers/helpers'
 
 export default function MyPlaylist({ setIsPlaying }) {
   const favor = useSelector((store) => store.tracks.vseIzbranniyeTreki)
@@ -68,6 +69,12 @@ export default function MyPlaylist({ setIsPlaying }) {
     }
   }
 
+  // const formatDate = (time) => {
+  //   const date = new Date(time)
+  //   const minutes = formatNumber(date.getMinutes())
+  //   return `${minutes}`
+  // }
+
   return (
     <>
       <S.ContentPlaylist>
@@ -116,7 +123,9 @@ export default function MyPlaylist({ setIsPlaying }) {
                     <use xlinkHref={`${sprite}#icon-likeActive`} />
                   </S.TrackTimeSvg>
                 </S.TrackLike>
-                <S.TrackTimeText>{track.duration_in_seconds}</S.TrackTimeText>
+                <S.TrackTimeText>
+                  {FormatTime(track.duration_in_seconds)}
+                </S.TrackTimeText>
               </S.TrackTime>
             </S.PlaylistTrack>
           ))}

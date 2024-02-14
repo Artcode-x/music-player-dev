@@ -17,7 +17,7 @@ export default function Register() {
   const { toggleUser } = useUserContext()
 
   const getRegisterCheck = (newUser) => {
-    toggleUser(newUser) // в ф-ию toggleUser передаем ответ с апи
+    toggleUser(newUser) // в функцию toggleUser передаем ответ с апи
     navigate('/')
   }
 

@@ -17,6 +17,7 @@ import addTracks, {
 
 import { useState } from 'react'
 import getAllTracksFromApi, { addLike, disLike, refreshToken } from '../Api/api'
+import FormatTime from '../../helpers/helpers'
 
 export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
   const filteredByAuthor = useSelector(filteredArrayTracksSelector)
@@ -178,7 +179,9 @@ export const MusicList = ({ loading1, addError, isPlaying, setIsPlaying }) => {
                   )}
                 </S.TrackTimeSvg>
               </S.TrackLike>
-              <S.TrackTimeText>{track.duration_in_seconds}</S.TrackTimeText>
+              <S.TrackTimeText>
+                {FormatTime(track.duration_in_seconds)}
+              </S.TrackTimeText>
             </S.TrackTime>
           </S.PlaylistTrack>
         ))}
