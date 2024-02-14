@@ -23,4 +23,5 @@ export const SidebarAvatar = styled.div`
   height: 43px;
   background-color: #313131;
   border-radius: 50%;
+  cursor: pointer;
 `
