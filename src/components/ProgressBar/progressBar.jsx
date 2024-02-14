@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { useEffect, useState } from 'react'
-import * as S from './ProgressBar.styled'
+import * as S from './progressBar.styled'
 
 export default function ProgressBar({ audioRef }) {
   const [сurrentTime, setCurrentTime] = useState('1')
